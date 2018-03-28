@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: opacity .5s ease;
+        }
+
+        .fade-enter,
+        .fade-leave-active {
+            opacity: 0
+        }
+
+        .child-view {
+            position: absolute;
+            transition: all .5s cubic-bezier(.55, 0, .1, 1);
+        }
+
+        .slide-left-enter,
+        .slide-right-leave-active {
+            opacity: 0;
+            -webkit-transform: translate(30px, 0);
+            transform: translate(30px, 0);
+        }
+
+        .slide-left-leave-active,
+        .slide-right-enter {
+            opacity: 0;
+            -webkit-transform: translate(-30px, 0);
+            transform: translate(-30px, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- //用于挂载到vue实例上 -->
+    <div class="box" id="app">
+        <!-- //app组件 -->
+        <app></app>
+        <!-- <h1>Route props</h1>
+        <ul>
+          <li><router-link to="/">/</router-link></li>
+          <li><router-link to="/hello/you">/hello/you</router-link></li>
+          <li><router-link to="/static">/static</router-link></li>
+          <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
+          <li><router-link to="/attrs">/attrs</router-link></li>
+        </ul>
+        <router-view class="view" foo="123"></router-view> -->
+        <ul>
+            <li>
+                <router-link to="/">/</router-link>
+            </li>
+            <li>
+                <router-link to="/parent">/parent</router-link>
+            </li>
+            <li>
+                <router-link to="/parent/foo">/parent/foo</router-link>
+            </li>
+            <li>
+                <router-link to="/parent/bar">/parent/bar</router-link>
+            </li>
+        </ul>
+        <transition name="fade" mode="out-in">
+            <router-view class="view"></router-view>
+        </transition>
+    </div>
+    <!-- //引入用webpack打包后的js文件 -->
+    <script src="../build.js"></script>
+</body>
+
+</html>

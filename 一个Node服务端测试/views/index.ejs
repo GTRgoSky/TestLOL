@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+   
+</head>
+
+<body>
+    <%= a%>
+    <!-- //用于挂载到vue实例上 -->
+    <div class="box" id="app">
+        <!-- //app组件 -->
+        <app></app>
+        <h1>Route props</h1>
+        <ul>
+          <li><router-link to="/">/</router-link></li>
+          <li><router-link to="/hello/you">/hello/you</router-link></li>
+          <li><router-link to="/static">/static</router-link></li>
+          <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
+          <li><router-link to="/attrs">/attrs</router-link></li>
+        </ul>
+        <router-view class="view" foo="123"></router-view>
+    </div>
+    <script>
+        console.log(12);
+    </script>
+    <!-- //引入用webpack打包后的js文件 -->
+    <script src="/build.js" type="text/javascript"></script>
+</body>
+
+</html>

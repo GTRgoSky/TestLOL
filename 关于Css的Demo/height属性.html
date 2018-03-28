@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        .outer {
+            display: inline-block;
+            height: 200px; width: 40%;
+            border: 5px solid #cd0000;
+        }
+        .height-100 {
+            position: absolute;
+            height: 100%; width: 200px;
+            background-color: #beceeb;
+        }
+        .height-inherit {
+            position: absolute;
+            height: inherit; width: 200px;
+            background-color: #beceeb;
+        }
+        .parenrt{
+            position: relative;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <code>
+        <a href="https://www.cnblogs.com/yuxinpeng/p/6196898.html">height:100%与height：inherit的区别1</a>
+        <a href="http://www.zhangxinxu.com/wordpress/2015/02/different-height-100-height-inherit/">height:100%与height：inherit的区别2</a>
+    </code>
+    <pre>
+        一、兼容性
+        首先，inherit这个属性只是在ie8+才支持；100%支持ie6；
+
+        二、大多数情况下没有区别
+        在正常情况下height：100%与height：inherit没有任何区别；
+
+        1.父元素：height：auto；height：100%与inherit也都是auto；
+
+        2.父元素定高：height：100px; height:100%与inherit也都是100px；
+
+        三、绝对定位情况下大不同
+        如果子元素为绝对定位元素，则height：100%；参考的父级是离它最近的有定位属性的父级而非直接父级；
+
+        但是此时height：inherit；参考的依旧是直接父级，无论直接父级是否有定位属性；
+    </pre>
+    <div class="parenrt">
+        <div class="outer"><div class="height-100"></div></div>
+        <div class="outer"><div class="height-inherit"></div></div>   
+    </div>
+</body>
+</html>
