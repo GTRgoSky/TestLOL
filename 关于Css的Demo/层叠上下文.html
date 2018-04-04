@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box>div {
+            background-color: #0074D9;
+            width: 256px;
+            height: 256px;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 此时该div是普通元素，z-index无效 */
+
+        .img1 {
+            /* z-index: -1; */
+            right: -150px;
+            display: inline-block;
+            /* 注意这里是负值z-index */
+        }
+        .img2 {
+            /* z-index: -1; */
+            float: left;
+            right: -70px;
+            margin-top: -80px;
+            /* position: relative; */
+            /* 注意这里是负值z-index */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- -->
+    <pre>
+        创建了层叠上下文，inline-block 比 left 高
+        如果加入            position: relative;
+        在z-index没有数值时不创建，否则创建，如果没有创建层叠上下文
+        遵照后来的覆盖前面的
+
+        当两个元素为正常流时，默认情况下后一个元素比前一个元素层级高，并且允许后面的元素透上来。
+        如果两个元素是块级元素，文字比背景层级高（因此不管是否设置背景文字始终会透上来）。
+        如果是行内或行内块，背景比文字层级高（因此只要设置背景，后一个元素将透不上来）。
+
+        行内块比块级元素层级高，依然是文字比背景层级高。
+        行内元素层级（inline）比行内块元素高，背景比文字层级高。
+
+        浮动和浮动，后一个比前一个层级高。
+        浮动和块元素，浮动层级高。
+        浮动和行内块，行内块层级高。
+        浮动和行内，行内层级高。
+
+        绝对定位和绝对定位，后一个比前一个层级高。
+        绝对定位和相对定位，后一个比前一个层级高。
+        绝对定位和固定定位，后一个比前一个层级高。
+        固定定位和相对定位，后一个比前一个层级高。
+        绝对定位和块元素，绝对定位层级高。
+        决定定位和行内块，绝对定位层级高。
+        绝对定位和行内元素，绝对定位层级高。
+        绝对定位和浮动，绝对定位层级高。
+        其他定位和绝对定位效果一样。
+
+        当两个元素类型一样时，默认情况下后一个元素层级比前一个元素层级高。
+        在没有设置背景的情况下，元素的背景是透明的，并且允许后面的元素透上来。
+        块元素和其他任意除定位元素以外，文字层级比背景层级高。
+        浮动和块元素，浮动层级高。
+        浮动和行内块，行内块层级高。
+        浮动和行内，行内层级高。
+        定位和定位，后一个元素层级高。
+        定位比所有元素层级高。
+
+        它们的前后顺序：小于0的z-index < 块 < 浮动 < 行内块 < 行内 < 定位 < 大于0的z-index
+
+        当一方不是层叠上下文则按照正常方式排序
+    </pre>
+    <div class="box" style="display:flex">
+        <div>
+            <img src="bgimg.png" class="img1">
+            <img src="user.jpg" class="img2">
+        </div>
+    </div>
+    <div style="background-color:red; position: relative;height:100px;width:100px;"></div>
+    <div style="background-color:yellow; position: relative;height:100px;width:100px;"></div>
+</body>
+
+</html>

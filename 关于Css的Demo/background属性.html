@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .body-color{
+            background-color: lavender;width:300px;height:300px;
+        }
+        .body-color .parent{
+            height:200px;width:200px;background-image:url('./bgimg.png');background-color: gold;border: 5px solid salmon;
+        }
+        .body-color .child{
+            border:5px solid blue;height:100px;width:100px;
+        }
+        .body-color .setcolor{
+            background-color:red;
+        }
+        .body-color .setinherit{
+            background-color:inherit;
+        }
+        .body-position{
+            /* background-position: top center; */
+            /* background-position: 50% 50%; */
+            background-position: 10px 10px;
+            background-image: url('./bgimg.png');
+            width:300px;
+            height:300px;
+            background-color: blue;
+            background-repeat: no-repeat;
+        }
+        .body-origin{
+            width: 300px;
+        }
+        .body-origin div{
+            margin-top: 20px;
+            background-color: yellow;
+            background-size: contain;
+        }
+        .body-origin-border{
+            padding:10px;
+            border:10px dotted #000000;
+            background-image:url('./bgimg.png');
+            background-origin:border-box;
+            background-repeat:no-repeat;
+            height: 100px;
+        }
+        .body-origin-padding{
+            height: 100px;
+            padding:10px;
+            border:10px dotted #000000;
+            background-image:url('./bgimg.png');
+            background-origin:padding-box;
+            background-repeat:no-repeat;
+        }
+        .body-origin-content{
+            height: 100px;
+            padding:10px;
+            border:10px dotted #000000;
+            background-image:url('./bgimg.png');
+            background-origin:content-box;
+            background-repeat:no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div class="body-color">
+        <div class="parent">
+            <div class="child setinherit"></div>
+        </div>
+    </div>
+
+    <div class="body-position"></div>
+
+    <div class="body-origin">
+        <div class="body-origin-border"></div>
+        <div class="body-origin-padding"></div>
+        <div class="body-origin-content"></div>
+    </div>
+
+    
+</body>
+</html>

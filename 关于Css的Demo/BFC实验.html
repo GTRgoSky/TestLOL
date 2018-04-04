@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="./dist/css/bfc实验.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+    <div class="border">
+        <h5>元素框:</h5>
+        <div class="box1"></div>
+    </div>
+
+    <div class="border">
+        <h5>替换/非替换元素:</h5>
+        <img style="width:auto" src="./user.jpg" />
+        <img style="width:100px" src="./user.jpg" />
+        <p style="width:10px;white-space:nowrap">我是非替换元素</p>
+    </div>
+
+    <div class="border">
+        <h5>Line Box:</h5>
+        <div class="box2">
+            <p>123</p>
+            <p>456</p>
+            <div>789</div>
+        </div>
+    </div>
+
+    <!-- BFC做到了什么？
+    如果我去掉inline-block，并且给box3对应的margin 会发现他们的上下margin会发生重叠(注释：box3都是在一个BFC下的元素)
+    当我给下面的box3加入了display:inline-block; 触发了BFC，则margin不再重叠。并且下面的box3内部变成了局部的布局，和
+    外部不再有关系。BFC的高度继承了内部元素的高度
+    -->
+    <div class="border" style="overflow:hidden">
+        <h5>BFC1:</h5>
+        <div class="box3">
+            <div class="float-inner"></div>
+        </div>
+        <div class="box3" style="display:inline-block;">
+            <div class="float-inner"></div>
+            <!-- <div class="float-two"></div> -->
+        </div>
+    </div>
+
+    <div class="border online-1" style="overflow:hidden">
+        <h5>BFC2:</h5>
+        <div class="a"></div>
+        <div class="b">
+            <div class="c"> </div>
+        </div>
+        <div class="d">
+            <div class="c"></div>
+        </div>
+    </div>
+    <div class="border" style="overflow:hidden">
+        <h5>解决margin叠加问题:</h5>
+        <p>3</p>
+        <p>3</p>
+        <p>3</p>
+        <div class="box">
+            <p>3</p>
+        </div>
+        <div class="box">
+            <p>3</p>
+        </div>
+        <div class="box">
+            <p>3</p>
+        </div>
+    </div>
+    <div class="border" style="overflow:hidden">
+        <h5>清除浮动问题:</h5>
+        <div class="">
+            <div style="height:20px;background:blue;width:20px"></div>
+        </div>
+        <div class="">
+            <div style="float:left;height:20px;background:black;width:20px"></div>
+        </div>
+        <div class="box">
+            <div style="float:left;height:20px;background:red;width:30px"></div>
+        </div>
+    </div>
+
+
+
+    <div class='item'>
+        <div class='pic'>your photo here?</div>
+        <p class='cont'>
+            爱饭否，爱豆瓣，也爱鸡脱壳。 爱爬山，爱拍美景。 爱腐败，更爱远征的自虐。 爱下雪天，爱感动，爱平底鞋。 我没有什么特别，我很特别。 我和别人不一样，我和你一样。 我是前端。
+        </p>
+    </div>
+
+    <div class="same-height">  
+        <h5>两栏自适应高度:</h5>
+        <!-- https://blog.csdn.net/qq_35639964/article/details/56839103 -->
+        <p id="p1" class="f">  
+        hello<br/>  
+            
+        hello<br/>  
+            
+        hello<br/>  
+            
+        hello  
+            
+        </p>  
+            
+        <p id="p2" class="f">world</p>  
+    </div> 
+    <script>
+        //setTimeout参数传立即执行函数，则忽视setTimeout，相当于传了undefined
+        for (var i = 0; i < 5; i++) {
+            console.time("test");
+            console.log(i)
+            setTimeout((function (i) {
+                console.timeEnd("test");
+                console.log(i)
+            })(i), 0)
+            // console.log(i);
+        }
+    </script>
+</body>
+
+</html>
