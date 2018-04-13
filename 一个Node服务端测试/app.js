@@ -12,12 +12,12 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')))
 //app.use('/static', express.static('public'));//可以通过为静态资源目录指定一个挂载路径的方式来实现http://localhost:3000/static/
 
-app.use(history({
-    rewrites: [{
-        from: /[\s\S\w]*/,
-        to: '/'
-    }]
-}))
+// app.use(history({
+//     rewrites: [{
+//         from: /[\s\S\w]*/,
+//         to: '/'
+//     }]
+// }))
 
 app.use('/', index);
 app.use("/test", test)

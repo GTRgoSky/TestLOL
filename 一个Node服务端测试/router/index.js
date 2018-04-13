@@ -21,7 +21,11 @@ router.get('/about', function (req, res) {
     res.send('About birds');
 });
 
-
+// 定义 about 页面的路由
+router.get('/html', function (req, res) {
+    //sendFile只可以传绝对路径
+    res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
+});
 
 module.exports = router
 

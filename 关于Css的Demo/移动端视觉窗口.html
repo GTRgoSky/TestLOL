@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport"
+          content="width=750,initial-scale=0.5,maximum-scale=0.5, minimum-scale=0.5,user-scalable=no"/> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html{
+            font-size: 16px;
+        }
+        body{
+        margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="">
+        <div style="background:green;width:130px;height:174px;"></div>
+        <div style="background:red;width:50%;height:100px;"></div>
+        <div style="background:blue;width:10rem;height:100px;"></div>
+        <div style="background:yellow;width:750px;height:100px;"></div>
+    </div>
+    <script>
+        var c = document.createElement('meta');
+        c.charset = 'utf-8';
+        c.setAttribute('name','viewport');
+        var a = screen.width/750;
+        c.setAttribute('content',`width=750,initial-scale=${a},maximum-scale=${a}, minimum-scale=${a},user-scalable=no`);
+        document.getElementsByTagName('head')[0].appendChild(c);
+    </script>
+</body>
+</html>
