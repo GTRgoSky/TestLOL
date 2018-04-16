@@ -7,8 +7,7 @@ yarn-error.log*
 test/unit/coverage
 test/e2e/reports
 selenium-debug.log
-F:/自己测试完/一个Node服务端测试/public/static/*
-F:/自己测试完/一个Node服务端测试/public/index.html
+mydist/
 
 # Editor directories and files
 .idea

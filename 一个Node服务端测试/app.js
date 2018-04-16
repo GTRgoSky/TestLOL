@@ -8,8 +8,10 @@ var ejs = require('ejs');
 const path = require('path');
 
 
-
+app.use(express.static(path.join(__dirname, 'mydist')))
 app.use(express.static(path.join(__dirname, 'public')))
+
+// app.use('/dist', express.static('public'));
 //app.use('/static', express.static('public'));//可以通过为静态资源目录指定一个挂载路径的方式来实现http://localhost:3000/static/
 
 // app.use(history({
@@ -39,7 +41,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-var server = app.listen(3001, function () {
+var server = app.listen(3010, function () {
     var host = server.address().address;
     var port = server.address().port;
 

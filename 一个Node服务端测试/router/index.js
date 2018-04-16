@@ -9,13 +9,18 @@ router.use(function timeLog(req, res, next) {
     console.log('Request URL:', req.originalUrl);
     let getTime = req.getTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} 
     ${time.getHours()}:${time.getMinutes().toString().padStart(2,0)}:${time.getSeconds().toString().padStart(2,0)}`;
-    console.log(0);
+    // console.log(0);
     next();
 });
 // 定义网站主页的路由
 router.get('/', function (req, res) {
     res.render('index',{a:1666});
 });
+
+router.get('/index', function (req, res) {
+    res.render('index',{a:1666});
+});
+
 // 定义 about 页面的路由
 router.get('/about', function (req, res) {
     res.send('About birds');
@@ -25,6 +30,14 @@ router.get('/about', function (req, res) {
 router.get('/html', function (req, res) {
     //sendFile只可以传绝对路径
     res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
+});
+
+// 定义 about 页面的路由
+router.get('/jsWap', function (req, res) {
+    //sendFile只可以传绝对路径
+    console.log('get app')
+    // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
+    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
 });
 
 module.exports = router
