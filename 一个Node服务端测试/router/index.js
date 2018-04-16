@@ -5,11 +5,9 @@ const router = express.Router();
 // 该路由使用的中间件
 router.use(function timeLog(req, res, next) {
     let time = new Date();
-    console.log('Request Type:', req.method);
+    let getTime = req.getTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes().toString().padStart(2,0)}:${time.getSeconds().toString().padStart(2,0)}`;
+    console.log('Request Type:', req.method , getTime);
     console.log('Request URL:', req.originalUrl);
-    let getTime = req.getTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} 
-    ${time.getHours()}:${time.getMinutes().toString().padStart(2,0)}:${time.getSeconds().toString().padStart(2,0)}`;
-    // console.log(0);
     next();
 });
 // 定义网站主页的路由
