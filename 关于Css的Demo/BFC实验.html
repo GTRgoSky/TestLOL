@@ -32,6 +32,11 @@
         </div>
     </div>
 
+    <div  class="border">
+        <div style="display: inline-block;position: relative;">11111</div>
+        <div style="display: inline-block;position: relative;">22222</div>
+        <div style="display: inline-block;position: relative;">33333</div>
+    </div>
     <!-- BFC做到了什么？
     如果我去掉inline-block，并且给box3对应的margin 会发现他们的上下margin会发生重叠(注释：box3都是在一个BFC下的元素)
     当我给下面的box3加入了display:inline-block; 触发了BFC，则margin不再重叠。并且下面的box3内部变成了局部的布局，和
@@ -73,6 +78,8 @@
             <p>3</p>
         </div>
     </div>
+
+    <!-- 如果我希望做到元素并排的操作 -->
     <div class="border" style="overflow:hidden">
         <h5>清除浮动问题:</h5>
         <div class="">
@@ -88,14 +95,28 @@
 
 
 
-    <div class='item'>
+    <div class='item border'>
         <div class='pic'>your photo here?</div>
-        <p class='cont'>
+        <p class='cont' style="overflow: hidden;">
             爱饭否，爱豆瓣，也爱鸡脱壳。 爱爬山，爱拍美景。 爱腐败，更爱远征的自虐。 爱下雪天，爱感动，爱平底鞋。 我没有什么特别，我很特别。 我和别人不一样，我和你一样。 我是前端。
         </p>
     </div>
 
-    <div class="same-height">  
+    <div class="border" style="display: flex;">
+        <h5>flex解决2栏自适应：</h5>
+        <div style="flex: 1;background-color: red"> hello<br/>  
+            
+            hello<br/>  
+                
+            hello<br/>  
+                
+            hello  
+                
+            </p>  </div>
+        <div style="flex: 1;background-color: blue">world</div>
+    </div>
+
+    <div class="same-height border">  
         <h5>两栏自适应高度:</h5>
         <!-- https://blog.csdn.net/qq_35639964/article/details/56839103 -->
         <p id="p1" class="f">  
@@ -105,12 +126,15 @@
             
         hello<br/>  
             
-        hello  
+        hello  hello<br/>hello<br/>
             
         </p>  
             
         <p id="p2" class="f">world</p>  
     </div> 
+
+    
+
     <script>
         //setTimeout参数传立即执行函数，则忽视setTimeout，相当于传了undefined
         for (var i = 0; i < 5; i++) {
