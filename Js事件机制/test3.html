@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="test">click</div>
+    <script>
+        setTimeout(()=>{
+            var i = 0;
+            let a = setInterval(()=>{
+                i++
+                console.log(i,'go')
+                if(i>4){
+                    clearInterval(a);
+                    console.log(i,'finish')
+                }
+            },1000)
+            console.log(i)
+        },100)
+        test.addEventListener('click',()=>{
+            console.log('click')
+        })
+        //事件轮询机制---每次只有计时器时间截止后才会把事件塞到计时器的watcher里
+    </script>
+</body>
+</html>

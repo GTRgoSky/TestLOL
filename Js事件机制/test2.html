@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件机制2</title>
+</head>
+<body>
+    <a id="btn1" onclick="fun1();" href="javascript:fun2();">btn</a>
+    <script type="text/javascript">
+		function fun1(){
+			console.log("111");
+		}
+		function fun2(){
+			console.log("222");
+		}
+		
+		var btn = document.getElementById("btn1");
+		
+		btn.addEventListener("click",function(){
+			console.log("333");
+        });
+        btn.addEventListener("click",function(e){
+            console.log(e);
+            e.stopPropagation();
+			console.log("444");
+        });
+        btn.addEventListener("click",function(){
+			console.log("555");
+        });
+        /*
+            结论：
+            在特定标签下会有另一种方法的执行方式。但是该方法的优先级是最低的会在其余事件执行完成后在执行，
+            onclick和addEventListener谁先被绑定谁先执行，在DOM上绑定的onclick优先级高于addEventListener
+            如果 onclick 事件被重复绑定，则以最后一次的绑定所在的顺序为准。
+            如果绑定多个 addEventListener 事件，在任意一个事件中 stopPropagation(); 都会阻止事件的冒泡，但不会阻止后续事件的执行，但若换成stopImmediatePropagation则会阻止。
+            结果：
+            222
+            333
+            111
+        */
+	</script>
+</body>
+</html>

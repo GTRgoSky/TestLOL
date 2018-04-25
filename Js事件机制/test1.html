@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件机制</title>
+</head>
+<body>
+    <button id="btn1" onclick="fun1();">btn</button>
+    <script type="text/javascript">
+		function fun1(){
+			console.log("111");
+		}
+		
+		var btn = document.getElementById("btn1");
+		
+		btn.onclick = function(){
+			console.log("222");
+		}
+		
+		btn.addEventListener("click",function(){
+			console.log("333");
+		})
+        /*
+            结论：
+            js中的onclikc会覆盖DOM上的事件，
+            而addEventListener不会影响前两种
+        */
+	</script>
+
+</body>
+</html>

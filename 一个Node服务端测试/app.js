@@ -27,8 +27,6 @@ app.use("/test", test)
 app.set('view engine', 'ejs')
 app.engine('ejs', ejs.__express)
 
-
-
 //在其所有他中间件的后面添加一个处理 404 的中间件
 app.use(function (req, res, next) {
     res.status(404).send('Sorry cant find that!');
@@ -41,9 +39,8 @@ app.use(function (err, req, res, next) {
 });
 
 
-var server = app.listen(3010, function () {
+var server = app.listen(3010, "0.0.0.0" ,function () {
     var host = server.address().address;
     var port = server.address().port;
-
     console.log('Example app listening at http://%s:%s', host, port);
 });

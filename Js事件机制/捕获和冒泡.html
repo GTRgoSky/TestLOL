@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>捕获和冒泡</title>
+</head>
+<body>
+    <div id="s1">s1
+        <div id="s2">s2</div>
+    </div>
+    <div id="s3">s3
+        <div id="s4">s4</div>
+    </div>
+    <script>
+    s1.addEventListener("click",function(e){
+        console.log("s1 冒泡事件");         
+    },false);
+    s2.addEventListener("click",function(e){
+        console.log("s2 冒泡事件");
+        
+    },false);
+            
+    s1.addEventListener("click",function(e){
+        console.log("s1 捕获事件");
+        //e.stopPropagation()可以阻止接下来的s1,s2冒泡事件导致s2捕获事件也不会被触发
+    },true);
+            
+    s2.addEventListener("click",function(e){
+        console.log("s2 捕获事件");
+        //e.stopPropagation()可以阻止接下来的s1冒泡事件
+    },true);
+    /*
+        element.addEventListener(event, function, useCapture)
+        第一个参数是需要绑定的事件
+        第二个参数是触发事件后要执行的函数
+        第三个参数默认值是false，表示在事件冒泡阶段调用事件处理函数;如果参数为true，则表示在事件捕获阶段调用处理函数。
+    */
+    /*
+        对于非target节点则先执行捕获在执行冒泡
+        对于target节点则是先执行先注册的事件，无论冒泡还是捕获
+    */
+    s4.addEventListener("click",function(e){
+            console.log("s4");
+            // e.stopPropagation()//阻止冒泡
+            //e.stopImmediatePropagation();阻止后续所有该DOM事件
+    });
+    s3.addEventListener("click",function(e){
+            console.log("s3");
+            
+    });
+    s4.addEventListener("click",function(e){
+            console.log("s4-dow");
+    });
+    /*
+        证明默认是冒泡事件，而且可以阻断传播
+        冒泡会把当前DOM挂载的事件执行完毕后再延伸到s3
+    */
+    </script>
+</body>
+</html>
