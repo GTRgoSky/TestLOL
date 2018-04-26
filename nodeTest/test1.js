@@ -9,7 +9,7 @@ test();
 var a = require('./moduleT');//a == 对象{a:mo}  或者理解为： module.exports == a
 var b = require('./exportsT');// b == exports ,但是exports必须挂载一个属性才可以抛出去
 var c = require('./exportsTT');//c == exports
-var d = require('testRequire'); // d从node_modules获取testRequire文件下的index
+var d = require('./testRequire'); // d从node_modules获取testRequire文件下的index
 d.go();
 if(process.env.doWhat === 'copy'){
     d.copy(['copy1','copy2'],'.js')//执行拷贝路径

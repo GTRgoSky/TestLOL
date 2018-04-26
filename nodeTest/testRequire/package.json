@@ -1,0 +1,9 @@
+{
+    "name": "fxtestRequire",
+    "main": "./index.js",
+    "author": "fx",
+    "dependencies": {
+        
+    },
+    "version": "1.0.0"
+}
