@@ -1,9 +1,10 @@
 {
     "name": "nodetest",
     "scripts": {
-        "start": "set doWhat=&& node test1.js"
+        "start": "set doWhat=&& node test1.js",
+        "http": "set doWhat=http&& node test1.js"
     },
     "dependencies": {
-        "fxhttptest" : "1.0.0"
+        "fxhttptest" : "1.0.1"
     }
 }
