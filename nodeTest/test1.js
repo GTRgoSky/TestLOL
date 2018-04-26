@@ -20,7 +20,7 @@ if(process.env.doWhat === 'copyBig'){
 
 
 if(process.env.doWhat == 'http'){
-    var e = require('httpGet');
+    var e = require('./httpGet');
 }
 // a.mo()
 // b.ex.ex();
