@@ -18,7 +18,6 @@ if(process.env.doWhat === 'copyBig'){
     d.copyBig(['copy1','copy2'],'.xlsx')//拷贝大文件路径
 }
 
-
 if(process.env.doWhat == 'http'){
     var e = require('./httpGet');
 }

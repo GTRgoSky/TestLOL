@@ -12,11 +12,11 @@ function routePath(req, res) {
     if (handleFn) {//执行路由加载
         req.query = pathObj.query; // 将 query 绑定到 req 上
         var body = '';
-        var form = new multiparty.Form();
-        form.parse(req, function (err, fields, files) {
-            
-            console.log(err,fields,files);
-        });
+        // var form = new multiparty.Form();
+        // form.parse(req, function (err, fields, files) {
+        //     res.writeHead(200, {'content-type': 'multipart/form-data'});
+        //     console.log(err,fields,files);
+        // });
         // 监听 POST 的数据内容
         req.on('data', function (chunk) {
             
