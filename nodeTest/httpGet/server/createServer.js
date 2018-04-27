@@ -2,21 +2,17 @@ const routes = require('../route/setRoute');
 const url = require('url');
 const path = require('path');
 let fs = require('fs');
+var util = require('util');
 // let querystring =require('querystring');
 var multiparty = require('multiparty');
 
 function routePath(req, res) {
     var pathObj = url.parse(req.url, true);//加上true得到的query为对象，否则为string
     var handleFn = routes[pathObj.pathname];
-    console.log(__dirname,1);//__dirname返回当前文件路径
+    // console.log(__dirname,1);//__dirname返回当前文件路径
     if (handleFn) {//执行路由加载
         req.query = pathObj.query; // 将 query 绑定到 req 上
         var body = '';
-        // var form = new multiparty.Form();
-        // form.parse(req, function (err, fields, files) {
-        //     res.writeHead(200, {'content-type': 'multipart/form-data'});
-        //     console.log(err,fields,files);
-        // });
         // 监听 POST 的数据内容
         req.on('data', function (chunk) {
             
