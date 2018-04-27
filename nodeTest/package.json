@@ -5,7 +5,8 @@
         "copy"  : "set doWhat=copy&& node test1.js",
         "copyBig"  : "set doWhat=copyBig&& node test1.js",
         "travel" : "set doWhat=travel&& node test1.js",
-        "http": "set doWhat=http&& node test1.js"
+        "http": "set doWhat=http&& node test1.js",
+        "net": "set doWhat=net&& node test1.js"
     },
     "dependencies": {
         "fxhttptest" : "1.0.1"

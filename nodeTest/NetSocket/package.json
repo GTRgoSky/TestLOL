@@ -1,0 +1,9 @@
+{
+    "name": "fxnetscoket",
+    "main": "./index.js",
+    "author": "fx",
+    "dependencies": {
+        "net": "^1.0.2"
+    },
+    "version": "1.0.0"
+}

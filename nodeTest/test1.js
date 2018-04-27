@@ -21,6 +21,10 @@ if(process.env.doWhat === 'copyBig'){
 if(process.env.doWhat == 'http'){
     var e = require('./httpGet');
 }
+
+if(process.env.doWhat == 'net'){
+    var f = require('./NetSocket');
+}
 // a.mo()
 // b.ex.ex();
 // c.hello();
