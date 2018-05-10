@@ -11,9 +11,9 @@ router.use(function timeLog(req, res, next) {
     next();
 });
 // 定义网站主页的路由
-router.get('/', function (req, res) {
-    res.render('index',{a:1666});
-});
+// router.get('/', function (req, res) {
+//     res.render('index',{a:1666});
+// });
 
 router.get('/index', function (req, res) {
     res.render('index',{a:1666});
@@ -30,10 +30,26 @@ router.get('/html', function (req, res) {
     res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
 });
 
-// 定义 about 页面的路由
+// 定义 wap 页面的路由
+router.get('/wap/home/', function (req, res) {
+    //sendFile只可以传绝对路径
+    console.log('get wap')
+    // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
+    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
+});
+
+// 定义 qmWap 页面的路由
+router.get('/qmWap', function (req, res) {
+    //sendFile只可以传绝对路径
+    console.log('get qmWap')
+    // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
+    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
+});
+
+// 定义 jsWap 页面的路由
 router.get('/jsWap', function (req, res) {
     //sendFile只可以传绝对路径
-    console.log('get app')
+    console.log('get jddWap')
     // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
     res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
 });

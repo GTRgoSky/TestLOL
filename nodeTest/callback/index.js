@@ -1,0 +1,2 @@
+// require('./tongbu');
+require('./yibu');

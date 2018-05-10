@@ -1,0 +1,7 @@
+{
+    "name": "process",
+    "scripts": {},
+    "dependencies": {
+        "child_process": "^1.0.2"
+    }
+}
