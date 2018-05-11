@@ -13,7 +13,7 @@ module.exports={
         path:__dirname,//输出路径为，当前路径下
         filename:'build.js'//输出后的文件名称
     },
-    resolve: {//其他的配置选项
+    resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
         alias: {
             'vue': 'vue/dist/vue.js'//vue文件地址配置
         }
@@ -41,7 +41,13 @@ module.exports={
             }
         }),
         new vConsolePlugin({
-            enable: true // 发布代码前记得改回 false
+            enable: false // 发布代码前记得改回 false,
         }),
+        //代码压缩
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //       warnings: false
+        //     }
+        // })
     ]
 };
