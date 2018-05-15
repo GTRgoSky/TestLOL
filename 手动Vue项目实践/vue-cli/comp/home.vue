@@ -32,7 +32,7 @@ export default {
         return {
             currentTab: 'foo',
             tabs: ['foo', 'bar'],
-            todoT:[1,2,3,4,5]
+            todoT:[1,2]
         }
     },
     computed: {
