@@ -1,5 +1,7 @@
 var webpack = require('webpack')  //引入文件
 var vConsolePlugin = require('vconsole-webpack-plugin'); 
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
 var argv = require('yargs').argv;
 
 console.log('argv:'+argv.fx)
@@ -11,7 +13,7 @@ module.exports={
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项
         path:__dirname,//输出路径为，当前路径下
-        filename:'build.js'//输出后的文件名称
+        filename:'build.js',//输出后的文件名称
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
         alias: {
@@ -20,6 +22,7 @@ module.exports={
     },
     module:{
         loaders:[//loader配置，需要解析啥东西就用相关的loader
+            {test: /\.less$/,loader: 'style!css!less'},
             {test:/\.vue$/, loader:'vue-loader'},
             {test:/\.js$/, loader:'babel-loader', exclude:/node_modules/}//设置node_modules里的js文件不用解析
         ]
@@ -43,6 +46,9 @@ module.exports={
         new vConsolePlugin({
             enable: false // 发布代码前记得改回 false,
         }),
+        // new HTMLWebpackPlugin({
+        //     title: 'Code Splitting'
+        // })
         //代码压缩
         // new webpack.optimize.UglifyJsPlugin({
         //     compress: {

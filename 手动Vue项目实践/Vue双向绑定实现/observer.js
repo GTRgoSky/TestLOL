@@ -53,6 +53,7 @@ function observe(value, vm) {
 var uid = 0;
 
 function Dep() {
+    console.log(uid)
     this.id = uid++;
     this.subs = [];
 }

@@ -2,10 +2,18 @@ import MVVM from "./mvvm.js";
 var vm = new MVVM({
     el: '#mvvm-app',
     data: {
-        word: 'Hello World!'
+        word: 'Hello World!',
+        fx: {
+            a:1,
+            b:2,
+            c:{asd:3}
+        },
+        fff:{aa:4},
+        f:5
     },
     methods: {
         sayHi: function () {
+            console.log(3421)
             this.word = 'Hi, everybody! i click ';
         }
     }
