@@ -46,7 +46,6 @@ Watcher.prototype = {
             dep.addSub(this);
             this.depIds[dep.id] = dep;
         }
-        console.log(this,dep.id);
     },
     get: function() {
         Dep.target = this;
@@ -61,7 +60,6 @@ Watcher.prototype = {
         var exps = exp.split('.');
         
         return function(obj) {
-            console.log(exps)
             for (var i = 0, len = exps.length; i < len; i++) {
                 if (!obj) return;
                 obj = obj[exps[i]];

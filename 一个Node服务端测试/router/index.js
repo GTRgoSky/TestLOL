@@ -31,11 +31,11 @@ router.get('/html', function (req, res) {
 });
 
 // 定义 wap 页面的路由
-router.get('/wap/home/', function (req, res) {
+router.get('/wap/home', function (req, res) {
     //sendFile只可以传绝对路径
     console.log('get wap')
     // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
-    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
+    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/wap/home/index.html');
 });
 
 // 定义 qmWap 页面的路由

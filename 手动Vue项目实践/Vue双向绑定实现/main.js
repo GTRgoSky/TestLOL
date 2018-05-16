@@ -13,9 +13,14 @@ var vm = new MVVM({
     },
     methods: {
         sayHi: function () {
-            console.log(3421)
             this.word = 'Hi, everybody! i click ';
+            this.vv = 666;
+            console.log(this)
         }
+    },
+    mounted(){
+        
+        
     }
 });
 

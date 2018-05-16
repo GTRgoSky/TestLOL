@@ -17,6 +17,11 @@ export default {
             default:[],
             type:Array
         }
+    },
+    methods:{
+        test(){
+            console.log('domTest')
+        }
     }
 }
 </script>

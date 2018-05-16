@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>home</p>
+        <p ref="refD">home</p>
         <button
             v-for="tab in tabs"
             v-bind:key="tab"
@@ -13,14 +13,14 @@
                 class="tab"
             ></component>
         </keep-alive>
-         <p is="dom" :todo="todoT">
+         <p ref="refT" is="dom" :todo="todoT">
             <template slot-scope="slotProps">
                 <a :href="'http://www.baidu.com?id='+slotProps.todo" >
                     <p>3123 and {{slotProps.todo}}</p>
                 </a>
             </template>
         </p>
-        
+        <button @click="changeTodo">点我试试</button>
     </div>
 </template>
 
@@ -45,6 +45,16 @@ export default {
         bar : () => import('./bar.vue'),
         foo : () => import('./foo.vue'),
         dom : () => import('./dom.vue')
+    },
+    methods:{
+        changeTodo(){
+            this.todoT = [2,1];
+            this.$refs.refT.test()
+            console.log(this.$refs.refD)
+        }
+    },
+    created(){
+      
     }
 }
 </script>
