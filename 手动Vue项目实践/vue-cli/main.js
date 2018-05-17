@@ -4,9 +4,7 @@ import App from './App.vue'
 
 new Vue({
     router,
-    created() {
-        console.log(123);
-    },
+    created() {},
     template: '<App/>',// == <app></app>
     components:{App}
 }).$mount('#app')

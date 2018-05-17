@@ -1,13 +1,13 @@
 <template>
     <div>
-        <p ref="refD">home</p>
+        <p ref="refD">home and params: {{ $route.params.userId }}</p>
         <button
             v-for="tab in tabs"
             v-bind:key="tab"
             v-bind:class="['tab-button', { active: currentTab === tab }]"
             v-on:click="currentTab = tab"
         >{{ tab }}</button>
-        <keep-alive include="foo">
+        <keep-alive>
             <component
                 v-bind:is="currentTabComponent"
                 class="tab"
@@ -41,7 +41,7 @@ export default {
         }
     },
     components:{
-        // foo,
+        // ues {"plugins": ["syntax-dynamic-import"]}
         bar : () => import('./bar.vue'),
         foo : () => import('./foo.vue'),
         dom : () => import('./dom.vue')
@@ -53,8 +53,8 @@ export default {
             console.log(this.$refs.refD)
         }
     },
-    created(){
-      
+    mounted(){
+      console.log(this.$router.currentRoute);
     }
 }
 </script>

@@ -30,6 +30,7 @@ router.get('/html', function (req, res) {
     res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
 });
 
+
 // 定义 wap 页面的路由
 router.get('/wap/home', function (req, res) {
     //sendFile只可以传绝对路径

@@ -7,9 +7,10 @@ var connect = require('connect');
 var ejs = require('ejs');
 const path = require('path');
 
-
-app.use(express.static(path.join(__dirname, 'mydist')))
+app.use(express.static(path.join(__dirname, 'public/vuedist')))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'mydist')))
+
 
 // app.use('/dist', express.static('public'));
 //app.use('/static', express.static('public'));//可以通过为静态资源目录指定一个挂载路径的方式来实现http://localhost:3000/static/

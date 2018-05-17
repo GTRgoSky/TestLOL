@@ -12,7 +12,7 @@ let _url = argv.fx;
 module.exports={
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项
-        path:__dirname,//输出路径为，当前路径下
+        path:__dirname+'/dist/',//输出路径为，当前路径下
         filename:'build.js',//输出后的文件名称
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)

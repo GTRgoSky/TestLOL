@@ -7,8 +7,9 @@
 
 <script>
 export default {
-    created(){
+    mounted(){
         console.log('foo');
+        console.log(this.$router.currentRoute);
         // setTimeout(() => {
         //     console.log('time')
         // }, 1000);
