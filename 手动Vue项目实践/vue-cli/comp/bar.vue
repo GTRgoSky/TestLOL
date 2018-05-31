@@ -10,11 +10,11 @@
 </template>
 
 <script>
+import { bus } from '../common/bus';
 export default {
     created(){
         console.log('bar')
         console.log(this.$router.currentRoute);
-
     },
     components:{
     }

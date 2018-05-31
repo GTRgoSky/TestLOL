@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const router = express.Router();
+var http = require('http');
+let fs = require('fs');
+const path = require('path');
 
 // 该路由使用的中间件
 router.use(function timeLog(req, res, next) {
@@ -52,7 +55,17 @@ router.get('/jsWap', function (req, res) {
     //sendFile只可以传绝对路径
     console.log('get jddWap')
     // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
-    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
+    fs.readFile(path.resolve('mydist', 'index.html'), 'utf-8', function (err, data) { //读取内容
+        if (err) {
+            throw err
+        };
+        res.writeHead(200, {
+            "Content-Type": "text/html"
+        }); //注意这里
+        res.write(data);
+        res.end();
+    });
+    // res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
 });
 
 module.exports = router

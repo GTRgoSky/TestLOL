@@ -27,6 +27,7 @@
 <script>
 // import foo from "./foo.vue";
 // import bar from "./bar.vue"
+import { bus } from '../common/bus';
 export default {
     data(){
         return {
@@ -54,7 +55,10 @@ export default {
         }
     },
     mounted(){
-      console.log(this.$router.currentRoute);
+        bus.$on('isAlsoGetUserTansInfo', function(status) {
+            console.log(1)
+        })
+        console.log(this.$router.currentRoute);
     }
 }
 </script>

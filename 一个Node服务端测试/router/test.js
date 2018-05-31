@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const path = require('path');
 // 定义网站主页的路由
 router.get('/', function(req,res,next){
     console.log('i get request & send it to next');
