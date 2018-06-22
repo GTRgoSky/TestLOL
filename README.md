@@ -20,4 +20,4 @@ node.js 读写文件，搭载测试服务器测试
 
 截止2018.06.22
 
-servei-worker第一次接触，不能理解
+servei-worker第一次接触，fetch没找到效果
