@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div id="classT">
         ket
         <p v-pre>666{{aa}}</p>
-        <p v-once>This will never change: {{msg}}</p>
-        <p>This will change: {{msg}}</p>
+        <p v-once class="class1">This will never change: {{msg}}</p>
+        <p class="class2">This will change: {{msg}}</p>
         <input type="text" @keyup.enter="enter" name="" id="">
         <button @click="testBus">testBus</button>
         <test-com></test-com>

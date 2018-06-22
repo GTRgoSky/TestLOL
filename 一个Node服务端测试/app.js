@@ -6,6 +6,7 @@ var history = require('connect-history-api-fallback'); //Vue刷新
 var connect = require('connect');
 var ejs = require('ejs');
 const path = require('path');
+var url = require('url');
 
 app.use(express.static(path.join(__dirname, 'public/vuedist')))
 app.use(express.static(path.join(__dirname, 'public')))
@@ -21,6 +22,10 @@ app.use(express.static(path.join(__dirname, 'mydist')))
 //         to: '/'
 //     }]
 // }))
+
+// app.all('*', function(req, res, next) {
+
+// });
 
 app.use('/', index);
 app.use("/test", test)

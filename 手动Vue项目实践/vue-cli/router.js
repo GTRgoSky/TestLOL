@@ -4,6 +4,7 @@ const Home = resolve => require(['./comp/home.vue'], resolve);
 const Foo = resolve => require(['./comp/foo.vue'], resolve);
 const Bar = resolve => require(['./comp/bar.vue'], resolve);
 const Ket = resolve => require(['./comp/ket.vue'], resolve);
+const Form = resolve => require(['./comp/form.vue'], resolve);
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const router = new VueRouter({
             path: '/ket',
             component: Ket,
             name : 'ket'
+        },
+        {
+            path: '/form',
+            component: Form,
+            name: 'form'
         }
     ]
 })

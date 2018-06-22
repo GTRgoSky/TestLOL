@@ -4,7 +4,7 @@ const router = express.Router();
 var http = require('http');
 let fs = require('fs');
 const path = require('path');
-
+//https://blog.csdn.net/crisschan/article/details/74454208 清除host缓存 ipconfig /flushdns
 // 该路由使用的中间件
 router.use(function timeLog(req, res, next) {
     let time = new Date();
@@ -31,6 +31,27 @@ router.get('/about', function (req, res) {
 router.get('/html', function (req, res) {
     //sendFile只可以传绝对路径
     res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
+});
+
+// 定义 about 页面的路由
+router.get('/gnHtml', function (req, res) {
+    //sendFile只可以传绝对路径
+    res.sendFile('F:/自己测试完/小功能实现/'+req.query.name+'.html');
+});
+
+
+// 定义 about 页面的路由
+router.get('/pwa', function (req, res) {
+    //sendFile只可以传绝对路径
+    // console.log(path.resolve('/自己测试完/pwa', req.query.name+'.html'))
+    fs.readFile(path.resolve('/自己测试完/pwa', req.query.name+'.html'), 'utf-8', function (err, data) { //读取内容
+        if (err) {
+            throw err
+        };
+        res.writeHead(200, {'Service-Worker-Allowed':'scope',  "Content-Type": "text/html"});
+        res.write(data);
+        res.end();
+    });
 });
 
 
@@ -66,6 +87,19 @@ router.get('/jsWap', function (req, res) {
         res.end();
     });
     // res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/index.html');
+});
+
+// 定义 payment 页面的路由
+router.get('/payment', function (req, res) {
+    //sendFile只可以传绝对路径
+    console.log('get payment')
+    // res.sendFile('F:/自己测试完/一个Node服务端测试/public/index.html');
+    res.sendFile('F:/自己测试完/一个Node服务端测试/mydist/payment/index.html');
+});
+
+// 定义 about 页面的路由
+router.post('/po', function (req, res) {
+    res.send('About birds');
 });
 
 module.exports = router
