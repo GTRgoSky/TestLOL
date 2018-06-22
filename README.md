@@ -17,3 +17,7 @@ vue-cli测试
 vue.use && 组件测试
 
 node.js 读写文件，搭载测试服务器测试
+
+截止2018.06.22
+
+servei-worker第一次接触，不能理解
