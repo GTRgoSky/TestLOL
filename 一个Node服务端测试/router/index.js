@@ -98,8 +98,8 @@ router.get('/payment', function (req, res) {
 });
 
 // 定义 about 页面的路由
-router.post('/po', function (req, res) {
-    res.send('About birds');
+router.get('/po', function (req, res) {
+    res.send('About birds 对等的6789');
 });
 
 module.exports = router

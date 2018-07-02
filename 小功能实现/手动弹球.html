@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ball</title>
+    <style type="text/css">
+        form{
+            width: 330px;
+            margin: 20px;
+            background-color: brown;
+            padding: 20px;
+        }
+        input:valid{background: green;}
+        input:invalid{background: red;}
+    </style>
+    <script src="https://cdn.bootcss.com/canvasjs/1.7.0/canvasjs.js"></script>
+    <script type="text/javascript">
+        var boxx = 20;  //盒子左上角的x位置
+        var boxy = 30;  //盒子左上角的y位置
+        var boxwidth = 350; //盒子的宽度
+        var boxheight = 250;    //盒子的高度
+        var ballrad = 20;   //球的半径
+        var boxboundx = boxwidth + boxx - ballrad;  //右边界
+        var boxboundy = boxheight + boxy - ballrad; //下边界
+        var inboxboundx = boxx + ballrad;   //左边界
+        var inboxboundy = boxy + ballrad;   //上边界
+        var ballx = 50; //球的初始x位置
+        var bally = 60; //球的初始y位置
+        var ctx;    //保存画布上下文变量
+        var ballvx = 4; //初始水平位移
+        var ballvy = 8; //初始垂直位移
+
+        var imgr = new Image();
+        imgr.src="http://10.33.80.115:3010/img/front.png";
+        var imgl = new Image();
+        imgl.src="http://10.33.80.115:3010/img/front.png";
+
+
+        var grad;   //设置梯度变量grad
+        var color;  //用于建立梯度grad
+        var hue = [
+            [255, 0, 0],
+            [255, 255, 0],
+            [0, 255, 0],
+            [0, 255, 255],
+            [0, 0, 255],
+            [255, 0, 255]
+        ];
+
+
+        function init(){
+
+            var h;
+            ctx = document.getElementById('canvas').getContext('2d');
+            grad = ctx.createLinearGradient(boxx, boxy, boxx+boxwidth, boxy+boxheight);
+            for(h=0; h<hue.length; h++){
+                color = 'rgb('+hue[h][0]+','+hue[h][1]+','+hue[h][2]+')';
+
+                grad.addColorStop(h*1/6,color); //建立颜色起止来定义梯度
+            }
+
+            ctx.linewidth = ballrad;
+            ctx.fillStyle = grad;
+
+            moveball();
+            setInterval(moveball, 100);
+        }
+
+        function moveball(){
+
+            ctx.clearRect(boxx, boxy, boxwidth, boxheight);
+            moveandcheck();
+
+            if(ballvx>=0){
+                ctx.drawImage(imgr, ballx-ballrad, bally-ballrad, 2*ballrad, 2*ballrad);
+            }else{
+                ctx.drawImage(imgl, ballx-ballrad, bally-ballrad, 2*ballrad, 2*ballrad);
+            }
+
+            ctx.fillRect(boxx, boxy, ballrad, boxheight); //左墙
+            ctx.fillRect(boxx+boxwidth-ballrad, boxy, ballrad, boxheight);  //右墙
+            ctx.fillRect(boxx, boxy, boxwidth, ballrad); //上墙
+            ctx.fillRect(boxx, boxy+boxheight-ballrad, boxwidth, ballrad); //下墙
+
+        }
+
+        function moveandcheck(){
+            var nballx = ballx + ballvx;    //设置试探的下一个x位置
+            var nbally = bally + ballvy;    //设置试探的下一个y位置
+
+            if(nballx > boxboundx){ //x的值大于右墙的边界吗
+                ballvx = -ballvx;
+                nballx = boxboundx;
+
+            }
+            if(nballx < inboxboundx){
+                //x值小于左边界吗
+                nballx = inboxboundx;
+                ballvx = -ballvx;
+            }
+            if(nbally > boxboundy){
+                nbally = boxboundy;
+                ballvy = -ballvy;
+            }
+            if(nbally < inboxboundy){
+                nbally = inboxboundy;
+                ballvy = -ballvy;
+            }
+            ballx = nballx;
+            bally = nbally;
+
+        }
+
+        function change(){
+            ballvx = Number(f.hv.value);
+            ballvy = Number(f.vv.value);
+            return false;
+        }
+
+    </script>
+
+</head>
+<body onload="init();">
+    <canvas id="canvas" width="400" height="300"></canvas>
+    <br/>
+    <form name="f" id="f" onsubmit="return change();">
+        Horizontal velocity <input name="hv" id="hv" value="4" type="number" min="-10" max="10">
+        <br/>
+        Vertical velocity <input name="vv" id="vv" value="8" type="number" min="-10" max="10">
+        <input type="submit" value="CHANGE">
+    </form>
+
+</body>
+
+</html>
