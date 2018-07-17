@@ -9,6 +9,8 @@ let _url = argv.fx;
 // console.log(JSON.parse(process.env.npm_config_argv).original[1]);//获取npm 后面的参数
 // let _url = JSON.parse(process.env.npm_config_argv).original[1].replace(/.{3}/,'').replace(/.$/,'');//匹配前三位数--'和最后一位'
 // console.log(_url);
+//https://segmentfault.com/q/1010000009642018/a-1020000009642094 关于打包的路径多出一个static
+//https://www.mmxiaowu.com/article/58482558d4352863efb55475 关于vue不同情况下打包模式
 module.exports={
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项

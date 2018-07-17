@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于get和set</title>
+</head>
+<body>
+    <script>
+//test`1
+console.warn('----------------------test1-----------------------')
+        function sum(getX,getY,callback){
+            var x,y;
+            getX(function(result){
+                x = result;
+                if(y !== undefined){
+                    callback(x + y)
+                }
+            });
+            getY(function(result){
+                y = result;
+                if(x !== undefined){
+                    callback(x + y)
+                }
+            })
+        }  
+
+        function fetchX(met){
+            //
+            if(typeof met === 'function'){
+                met(1)
+            }
+        }
+
+        function fetchY(met){
+            //
+            if(typeof met === 'function'){
+                met(2)
+            }
+        }
+
+        sum(fetchX, fetchY, function(res){
+            console.log(res);
+        })
+
+    </script>
+
+    <script>
+        //test`2
+        console.warn('----------------------test2-----------------------')
+        var global = {
+            x : 1,
+            y : 2,
+            z : 3,
+            get GetX(){
+                console.log('do GetX')
+                return this.x
+            },
+            set GetX(result){
+                console.log(result,'setX');
+                this.x = result;
+            },
+            get GetY(){
+                console.log('do GetY')
+                return this.y
+            },
+            GetZ : function(){
+                return this.z
+            },
+        }
+
+        function con(valX, valY, valZ, cb){
+            console.log(valX,'valX');
+            console.log(valY,'valY');
+            console.log(valZ,'valZ');
+            cb();
+        }
+
+        con(global.GetX, global.GetY, global.GetZ(), function(){
+            //1、设置的get和set可以类比成对象属性值，而其他则是function需要执行才可以获取值
+            console.log('start')
+            global.GetX = 7
+            global.GetY = 8
+            //GetZ会报错 设置了set 可以改变值 否则不可以变更
+            con(global.GetX, global.GetY, global.GetZ(), function(){
+                console.log('end')
+            })
+        })
+    </script>
+</body>
+</html>

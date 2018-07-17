@@ -61,6 +61,7 @@ this.addEventListener('fetch', function (event) {
     console.log(nowV, '当前版本号');
 
     if (event.request.method === "POST") {
+        console.log('经过了fetch的post')
         return;
     }
     event.respondWith(

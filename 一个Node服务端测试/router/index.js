@@ -33,6 +33,13 @@ router.get('/html', function (req, res) {
     res.sendFile('F:/自己测试完/关于Css的Demo/'+req.query.name+'.html');
 });
 
+
+// 定义 about 页面的路由
+router.get('/ppt', function (req, res) {
+    //sendFile只可以传绝对路径
+    res.sendFile('F:/自己测试完/关于Css的Demo/ppt/index.html');
+});
+
 // 定义 about 页面的路由
 router.get('/gnHtml', function (req, res) {
     //sendFile只可以传绝对路径

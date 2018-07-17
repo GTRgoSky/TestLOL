@@ -1,0 +1,106 @@
+<!doctype html>
+
+<!--
+  This is a simple example / template impress.js slide show. The goal is to be
+  easier to read for a first timer than the official and very feature rich
+  demo by bartaz (http://bartaz.github.io/impress.js/). It's also a very
+  traditional presentation that looks like slides (square screens with bullet
+  points...), again to make a first timer feel more at home. From this simple
+  presentation you can then go on to more powerful impress.js presentations!
+  
+  This example is hopefully helpful for people that want to create both
+  simple and (eventually) awesome presentations in impress.js and comfortable
+  doing that directly in HTML.
+  
+  By: @henrikingo (Still based on the HTML from bartaz' demo.)  
+    
+-->
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>羽毛球社求投票</title>
+    <meta name="description" content="Explore impress.js in 3D" />
+    <meta name="author" content="Henrik Ingo" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <link href="css/3D-rotations.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress" data-transition-duration="2000">
+
+
+    <div id="overview" class="step overview" data-x="1350" data-y="100" data-z="100" data-scale="3" data-rotate-y="90">
+         <h1>欢迎你加入羽毛球社~</h1>
+    </div>
+    <div id="overview2" class="step overview" data-x="2018" data-y="106" data-z="3018" data-scale="2">
+         <p style=" text-align: left;font-size: 60px; width: 500px;">羽毛球社因你加入而精彩~，在这里无数有趣的人与你约战。不要在宅在家里苦恼没有社交圈子了。加入我们，焕发自己的青春活力~</p>
+    </div>
+
+    <div id="step-1" class="step" data-x="0" data-y="0" data-z="0"
+         data-goto-prev="step-8">
+        <p>4月份我们组织了第一届羽林大会。(每一位参赛小伙伴都获得了精美礼品哦)</p>
+    </div>
+
+    <div id="step-2" class="step" data-x="420" data-y="-70" data-z="-250" data-rotate-z="45" data-rotate-y="-45" data-rotate-order="zyx">
+        <p>5月份我们举办了3次社团活动。每周都有十多名小伙伴来IVT体育馆与我们一起锻炼~</p>
+    </div>
+
+    <div id="step-3" class="step" data-x="700" data-y="350" data-z="-350" data-rotate-z="90" data-rotate-y="-90" data-rotate-order="zyx">
+        <p>6月份，我们达到了每周五晚上都有活动的频次。</p>
+    </div>
+
+    <div id="step-4" class="step" data-x="422" data-y="780" data-z="-250" data-rotate-z="135" data-rotate-y="-135" data-rotate-order="zyx">
+        <p>我们提供各式羽毛球装备，还有饮料提供，绝不是撒手不管型~</p>
+    </div>
+
+    <div id="step-5" class="step" data-x="0" data-y="702" data-z="0" data-rotate-z="180" data-rotate-y="-180" data-rotate-order="zyx">
+        <p>今天，羽毛球团队希望有更多小伙伴加入我们。</p>
+    </div>
+
+    <div id="step-6" class="step" data-x="379" data-y="780" data-z="270" data-rotate-z="135" data-rotate-y="-225" data-rotate-order="zyx">
+        <p>最后：见证真爱的时候到了  请投出您的宝贵一票~感谢</p>
+    </div>
+
+    <div id="step-7" class="step" data-x="700" data-y="350" data-z="350" data-rotate-z="90" data-rotate-y="-270" data-rotate-order="zyx">
+        <img src="http://5b0988e595225.cdn.sohucs.com/images/20170824/7dab104d025349fb9b4916f673db1968.gif" alt="" style="margin: auto;display: block;">
+    </div>
+
+   
+</div>
+
+<div id="impress-toolbar"></div>
+<div id="impress-help" style="display: none;"></div>
+
+<script type="text/javascript" src="./impress.js"></script>
+<script>impress().init();
+
+new function () {
+            var _self = this;
+            _self.width = 720; //设置默认最大宽度
+            _self.fontSize = 100; //默认字体大小
+            _self.widthProportion = function () {
+                var p = (document.body && document.body.clientWidth || document.getElementsByTagName("html")[0].offsetWidth) /
+                    _self.width;
+                return p > 1 ? 1 : p;
+            };
+            _self.changePage = function () {
+                document.getElementsByTagName("html")[0].setAttribute("style", "font-size:" + _self.widthProportion() *
+                    _self.fontSize + "px !important");
+            }
+            _self.changePage();
+            window.addEventListener('resize', function () {
+                _self.changePage();
+            }, false);
+        };
+
+</script>
+
+</body>
+</html>
