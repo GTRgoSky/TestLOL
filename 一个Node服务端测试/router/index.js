@@ -4,6 +4,24 @@ const router = express.Router();
 var http = require('http');
 let fs = require('fs');
 const path = require('path');
+// 上传模块
+var multer = require('multer');
+// 实例化上传模块(前端使用参数名为file)
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.resolve(__dirname+'/'+'../public'))
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'upload.zip')
+    },
+})
+var upload = multer({ storage: storage }).any();
+
+//解压缩
+const unzip = require('unzip')
+
+
 //https://blog.csdn.net/crisschan/article/details/74454208 清除host缓存 ipconfig /flushdns
 // 该路由使用的中间件
 router.use(function timeLog(req, res, next) {
@@ -107,6 +125,25 @@ router.get('/payment', function (req, res) {
 // 定义 about 页面的路由
 router.get('/po', function (req, res) {
     res.send('About birds 对等的6789');
+});
+
+//上传文件
+router.post('/upload', upload, function (req, res) {
+    let _url = req.body.my_field;
+      /*修改上传文件地址*/
+      upload(req,res,function(err){
+        if (err) {
+            console.log('上传失败');
+        }else{
+            console.log('上传成功');
+        }
+    });
+    fs.createReadStream(path.resolve(__dirname+'/'+'../public/upload.zip')).pipe(unzip.Extract({ path: path.resolve(__dirname+'/'+'../public/'+_url) }));
+
+    // 反馈上传信息
+    res.send({
+        'states':'success'
+    });
 });
 
 module.exports = router

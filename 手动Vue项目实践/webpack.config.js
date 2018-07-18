@@ -1,9 +1,11 @@
 var webpack = require('webpack')  //引入文件
 var vConsolePlugin = require('vconsole-webpack-plugin'); 
-const HTMLWebpackPlugin = require('html-webpack-plugin');
+// const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path')
 var argv = require('yargs').argv;
-
+// const WebpackZipPlugin =require('webpack-zip-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin');
+const {upload} = require('./upload.js')
 console.log('argv:'+argv.fx)
 let _url = argv.fx;
 // console.log(JSON.parse(process.env.npm_config_argv).original[1]);//获取npm 后面的参数
@@ -19,7 +21,7 @@ module.exports={
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
         alias: {
-            'vue': 'vue/dist/vue.js'//vue文件地址配置
+            'vue$': 'vue/dist/vue.js'//vue文件地址配置
         }
     },
     module:{
@@ -48,6 +50,20 @@ module.exports={
         new vConsolePlugin({
             enable: false // 发布代码前记得改回 false,
         }),
+        //do zip
+        // new WebpackZipPlugin({
+        //     initialFile: './dist',  //需要打包的文件夹(一般为dist)
+        //     endPath: './',  //打包到对应目录（一般为当前目录'./'）
+        //     zipName: 'upload.zip' //打包生成的文件名
+        // })
+        new FileManagerPlugin({
+            onEnd: {
+            //   mkdir: ['./zip'],//创建文件夹
+              archive: [
+                { source: './dist', destination: './upload.zip' },
+              ]
+            }
+        })
         // new HTMLWebpackPlugin({
         //     title: 'Code Splitting'
         // })
@@ -59,3 +75,9 @@ module.exports={
         // })
     ]
 };
+
+setTimeout(()=>{
+    upload(function(res){
+        console.log('上传成功',res)
+    })
+},3000)
