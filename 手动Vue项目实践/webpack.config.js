@@ -77,7 +77,7 @@ module.exports={
 };
 
 setTimeout(()=>{
-    upload(function(res){
-        console.log('上传成功',res)
+    upload(function(res,body){
+        console.log(body)
     })
 },3000)
