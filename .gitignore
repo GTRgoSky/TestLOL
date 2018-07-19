@@ -8,6 +8,7 @@ test/unit/coverage
 test/e2e/reports
 selenium-debug.log
 mydist/
+upload.zip
 
 # Editor directories and files
 .idea
