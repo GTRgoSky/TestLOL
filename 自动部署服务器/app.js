@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 let fs = require('fs');
 const path = require('path');
+
+app.use(express.static('public'));
+
 // 上传模块
 var multer = require('multer');
 // 实例化上传模块(前端使用参数名为file)
@@ -17,7 +20,9 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).any();
 
 //解压缩
-const unzip = require('unzip')
+const unzip = require('unzip');
+
+
 
 app.get('/alive',function(req,res){
     console.log('alive')
@@ -41,6 +46,25 @@ app.post('/upload', upload, function (req, res) {
     res.send('上传成功!'+'url:'+_url);
 });
 
+app.put('/testput',function(req,res){
+    //所有用到的测试请求请走这里
+    console.log('test start')
+    // console.log(path.resolve(__dirname+'/public/test.json'))
+    // req.pipe(fs.createWriteStream(path.resolve('test.json')))
+    let file = fs.createWriteStream(path.resolve(__dirname+'/public/test.json'));
+    req.pipe(file)
+    res.send('get request');
+})
+
+app.post('/testpost',function(req,res){
+    //所有用到的测试请求请走这里
+    console.log('test start')
+    // console.log(path.resolve(__dirname+'/public/test.json'))
+    // req.pipe(fs.createWriteStream(path.resolve('test.json')))
+    let file = fs.createWriteStream(path.resolve(__dirname+'/public/test.json'));
+    req.pipe(file)
+    res.send('get request');
+})
 
 //在其所有他中间件的后面添加一个处理 404 的中间件
 app.use(function (req, res, next) {
