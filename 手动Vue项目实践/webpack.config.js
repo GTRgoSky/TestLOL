@@ -14,14 +14,25 @@ let _url = argv.fx;
 //https://segmentfault.com/q/1010000009642018/a-1020000009642094 关于打包的路径多出一个static
 //https://www.mmxiaowu.com/article/58482558d4352863efb55475 关于vue不同情况下打包模式
 module.exports={
+    // entry: {
+    //     // app: './src/main.js',
+    //     app: `./${_url}/main.js`, //配置入口,
+    //     vendor: ['vue'],
+    // },
+    //提出下列js到打包js中
+    // externals: {
+    //     'vue': 'Vue',
+    //     'vue-router': 'VueRouter',
+    //     'axios': 'axios',
+    //   },
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项
         path:__dirname+'/dist/',//输出路径为，当前路径下
-        // filename:'build.js',//输出后的文件名称
-        filename: '[name].js'
+        filename:'build.js',//输出后的文件名称
+        // filename: '[name].js'
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
-        extensions: ['.js', '.vue', '.json'],
+        // extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.js'//vue文件地址配置
         }

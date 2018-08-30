@@ -24,6 +24,12 @@ export default {
         },
         b(){
             console.log(666,this)
+            performance.mark('for-start')//开始标记
+            for (let i = 0; i < 100; i++) {
+                console.log(i)
+            }
+            performance.mark('for-end')//结束标记
+            performance.measure('for-measure','for-start','for-end')//在Performance的 User Timing里查看代码段性能
         },
         inner(e){
             console.log(e.target.innerHTML)

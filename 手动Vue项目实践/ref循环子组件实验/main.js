@@ -24,7 +24,7 @@ var vm = new Vue({
     created() {
     },
     mounted(){
-        // console.log(this.$refs.test)
+        console.log(this.$refs.test)
     },
     components:{testA},
     template:'<test-a/>',
