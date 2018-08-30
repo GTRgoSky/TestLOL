@@ -22,10 +22,11 @@ var upload = multer({ storage: storage }).any();
 //解压缩
 const unzip = require('unzip');
 
-
+//请求加密认证
+const basicAuth = require('basic-auth')
 
 app.get('/alive',function(req,res){
-    console.log('alive')
+    console.log('alive',req)
     res.send('alive');
 })
 // 
@@ -56,15 +57,24 @@ app.put('/testput',function(req,res){
     res.send('get request');
 })
 
-app.post('/testpost',function(req,res){
+app.get('/testauth',function(req,res){
     //所有用到的测试请求请走这里
-    console.log('test start')
-    // console.log(path.resolve(__dirname+'/public/test.json'))
-    // req.pipe(fs.createWriteStream(path.resolve('test.json')))
-    let file = fs.createWriteStream(path.resolve(__dirname+'/public/test.json'));
-    req.pipe(file)
-    res.send('get request');
+    console.log('auth start')
+    const credentials = basicAuth(req);
+    console.log(req.auth)
+    let str = '';
+    if(credentials && (credentials.name == 'Yxx' && credentials.pass == 566)){
+        //https://segmentfault.com/a/1190000013109445
+        res.statusCode = 200;
+        str = 'get auth';
+    }else{
+        res.setHeader('WWW-Authenticate', 'Basic realm="example"')//告诉客户端可以在HTTP请求中带上Cookie
+        res.statusCode = 401;
+        str = '你没有权限访问服务器';
+    }
+    res.send(str);
 })
+
 
 //在其所有他中间件的后面添加一个处理 404 的中间件
 app.use(function (req, res, next) {

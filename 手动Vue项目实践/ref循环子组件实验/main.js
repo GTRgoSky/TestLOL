@@ -1,6 +1,8 @@
 import Vue from 'vue' //引入主角vue.js，这里是因为在webpack.config中进行配置地址了
 import VueRouter from 'vue-router'
-import Navigation from 'vue-navigation'
+import testA from './test.vue'
+
+
 
 Vue.use(VueRouter)
 
@@ -12,8 +14,9 @@ const Home = {
     </div>`
 }
 
+// Vue.config.performance = 
 
-new Vue({
+var vm = new Vue({
     data(){
         return {
         }
@@ -21,7 +24,8 @@ new Vue({
     created() {
     },
     mounted(){
-        console.log(this.$refs.test)
+        // console.log(this.$refs.test)
     },
-    template:Home.template,
+    components:{testA},
+    template:'<test-a/>',
 }).$mount('#app')

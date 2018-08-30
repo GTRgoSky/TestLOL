@@ -17,9 +17,11 @@ module.exports={
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项
         path:__dirname+'/dist/',//输出路径为，当前路径下
-        filename:'build.js',//输出后的文件名称
+        // filename:'build.js',//输出后的文件名称
+        filename: '[name].js'
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
+        extensions: ['.js', '.vue', '.json'],
         alias: {
             'vue$': 'vue/dist/vue.js'//vue文件地址配置
         }
@@ -76,8 +78,8 @@ module.exports={
     ]
 };
 
-setTimeout(()=>{
-    upload(function(res,body){
-        console.log(body)
-    })
-},3000)
+// setTimeout(()=>{
+//     upload(function(res,body){
+//         console.log(body)
+//     })
+// },3000)

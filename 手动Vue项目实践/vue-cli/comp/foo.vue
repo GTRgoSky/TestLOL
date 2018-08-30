@@ -2,10 +2,12 @@
     <div>
         foo
         <slot></slot>
+        {{count}}
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     mounted(){
         console.log('foo');
@@ -22,6 +24,12 @@ export default {
     deactivated(){
         //失去激活
         // console.log('de');
+    },
+    computed: {
+        ...mapState(['count'])
+        // count () {
+        //     return this.$store.state.count
+        // }
     }
 }
 </script>
