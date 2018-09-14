@@ -2,6 +2,8 @@
 
 //Git推送脚本
 
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 const execSync = require('child_process').execSync;
 
 try {
@@ -17,3 +19,20 @@ try {
     console.log('execute error：');
     console.log(err.toString());
 }
+
+// async function pushGit() {
+//     console.log('start-inner')
+//     const { stdout:str1, stderr:stderr1 } = await exec('git status', {encoding: 'utf8'});
+//     console.log(str1)
+//     if(stderr1) console.log("stderr1:",stderr1);
+//     const re = str1.match(/^On branch (.+)\s/);
+//     console.log('你现在所在分支：' + re[1] + '\n');
+//     exec('git add *', {encoding: 'utf8'});
+//     execSync('git commit ' + '-m '+ process.argv[2], {encoding: 'utf8'});
+//     await exec('git push', {encoding: 'utf8'});
+//     console.log('end-inner')
+// }
+
+// console.log('start fun')
+// pushGit();
+// console.log('end fun')
