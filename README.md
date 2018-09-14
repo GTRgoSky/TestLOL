@@ -29,3 +29,15 @@ servei-worker第一次接触，fetch没找到效果
 完成webpack+Node打包后的自动化部署功能。
 
 在手动Vue中的ref实验中添加了关于Vue性能的标记测试(performance[一个浏览器自带的性能检测器])
+
+截止2018.08.26
+
+新增自动部署服务器文件夹：测试流的传递。实现本地打包zip后传到服务端解压--部署--删除zip的自动化流程
+
+在手动Vue项目实践中新增vue-study文件夹：Vue策略Demo $options的Demo 关于Vue构造函数继承后的一些父子继承测试 关于源码中一些问题的校验
+
+截止2018.09.14
+
+新增node_cli文件夹：增加了通过Node && shell 执行Git脚本，节省手动git的步骤
+
+
