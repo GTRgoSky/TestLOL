@@ -26,6 +26,7 @@ var vm = new Vue({
     mounted(){
         console.log(this.$refs.test)
     },
+    a:66,
     components:{testA},
     template:'<test-a/>',
 }).$mount('#app')

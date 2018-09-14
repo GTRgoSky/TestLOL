@@ -27,3 +27,5 @@ servei-worker第一次接触，fetch没找到效果
 测试通过第一次cache存储、PWA的离线缓存功能。
 
 完成webpack+Node打包后的自动化部署功能。
+
+在手动Vue中的ref实验中添加了关于Vue性能的标记测试(performance[一个浏览器自带的性能检测器])

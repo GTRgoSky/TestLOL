@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://10.33.80.115:3010/xr/css/sp.css">
+</head>
+<body>
+    <p id="Js"></p>
+    <p>自带文案</p>
+    <p class="red">css给予样式的文案</p>
+    <div id="rF" onclick="test(this)" style="width:50px;"></div>
+    <div id='sA'>
+    </div>
+    <script>
+        requestAnimationFrame(function(){
+            console.log(666)
+            document.getElementById('rF').innerHTML = 556;
+        })
+        function test(e){
+            e.innerHTML = 557;
+            console.log(e.style.width)
+        }
+        var fragment = document.createDocumentFragment();//节点碎片
+        for (var i=0; i<6; i++) {
+            var div =document.createElement('div');//创建一个dom节点
+            div.innerHTML = 'index:' + i;//给节点添加内容
+            fragment.appendChild(div);//把创建的节点插入到碎片中
+            // document.getElementById('sA').appendChild(div);      此种方法出发了5次重排
+        }
+        document.getElementById('sA').appendChild(fragment);      
+    </script>
+    <script src="http://10.33.80.115:3010/xr/js/sp.js"></script>
+</body>
+</html>

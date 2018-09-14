@@ -7,7 +7,16 @@ var connect = require('connect');
 var ejs = require('ejs');
 const path = require('path');
 var url = require('url');
-
+// app.use('*',function(req, res, next){
+//     if(!req.baseUrl.includes('sp.js')){
+//         next();
+//     }else{
+//         setTimeout(()=>{
+//             console.log('首屏加载延迟5S给予返回')
+//             next();
+//         },5000)
+//     }
+// })
 app.use(express.static(path.join(__dirname, 'public/vuedist')))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.static(path.join(__dirname, 'mydist')))
@@ -26,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'mydist')))
 // app.all('*', function(req, res, next) {
 
 // });
+
 
 app.use('/', index);
 app.use("/test", test)

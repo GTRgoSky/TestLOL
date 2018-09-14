@@ -8,20 +8,34 @@
         <div @click='inner'>
             <span>gegege</span>gogogo
         </div>
-        
+        <com-one @par="changeC" :com-one='comOne'></com-one>
     </div>
 </template>
 
 <script>
+import comOne from './com/como.vue'
 export default {
     name : 'test-a',
     data(){
         return {
             list : [1,2,3,4],
-            id:1
+            id:1,
+            comOne:1,
+            ttss: 'testProvide'
+        }
+    },
+    // provide: {
+    //     provideT: 'testProvide'
+    // },
+    provide() {
+        return {
+            'provideT' : this.ttss
         }
     },
     created() {
+    },
+    components:{
+        comOne
     },
     methods:{
         t(v){
@@ -42,6 +56,10 @@ export default {
             console.log(e.target.innerText)
             console.log(e.target.outerHTML)
             console.log(e.target.textContent)
+        },
+        changeC(){
+            this.comOne = 2;
+            console.log(this)
         }
     }
 }
