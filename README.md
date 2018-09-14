@@ -38,6 +38,7 @@ servei-worker第一次接触，fetch没找到效果
 
 截止2018.09.14
 
-新增node_cli文件夹：增加了通过Node && shell 执行Git脚本，节省手动git的步骤
+计划做一套简单的Node.js 命令行程序
+新增node_cli文件夹：增加了通过Node && shell 执行Git脚本，节省手动git的步骤（目前只实现了递交功能）
 
 
