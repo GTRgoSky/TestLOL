@@ -31,8 +31,8 @@ Observer.prototype = {
                 if (newVal === val) {
                     return;
                 }
-                val = newVal;
-                // 新的值是object的话，进行监听
+                val = newVal;//此时，data上的值已经进行了更新，剩下的就是找到对应DOM进行更新
+                // 新的值是object的话，进行监听（即递归监听到最底层属性，如果不是对象，则return空，可忽视）
                 childObj = observe(newVal);
                 // 通知订阅者
                 dep.notify();
@@ -53,13 +53,13 @@ function observe(value, vm) {
 var uid = 0;
 
 function Dep() {
-    this.id = uid++;
-    this.subs = [];
+    this.id = uid++;//data对象里每一个子对象都会创建对应id，防止重复添加watcher
+    this.subs = [];//里面存储的都是实例化的watch
 }
 
 Dep.prototype = {
     addSub: function(sub) {
-        this.subs.push(sub);
+        this.subs.push(sub);//将watch实例放入数组
     },
 
     depend: function() {
@@ -75,7 +75,7 @@ Dep.prototype = {
 
     notify: function() {
         this.subs.forEach(function(sub) {
-            sub.update();
+            sub.update();//订阅者执行watch上的方法
         });
     }
 };

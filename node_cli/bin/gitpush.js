@@ -20,6 +20,7 @@ const exec = util.promisify(require('child_process').exec);
 //     console.log(err.toString());
 // }
 
+//尝试用promise做一次测试
 async function pushGit() {
     console.log('start-inner')
     const { stdout:str1, stderr:stderr1 } = await exec('git status', {encoding: 'utf8'});

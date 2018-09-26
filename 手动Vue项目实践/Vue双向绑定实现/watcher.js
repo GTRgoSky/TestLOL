@@ -11,7 +11,7 @@ function Watcher(vm, expOrFn, cb) {
     } else {
         this.getter = this.parseGetter(expOrFn);
     }
-
+    //这个方法是为了绑定watch监听的。触发get后，会执行parseGetter里面的取值操作，而此时Dep.target指向watch，将自己添加到订阅器的操作
     this.value = this.get();
 }
 
@@ -20,11 +20,12 @@ Watcher.prototype = {
         this.run();
     },
     run: function() {
-        var value = this.get();
+        var value = this.get();//得到新值
         var oldVal = this.value;
+        //如果值没有变更直接返回不在进行任何操作
         if (value !== oldVal) {
-            this.value = value;
-            this.cb.call(this.vm, value, oldVal);
+            this.value = value;//更新旧值
+            this.cb.call(this.vm, value, oldVal);//this.vm是实例对象，触发watch的回调
         }
     },
     addDep: function(dep) {
@@ -49,9 +50,11 @@ Watcher.prototype = {
     },
     get: function() {
         Dep.target = this;
-        var value = this.getter.call(this.vm, this.vm);
+        var value = this.getter.call(this.vm, this.vm);//this.vm将data抛出了option，直接在vm对象上挂载
         Dep.target = null;
         return value;
+        //初次渲染这个方法为了调取一次watch用于将实例化的watch放入dep，同时保存oldVal用于和新值比对
+        //二次渲染为了取得新值
     },
 
     parseGetter: function(exp) {
@@ -62,7 +65,7 @@ Watcher.prototype = {
         return function(obj) {
             for (var i = 0, len = exps.length; i < len; i++) {
                 if (!obj) return;
-                obj = obj[exps[i]];
+                obj = obj[exps[i]];//此处是个取值操作会触发defineProperty绑定的get方法
             }
             return obj;
         }

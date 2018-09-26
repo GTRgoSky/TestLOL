@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="http://10.33.80.115:3010/xr/css/sp.css">
+    <style>
+        .sanjiao{
+            width: 0;
+            height: 0;
+            border: 50px solid transparent;
+            border-left: 50px solid yellow;
+            border-right: 50px solid yellow;
+        }
+    </style>
 </head>
 <body>
     <p id="Js"></p>
@@ -14,6 +23,8 @@
     <div id="rF" onclick="test(this)" style="width:50px;"></div>
     <div id='sA'>
     </div>
+    <canvas id="myCanvas" height="100"></canvas>
+    <div class="sanjiao"></div>
     <script>
         requestAnimationFrame(function(){
             console.log(666)
@@ -31,6 +42,18 @@
             // document.getElementById('sA').appendChild(div);      此种方法出发了5次重排
         }
         document.getElementById('sA').appendChild(fragment);      
+
+
+//临时测试
+        var c=document.getElementById("myCanvas");
+        var ctx=c.getContext("2d");
+        ctx.lineWidth = 10;
+        ctx.beginPath();
+        ctx.lineCap="round";
+        ctx.moveTo(20,10);
+        ctx.lineTo(100,10);
+        ctx.stroke();
+
     </script>
     <script src="http://10.33.80.115:3010/xr/js/sp.js"></script>
 </body>

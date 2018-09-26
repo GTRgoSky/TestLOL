@@ -3,10 +3,10 @@ import {Watcher} from "./watcher.js"
 
 function Compile(el, vm) {
     this.$vm = vm;
-    this.$el = this.isElementNode(el) ? el : document.querySelector(el);
+    this.$el = this.isElementNode(el) ? el : document.querySelector(el);//初始化el:#mvvm-app,$el为此id的dom
 
     if (this.$el) {
-        this.$fragment = this.node2Fragment(this.$el);
+        this.$fragment = this.node2Fragment(this.$el);//$fragment存储(拷贝)了el的所有节点，复制了$el的DOM
         this.init();
         this.$el.appendChild(this.$fragment);
     }
@@ -33,6 +33,7 @@ Compile.prototype = {
         var childNodes = el.childNodes,
             me = this;
 
+            //[].slice.call(every)此种写法可以将具有length的every转换为数组
         [].slice.call(childNodes).forEach(function(node) {
             var text = node.textContent;
             var reg = /\{\{(.*)\}\}/;//判断是否是{{}}的格式存在在text节点
@@ -85,6 +86,7 @@ Compile.prototype = {
     },
 
     isElementNode: function(node) {
+        console.log(node)
         return node.nodeType == 1;
     },
 
@@ -126,10 +128,10 @@ var compileUtil = {
     bind: function(node, vm, exp, dir) {
         var updaterFn = updater[dir + 'Updater'];
 
-        updaterFn && updaterFn(node, this._getVMVal(vm, exp));
+        updaterFn && updaterFn(node, this._getVMVal(vm, exp));//将值渲染在对应DOM中
 
         new Watcher(vm, exp, function(value, oldValue) {
-            updaterFn && updaterFn(node, value, oldValue);
+            updaterFn && updaterFn(node, value, oldValue);//这个回调目的是为了更新DOM
         });
     },
 
@@ -147,7 +149,7 @@ var compileUtil = {
         var val = vm;
         exp = exp.split('.');
         exp.forEach(function(k) {
-            val = val[k];
+            val = val[k];//val[k]是个取值操作，会触发defineProperty绑定的get方法
         });
         return val;
     },

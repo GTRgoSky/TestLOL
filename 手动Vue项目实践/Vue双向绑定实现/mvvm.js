@@ -9,7 +9,7 @@ function MVVM(options) {
         me._proxy(key);
     });
     observe(data, this);
-    this.$compile = new Compile(options.el || document.body, this)
+    this.$compile = new Compile(options.el || document.body, this)//（el: '#mvvm-app'）
 }
 
 MVVM.prototype = {
@@ -22,7 +22,7 @@ MVVM.prototype = {
                 return me._data[key];
             },
             set: function proxySetter(newVal) {
-                me._data[key] = newVal;
+                me._data[key] = newVal;//开发者修改data值后的入口
             }
         });
 	}

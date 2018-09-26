@@ -10,11 +10,13 @@
   "preferGlobal": true,
   "bin": {
     "cli-demo": "bin/index.js",
-    "git-push": "bin/gitpush.js"
+    "git-push": "bin/gitpush.js",
+    "git-pull": "bin/gitpull.js"
   },
   "repository": {
     "type": "git",
     "url": ""
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {}
 }
