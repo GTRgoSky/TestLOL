@@ -1,5 +1,4 @@
 // 首屏加载
-
 document.getElementById('Js').innerHTML = '我是Js返回的文案';
 
 /*注释：

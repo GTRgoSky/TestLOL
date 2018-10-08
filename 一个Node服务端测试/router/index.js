@@ -28,7 +28,7 @@ router.use(function timeLog(req, res, next) {
     let time = new Date();
     let getTime = req.getTime = `${time.getFullYear()}-${time.getMonth()+1}-${time.getDate()} ${time.getHours()}:${time.getMinutes().toString().padStart(2,0)}:${time.getSeconds().toString().padStart(2,0)}`;
     console.log('Request Type:', req.method , getTime);
-    console.log('Request URL:', req.originalUrl);
+    console.log('Request URL:', decodeURIComponent(req.originalUrl));
     next();
 });
 // 定义网站主页的路由
