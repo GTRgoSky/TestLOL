@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>动态引入script</title>
+</head>
+<body>
+    <script>
+        console.log(1321)
+        let script = document.createElement('script');
+        let str = 'a'
+        setInterval(()=>{
+            console.log(str)
+            script.src = str;
+            if(str == 'a'){
+                str = 'b';
+            }else{
+                str = 'a'
+            }
+            document.querySelector('body').appendChild(script)
+        },1000)
+    </script>
+</body>
+</html>

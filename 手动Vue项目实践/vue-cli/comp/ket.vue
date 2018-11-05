@@ -6,6 +6,7 @@
         <p class="class2">This will change: {{msg}}</p>
         <input type="text" @keyup.enter="enter" name="" id="">
         <button @click="testBus">testBus</button>
+        <button @click="replaceRoute">replaceRoute</button>
         <test-com></test-com>
     </div>
 </template>
@@ -28,6 +29,9 @@ export default {
         },
         enter(e){
             alert(e.target.value)
+        },
+        replaceRoute(){
+            this.$router.replace({path:'/foo?u=123',query:{test:1,tes:2}})
         }
     },
     beforeDestroy(){
