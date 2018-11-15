@@ -2,13 +2,9 @@ module.exports = {
   "presets": [
     "@vue/app"
   ],
-  "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "iview",
-        "libraryDirectory": "src/components"
-      }
-    ]
-  ]
+  //按需引入
+  // "plugins": [["import", {
+  //   "libraryName": "iview",
+  //   "libraryDirectory": "src/components"
+  // }]]
 }
