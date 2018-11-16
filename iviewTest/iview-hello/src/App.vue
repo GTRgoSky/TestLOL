@@ -13,27 +13,43 @@
     <div class="layout home-layout">
         <Layout style="height: 100%;">
             <Sider ref="side1" hide-trigger collapsible :collapsed-width="78" v-model="isCollapsed">
-                <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
-                    <MenuItem name="1-1">
+                <div class="logo" :class="logoClass">
+                    <img src="./assets/logo.png" alt="">
+                    <span>type + Vue</span>
+                </div>
+                <Menu active-name="1-2"  width="auto" :class="menuitemClasses">
+                    <router-link to="/">
+                        <MenuItem name="1-1">
                         <Icon type="ios-navigate"></Icon>
-                        <span>Option 1</span>
+                        <span>主页</span>
                     </MenuItem>
-                    <MenuItem name="1-2">
-                        <Icon type="ios-search"></Icon>
-                        <span>Option 2</span>
-                    </MenuItem>
-                    <MenuItem name="1-3">
+                    </router-link>
+                    <router-link to="/about">
+                        <MenuItem name="1-2">
+                            <Icon type="ios-search"></Icon>
+                            <span>关于</span>
+                        </MenuItem>
+                    </router-link>
+                    <Submenu name="3">
+                        <template slot="title">
+                            <Icon type="ios-settings"></Icon>
+                            <span>Item 3</span>
+                        </template>
+                        <MenuItem name="3-1">Option 1</MenuItem>
+                        <MenuItem name="3-2">Option 2</MenuItem>
+                    </Submenu>
+                    <!-- <MenuItem name="1-3">
                         <Icon type="ios-settings"></Icon>
-                        <span>Option 3</span>
-                    </MenuItem>
+                        <span>设置</span>
+                    </MenuItem> -->
                 </Menu>
             </Sider>
             <Layout>
-                <Header :style="{padding: 0}" class="layout-header-bar">
+                <Header :style="{padding: 0}" class="layout-header-bar"  style="display:none">
                     <Icon @click.native="collapsedSider" :class="rotateIcon" :style="{margin: '0 20px'}" type="md-menu" size="24"></Icon>
                 </Header>
                 <Content :style="{margin: '20px', background: '#fff', minHeight: '260px'}">
-                    Content
+                    <router-view></router-view>
                 </Content>
             </Layout>
         </Layout>
@@ -43,7 +59,6 @@
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
-import { Button, Layout, Header, Sider, Content, Footer } from "iview";
 import { timerd, timerD } from "./common/util";
 export default {
   name: "app",
@@ -53,13 +68,7 @@ export default {
     };
   },
   components: {
-    HelloWorld,
-    Button,
-    Layout,
-    Header,
-    Sider,
-    Content,
-    Footer
+    HelloWorld
   },
   mounted() {
     console.log(timerd("-"));
@@ -70,6 +79,9 @@ export default {
     },
     menuitemClasses() {
       return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
+    },
+    logoClass() {
+      return [this.isCollapsed ? "logo-icon" : ""];
     }
   },
   methods: {
@@ -83,9 +95,33 @@ export default {
   }
 };
 </script>
+<style lang='less'>
+.home-layout {
+  .collapsed-menu {
+    &.ivu-menu-vertical {
+      .ivu-menu-submenu-title {
+        span {
+          display: none;
+        }
+        .ivu-icon-ios-arrow-down {
+          display: none;
+        }
+      }
+      .ivu-menu-opened {
+        position: relative;
+        .ivu-menu {
+          position: absolute;
+          right: -116px;
+          top: 10px;
+          background-color: cadetblue;
+        }
+      }
+    }
+  }
+}
+</style>
 
-<style>
-body,html{height: 100%;}
+<style scoped lang='less'>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -93,23 +129,26 @@ body,html{height: 100%;}
   height: 100%;
 }
 .layout {
-  border: 1px solid #d7dde4;
   background: #f5f7f9;
   position: relative;
-  border-radius: 4px;
   overflow: hidden;
   height: 100%;
+  .ivu-layout-sider,
+  .ivu-menu {
+    color: white;
+    background: cadetblue;
+    .ivu-menu-item {
+      color: white;
+      &:hover {
+        color: aquamarine;
+        // background-color: white;
+      }
+    }
+  }
 }
 .layout-header-bar {
   background: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-.layout-logo-left {
-  width: 90%;
-  height: 30px;
-  background: #5b6270;
-  border-radius: 3px;
-  margin: 15px auto;
 }
 .menu-icon {
   transition: all 0.3s;
@@ -141,5 +180,28 @@ body,html{height: 100%;}
   transition: font-size 0.2s ease 0.2s, transform 0.2s ease 0.2s;
   vertical-align: middle;
   font-size: 22px;
+}
+.logo {
+  height: 64px;
+  line-height: 64px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding-left: 15px;
+  img {
+    width: 30px;
+    height: 50%;
+    vertical-align: middle;
+  }
+  span {
+    color: white;
+    font-size: 20px;
+    margin-left: 15px;
+  }
+  &.logo-icon {
+    text-align: center;
+    padding: 0;
+    span {
+      display: none;
+    }
+  }
 }
 </style>
