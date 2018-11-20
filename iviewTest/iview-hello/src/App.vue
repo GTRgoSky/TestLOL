@@ -56,33 +56,32 @@
     </div>
   </div>
 </template>
-
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-import { timerd, timerD } from "./common/util";
+import HelloWorld from './components/HelloWorld.vue';
+import { timerd, timerD } from './common/util';
 export default {
-  name: "app",
+  name: 'app',
   data() {
     return {
-      isCollapsed: false
+      isCollapsed: false,
     };
   },
   components: {
-    HelloWorld
+    HelloWorld,
   },
   mounted() {
-    console.log(timerd("-"));
+    console.log(timerd('-'));
   },
   computed: {
     rotateIcon() {
-      return ["menu-icon", this.isCollapsed ? "rotate-icon" : ""];
+      return ['menu-icon', this.isCollapsed ? 'rotate-icon' : ''];
     },
     menuitemClasses() {
-      return ["menu-item", this.isCollapsed ? "collapsed-menu" : ""];
+      return ['menu-item', this.isCollapsed ? 'collapsed-menu' : ''];
     },
     logoClass() {
-      return [this.isCollapsed ? "logo-icon" : ""];
-    }
+      return [this.isCollapsed ? 'logo-icon' : ''];
+    },
   },
   methods: {
     getConsol() {
@@ -91,8 +90,8 @@ export default {
     },
     collapsedSider() {
       this.$refs.side1.toggleCollapse();
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang='less'>
@@ -120,7 +119,7 @@ export default {
   }
 }
 </style>
-
+ 
 <style scoped lang='less'>
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
