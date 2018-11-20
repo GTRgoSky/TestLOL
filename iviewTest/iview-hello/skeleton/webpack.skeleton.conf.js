@@ -1,5 +1,6 @@
 //用于编译首屏骨架项目的打包工具
 //  "webpack": "^2.4.1",
+//webpack --config ./webpack.skeleton.conf.js
 const path = require('path')
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
@@ -9,11 +10,11 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');//高版本之后的vue
 module.exports = {
   target: 'node',
   entry: {
-    skeleton: './src/skeleton.entry.js'
+    skeleton: './skeleton.entry.js'
   },
   output: {
-    path: path.resolve(__dirname, './dist'),
-    publicPath: '/dist/',
+    path: path.resolve(__dirname, '../dist'),
+    publicPath: '../dist/',
     filename: '[name].js',
     libraryTarget: 'commonjs2'
   },

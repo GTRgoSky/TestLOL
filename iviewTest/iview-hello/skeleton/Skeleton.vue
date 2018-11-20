@@ -1,6 +1,6 @@
 <template>
   <div class="skeleton page">
-    骨架页面
+    骨架页面Test
     <div class="skeleton-nav"></div>
     <div class="skeleton-swiper"></div>
     <ul class="skeleton-tabs">
