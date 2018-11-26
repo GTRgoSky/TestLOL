@@ -65,6 +65,9 @@ app.use(express.static(path.join(__dirname, 'public')))
 //加入这个后，history模式搞定
 app.use(history({
     rewrites: [{
+        from: '404',
+        to: '/about'
+    },{
         from: /[\s\S\w]*/,
         to: '/vuehtml'
     }]

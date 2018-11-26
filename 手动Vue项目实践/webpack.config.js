@@ -1,3 +1,4 @@
+//http://webpack.wuhaolin.cn/2配置/2-8整体配置结构.html
 var webpack = require('webpack')  //引入文件
 var vConsolePlugin = require('vconsole-webpack-plugin'); 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
@@ -36,7 +37,7 @@ module.exports={
         // filename:'build.js',//输出后的文件名称
         filename: '[name].js',
         chunkFilename: '[name].[chunkhash:8].js',
-        publicPath: '/dist/'//老版本的可以不用配置但是新版本需要配置
+        publicPath: '/dist/'//老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
     },
     module:{
         rules: [
@@ -76,11 +77,20 @@ module.exports={
         "vue-router": "VueRouter",
         "vuex": "Vuex",
     },
-    performance: {
-        hints: false
+    // 输出文件性能检查配置
+    performance: { 
+        // hints: 'warning', // 有性能问题时输出警告
+        // hints: 'error', // 有性能问题时输出错误
+        // hints: false, // 关闭性能检查
+        maxAssetSize: 200000, // 最大文件大小 (单位 bytes)
+        maxEntrypointSize: 400000, // 最大入口文件大小 (单位 bytes)
+        // assetFilter: function(assetFilename) { // 过滤要检查的文件
+        //     return assetFilename.endsWith('.js');
+        // }
     },
     // devtool: 'inline-source-map',
     // devtool: 'source-map',
+    // devtool: 'none',
     devServer: { //配置webpack加载地址的host，port，地址路径
         host:'192.168.8.120', 
         contentBase: _url + '/',
@@ -88,7 +98,10 @@ module.exports={
         port: 8088,
         headers: {
             'X-foo':process.env.NODE_ENV=='product' ? 'bar' : 'none'
-        }
+        },
+        // proxy: { // 代理到后端服务接口
+        //     '/': 'http://192.168.8.120:3010/vuehtml'
+        // },
     },
     plugins: [//这个是2.x中加的，各种loader的配置选项
         new webpack.LoaderOptionsPlugin({

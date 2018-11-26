@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 import router from './router'
 import App from './App.vue';
 import {common} from './install';
-import { sync } from 'vuex-router-sync';
+// import { sync } from 'vuex-router-sync';
 Vue.use(Vuex)
 Vue.use(common,'通过args传入的参数')
 const store = new Vuex.Store({
@@ -17,7 +17,7 @@ const store = new Vuex.Store({
         }
     }
 })
-const unsync = sync(store, router) // done. Returns an unsync callback fn
+// const unsync = sync(store, router) // done. Returns an unsync callback fn
 
 new Vue({
     router,
