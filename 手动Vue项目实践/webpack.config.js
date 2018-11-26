@@ -1,35 +1,39 @@
 var webpack = require('webpack')  //引入文件
 var vConsolePlugin = require('vconsole-webpack-plugin'); 
-// const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path')
 var argv = require('yargs').argv;
 // const WebpackZipPlugin =require('webpack-zip-plugin')
 // const FileManagerPlugin = require('filemanager-webpack-plugin');
-const {upload} = require('./upload.js');
-const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+// const {upload} = require('./upload.js');
+// const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
 // let lessExtract = new MiniCssExtractPlugin('less.css');
-const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
-const glob = require('glob');
+// const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
+// const glob = require('glob');
 console.log('argv:'+ argv.fx)
 let _url = argv.fx;
 // let _url = '测试打包体积'
-console.log('配置全局变量：'+process.env.NODE_ENV)
+console.log('配置全局变量：'+process.env.NODE_ENV);
+console.log('__dirname:'+ __dirname)
 // console.log(JSON.parse(process.env.npm_config_argv).original[1]);//获取npm 后面的参数
 // let _url = JSON.parse(process.env.npm_config_argv).original[1].replace(/.{3}/,'').replace(/.$/,'');//匹配前三位数--'和最后一位'
 // console.log(_url);
 //https://segmentfault.com/q/1010000009642018/a-1020000009642094 关于打包的路径多出一个static
 //https://www.mmxiaowu.com/article/58482558d4352863efb55475 关于vue不同情况下打包模式
 module.exports={
+    target:'async-node',
     //context 配置根目录地址。默认为执行启动 Webpack 时所在的当前工作目录
     mode:'production',//production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
-    entry:`./${_url}/main.js`, //配置入口
+    entry: {
+        main: `./${_url}/main.js`, //配置入口
+    },
     output:{  //配置输出选项
-        path:__dirname+'/dist/',//输出路径为，当前路径下
-        filename:'build.js',//输出后的文件名称
-        // filename: '[name].js',
-        // chunkFilename: '[name].[chunkhash:8].js',
+        path:__dirname+`/${_url}/dist/`,//输出路径为，当前路径下
+        // filename:'build.js',//输出后的文件名称
+        filename: '[name].js',
+        chunkFilename: '[name].[chunkhash:8].js',
         publicPath: '/'//老版本的可以不用配置但是新版本需要配置
     },
     module:{
@@ -65,11 +69,16 @@ module.exports={
             'vue$': 'vue/dist/vue.js'//vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
         }
     },
+    externals: {
+        "vue": 'Vue',
+        "vue-router": "VueRouter",
+        "vuex": "Vuex",
+    },
     performance: {
         hints: false
     },
-    devtool: 'inline-source-map',
-    // devtool: false,
+    // devtool: 'inline-source-map',
+    // devtool: 'source-map',
     devServer: { //配置webpack加载地址的host，port，地址路径
         host:'192.168.8.120', 
         contentBase: _url + '/',
@@ -90,6 +99,10 @@ module.exports={
         }),
         new vConsolePlugin({
             enable: false // 发布代码前记得改回 false,
+        }),
+        new HTMLWebpackPlugin({
+            filename: 'index.html',
+            template: `./${_url}/index.html`, //配置入口
         }),
         //do zip
         // new WebpackZipPlugin({
