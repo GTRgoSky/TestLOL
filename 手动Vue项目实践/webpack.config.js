@@ -4,52 +4,80 @@ var vConsolePlugin = require('vconsole-webpack-plugin');
 const path = require('path')
 var argv = require('yargs').argv;
 // const WebpackZipPlugin =require('webpack-zip-plugin')
-const FileManagerPlugin = require('filemanager-webpack-plugin');
-const {upload} = require('./upload.js')
-console.log('argv:'+argv.fx)
+// const FileManagerPlugin = require('filemanager-webpack-plugin');
+const {upload} = require('./upload.js');
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
+// let lessExtract = new MiniCssExtractPlugin('less.css');
+const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
+const glob = require('glob');
+console.log('argv:'+ argv.fx)
 let _url = argv.fx;
+// let _url = '测试打包体积'
+console.log('配置全局变量：'+process.env.NODE_ENV)
 // console.log(JSON.parse(process.env.npm_config_argv).original[1]);//获取npm 后面的参数
 // let _url = JSON.parse(process.env.npm_config_argv).original[1].replace(/.{3}/,'').replace(/.$/,'');//匹配前三位数--'和最后一位'
 // console.log(_url);
 //https://segmentfault.com/q/1010000009642018/a-1020000009642094 关于打包的路径多出一个static
 //https://www.mmxiaowu.com/article/58482558d4352863efb55475 关于vue不同情况下打包模式
 module.exports={
-    // entry: {
-    //     // app: './src/main.js',
-    //     app: `./${_url}/main.js`, //配置入口,
-    //     vendor: ['vue'],
-    // },
-    //提出下列js到打包js中
-    // externals: {
-    //     'vue': 'Vue',
-    //     'vue-router': 'VueRouter',
-    //     'axios': 'axios',
-    //   },
+    //context 配置根目录地址。默认为执行启动 Webpack 时所在的当前工作目录
+    mode:'production',//production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
     entry:`./${_url}/main.js`, //配置入口
     output:{  //配置输出选项
         path:__dirname+'/dist/',//输出路径为，当前路径下
         filename:'build.js',//输出后的文件名称
-        // filename: '[name].js'
+        // filename: '[name].js',
+        // chunkFilename: '[name].[chunkhash:8].js',
+        publicPath: '/'//老版本的可以不用配置但是新版本需要配置
+    },
+    module:{
+        rules: [
+            {
+                test: /\.css$/,
+                // use: [MiniCssExtractPlugin.loader,'css-loader?minimize']
+                loader: ExtractTextPlugin.extract('css-loader?minimize')
+            }, {
+                test: /\.less$/,
+                use: [MiniCssExtractPlugin.loader,'css-loader?minimize', 'less-loader', 'postcss-loader']
+            },
+            {test:/\.vue$/, loader:'vue-loader'},
+            {test:/\.js$/, loader:'babel-loader', exclude:/node_modules/},//设置node_modules里的js文件不用解析
+            {
+                test:/\.(png|jpg|gif)$/,
+                use:[{
+                    loader:'url-loader',
+                    options:{ // 这里的options选项参数可以定义多大的图片转换为base64
+                        limit:50000, // 表示小于50kb的图片转为base64,大于50kb的是路径
+                        outputPath:'images' //定义输出的图片文件夹
+                    }
+                }]
+            }
+        ],
+        noParse: (res)=>{
+            return ''
+        }
     },
     resolve: {//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
         // extensions: ['.js', '.vue', '.json'],
         alias: {
-            'vue$': 'vue/dist/vue.js'//vue文件地址配置
+            'vue$': 'vue/dist/vue.js'//vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
         }
     },
-    module:{
-        loaders:[//loader配置，需要解析啥东西就用相关的loader
-            {test: /\.less$/,loader: 'style!css!less'},
-            {test:/\.vue$/, loader:'vue-loader'},
-            {test:/\.js$/, loader:'babel-loader', exclude:/node_modules/}//设置node_modules里的js文件不用解析
-        ]
+    performance: {
+        hints: false
     },
     devtool: 'inline-source-map',
+    // devtool: false,
     devServer: { //配置webpack加载地址的host，port，地址路径
-        host:'10.33.80.115', 
-        contentBase: _url+'/',
+        host:'192.168.8.120', 
+        contentBase: _url + '/',
         historyApiFallback: true,
-        port:8088 
+        port: 8088,
+        headers: {
+            'X-foo':process.env.NODE_ENV=='product' ? 'bar' : 'none'
+        }
     },
     plugins: [//这个是2.x中加的，各种loader的配置选项
         new webpack.LoaderOptionsPlugin({
@@ -69,24 +97,51 @@ module.exports={
         //     endPath: './',  //打包到对应目录（一般为当前目录'./'）
         //     zipName: 'upload.zip' //打包生成的文件名
         // })
-        new FileManagerPlugin({
-            onEnd: {
-            //   mkdir: ['./zip'],//创建文件夹
-              archive: [
-                { source: './dist', destination: './upload.zip' },
-              ]
-            }
-        })
+        // new FileManagerPlugin({
+        //     onEnd: {
+        //     //   mkdir: ['./zip'],//创建文件夹
+        //       archive: [
+        //         { source: './dist', destination: './upload.zip' },
+        //       ]
+        //     }
+        // }),
+        //new MiniCssExtractPlugin({
+        //　  filename: "[name].[chunkhash:8].css",
+        // 　　chunkFilename: "[id].css"
+        //}),
+        // new ExtractTextPlugin('main.css'),
         // new HTMLWebpackPlugin({
         //     title: 'Code Splitting'
         // })
         //代码压缩
-        // new webpack.optimize.UglifyJsPlugin({
-        //     compress: {
-        //       warnings: false
-        //     }
+        // new UglifyjsWebpackPlugin(),
+        //消除冗余css
+        // new PurifyCssWebpack({
+        //     paths:glob.sync(__dirname+'/dist/')
         // })
-    ]
+    ],
+    // optimization: {
+    //     splitChunks: {
+    //         chunks: 'async',
+    //         minSize: 30000,
+    //         minChunks: 1,
+    //         maxAsyncRequests: 5,
+    //         maxInitialRequests: 3,
+    //         automaticNameDelimiter: '~',
+    //         name: true,
+    //         cacheGroups: {
+    //             vendors: {
+    //                 test: /[\\/]node_modules[\\/]/,
+    //                 priority: -10
+    //                 },
+    //                 default: {
+    //                 minChunks: 2,
+    //                 priority: -20,
+    //                 reuseExistingChunk: true
+    //             }
+    //         }
+    //     }
+    // }
 };
 
 // setTimeout(()=>{
@@ -94,3 +149,6 @@ module.exports={
 //         console.log(body)
 //     })
 // },3000)
+
+//1MB 146kb
+//1MB 146KB
