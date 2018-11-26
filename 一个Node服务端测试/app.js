@@ -56,20 +56,19 @@ app.use('/xr/js/jq.js',function(req, res, next){
     // });
 })
 
-app.use(express.static(path.join(__dirname, 'public/vuedist')))
 app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'mydist')))
 
 
 // app.use('/dist', express.static('public'));
 //app.use('/static', express.static('public'));//可以通过为静态资源目录指定一个挂载路径的方式来实现http://localhost:3000/static/
 
-// app.use(history({
-//     rewrites: [{
-//         from: /[\s\S\w]*/,
-//         to: '/'
-//     }]
-// }))
+//加入这个后，history模式搞定
+app.use(history({
+    rewrites: [{
+        from: /[\s\S\w]*/,
+        to: '/vuehtml'
+    }]
+}))
 
 // app.all('*', function(req, res, next) {
 

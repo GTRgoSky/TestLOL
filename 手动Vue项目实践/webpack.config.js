@@ -25,7 +25,7 @@ console.log('outPutUrl:'+outPutUrl);
 //https://segmentfault.com/q/1010000009642018/a-1020000009642094 关于打包的路径多出一个static
 //https://www.mmxiaowu.com/article/58482558d4352863efb55475 关于vue不同情况下打包模式
 module.exports={
-    target:'async-node',
+    // target:'async-node',
     //context 配置根目录地址。默认为执行启动 Webpack 时所在的当前工作目录
     mode:'production',//production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
     entry: {
