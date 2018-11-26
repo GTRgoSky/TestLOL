@@ -6,7 +6,8 @@
   "scripts": {
     "start": "SET NODE_ENV=product&& webpack-dev-server --inline --hot --fx",
     "dev": "cross-env NODE_ENV=dev webpack-dev-server --inline --hot --fx",
-    "build": "webpack --devtool source-map --fx"
+    "build": "cross-env NODE_ENV=dev webpack --devtool source-map --fx",
+    "build-server": "cross-env NODE_ENV=product webpack --devtool source-map --fx"
   },
   "keywords": [],
   "author": "",

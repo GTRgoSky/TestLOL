@@ -16,7 +16,9 @@ console.log('argv:'+ argv.fx)
 let _url = argv.fx;
 // let _url = '测试打包体积'
 console.log('配置全局变量：'+process.env.NODE_ENV);
-console.log('__dirname:'+ __dirname)
+console.log('__dirname:'+ __dirname);
+const outPutUrl = process.env.NODE_ENV === 'product' ? path.resolve(__dirname,'../一个Node服务端测试/public/dist/') : __dirname+`/${_url}/dist/`;
+console.log('outPutUrl:'+outPutUrl);
 // console.log(JSON.parse(process.env.npm_config_argv).original[1]);//获取npm 后面的参数
 // let _url = JSON.parse(process.env.npm_config_argv).original[1].replace(/.{3}/,'').replace(/.$/,'');//匹配前三位数--'和最后一位'
 // console.log(_url);
@@ -30,11 +32,11 @@ module.exports={
         main: `./${_url}/main.js`, //配置入口
     },
     output:{  //配置输出选项
-        path:__dirname+`/${_url}/dist/`,//输出路径为，当前路径下
+        path: outPutUrl,//输出路径为，当前路径下
         // filename:'build.js',//输出后的文件名称
         filename: '[name].js',
         chunkFilename: '[name].[chunkhash:8].js',
-        publicPath: '/'//老版本的可以不用配置但是新版本需要配置
+        publicPath: '/dist/'//老版本的可以不用配置但是新版本需要配置
     },
     module:{
         rules: [
@@ -104,6 +106,7 @@ module.exports={
             filename: 'index.html',
             template: `./${_url}/index.html`, //配置入口
         }),
+        // new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' })
         //do zip
         // new WebpackZipPlugin({
         //     initialFile: './dist',  //需要打包的文件夹(一般为dist)
