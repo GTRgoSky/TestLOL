@@ -9,7 +9,7 @@ var argv = require('yargs').argv;
 // const {upload} = require('./upload.js');
 // const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
 // let lessExtract = new MiniCssExtractPlugin('less.css');
 // const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
 // const glob = require('glob');
@@ -41,14 +41,7 @@ module.exports={
     },
     module:{
         rules: [
-            {
-                test: /\.css$/,
-                // use: [MiniCssExtractPlugin.loader,'css-loader?minimize']
-                loader: ExtractTextPlugin.extract('css-loader?minimize')
-            }, {
-                test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader,'css-loader?minimize', 'less-loader', 'postcss-loader']
-            },
+            
             {test:/\.vue$/, loader:'vue-loader'},
             {test:/\.js$/, loader:'babel-loader', exclude:/node_modules/},//设置node_modules里的js文件不用解析
             {
@@ -60,6 +53,23 @@ module.exports={
                         outputPath:'images' //定义输出的图片文件夹
                     }
                 }]
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader?minimize', 
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.css$/,
+                // use: [MiniCssExtractPlugin.loader,'css-loader?minimize']
+                // 提取出 Chunk 中的 CSS 代码到单独的文件中
+                use: [
+            　　  　　MiniCssExtractPlugin.loader,
+            　　 　　 "css-loader?minimize"
+            　　 ]
             }
         ],
         noParse: (res)=>{
@@ -138,7 +148,10 @@ module.exports={
         //　  filename: "[name].[chunkhash:8].css",
         // 　　chunkFilename: "[id].css"
         //}),
-        // new ExtractTextPlugin('main.css'),
+        new MiniCssExtractPlugin({
+            filename: '[name].[chunkhash:8].css', //配置入口
+            // chunkFilename: `[id].[chunkhash:8].css`
+        })
         // new HTMLWebpackPlugin({
         //     title: 'Code Splitting'
         // })

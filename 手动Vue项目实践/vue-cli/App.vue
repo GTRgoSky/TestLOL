@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>物理返回监听测试</h1>
+        <h1 class="a">物理返回监听测试</h1>
         <ul>
           <li><router-link :to="{ name: 'home'}">/</router-link></li>
           <li><router-link :to="{ path: '/foo', query: { userId: '456' }}">/foo(根据path,slot分发)</router-link></li>
@@ -20,5 +20,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+    @import './test.less';
 </style>
