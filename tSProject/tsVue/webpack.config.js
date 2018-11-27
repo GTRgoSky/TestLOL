@@ -2,15 +2,15 @@ var webpack = require('webpack')  //引入文件
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 var argv = require('yargs').argv;
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-let _url = argv.fx;
-const outPutUrl = process.env.NODE_ENV === 'product' ? path.resolve(__dirname,'../一个Node服务端测试/public/dist/') : __dirname+`/${_url}/dist/`;
+// let _url = argv.fx;
+
 module.exports={
     mode:'development',//production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
     entry: {
-        main: `./${_url}/main.ts`, //配置入口
+        main: `./main.ts`, //配置入口
     },
     output:{  //配置输出选项
-        path: outPutUrl,//输出路径为，当前路径下
+        path: '/',//输出路径为，当前路径下
         filename: '[name].js',
         chunkFilename: '[name].[chunkhash:8].js',
         publicPath: '/dist/'//老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
@@ -24,8 +24,9 @@ module.exports={
                     {
                         loader: 'ts-loader',
                         options: {
-                        appendTsSuffixTo: [/\.vue$/],
-                        appendTsxSuffixTo: [/\.vue$/]
+                            // 让 tsc 把 vue 文件当成一个 TypeScript 模块去处理，以解决 moudle not found 的问题，tsc 本身不会处理 .vue 结尾的文件
+                            appendTsSuffixTo: [/\.vue$/],
+                            appendTsxSuffixTo: [/\.vue$/]
                         }
                     }
                 ],
@@ -66,14 +67,14 @@ module.exports={
     },
     devServer: { //配置webpack加载地址的host，port，地址路径
         host:'192.168.8.120', 
-        contentBase: _url + '/',
+        contentBase: './',
         historyApiFallback: true,
         port: 8089,
     },
     plugins: [//这个是2.x中加的，各种loader的配置选项
         new HTMLWebpackPlugin({
             filename: 'index.html',
-            template: `./${_url}/index.html`, //配置入口
+            template: `./index.html`, //配置入口
         }),
         new VueLoaderPlugin()
     ]

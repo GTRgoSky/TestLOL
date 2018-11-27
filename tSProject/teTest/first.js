@@ -1,3 +1,4 @@
+"use strict";
 var __rest = (this && this.__rest) || function (s, e) {
     var t = {};
     for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
@@ -7,6 +8,7 @@ var __rest = (this && this.__rest) || function (s, e) {
             t[p[i]] = s[p[i]];
     return t;
 };
+exports.__esModule = true;
 var Student = /** @class */ (function () {
     function Student(firstName, middleInitial, lastName) {
         this.firstName = firstName;
@@ -83,4 +85,12 @@ var AnalogClock = /** @class */ (function () {
 }());
 var digital = createClock(DigitalClock, 12, 17);
 var analog = createClock(AnalogClock, 7, 32);
-console.log(digital.tick(), analog);
+digital.tick();
+console.log(analog);
+var square = {};
+square.color = "blue";
+square.sideLength = 10;
+//square.test = 'tets'报错，未在接口定义
+/// <reference path="./test.d.ts" />
+var a_js_1 = require("./a.js");
+console.log(a_js_1["default"]);

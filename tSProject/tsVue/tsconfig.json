@@ -14,9 +14,10 @@
     "jsx": "preserve",
     "jsxFactory": "h"
   },
-  "include": [
-    "./**/*.ts"
-  ],
+  // "include": [
+  //   "./*.ts",
+  //   "./*.js"
+  // ],
   "compileOnSave": false
   //https://www.tslang.cn/docs/handbook/tsconfig-json.html
 }
