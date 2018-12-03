@@ -1,0 +1,19 @@
+{
+  "name": "wing-time",
+  "version": "1.0.0",
+  "description": "Yxx use dateTime format",
+  "main": "use/time.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wings",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-minify": "^3.1.0",
+    "gulp-uglify": "^3.0.1"
+  },
+  "dependencies": {
+    "gulp-rename": "^1.4.0"
+  }
+}
