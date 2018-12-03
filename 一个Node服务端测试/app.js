@@ -62,16 +62,16 @@ app.use(express.static(path.join(__dirname, 'public')))
 // app.use('/dist', express.static('public'));
 //app.use('/static', express.static('public'));//可以通过为静态资源目录指定一个挂载路径的方式来实现http://localhost:3000/static/
 
-//加入这个后，history模式搞定
-app.use(history({
-    rewrites: [{
-        from: '404',
-        to: '/about'
-    },{
-        from: /[\s\S\w]*/,
-        to: '/vuehtml'
-    }]
-}))
+// //加入这个后，history模式搞定
+// app.use(history({
+//     rewrites: [{
+//         from: '404',
+//         to: '/about'
+//     },{
+//         from: /[\s\S\w]*/,
+//         to: '/vuehtml'
+//     }]
+// }))
 
 // app.all('*', function(req, res, next) {
 

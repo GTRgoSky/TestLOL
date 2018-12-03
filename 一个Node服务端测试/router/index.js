@@ -52,13 +52,19 @@ router.get('/html', function (req, res) {
     res.sendFile(_mainUrl+'/关于Css的Demo/'+req.query.name+'.html');
 });
 
-// 定义 about 页面的路由
+// 定义 vue单 页面的路由
 router.get('/vuehtml', function (req, res) {
     //sendFile只可以传绝对路径
     res.sendFile(_mainUrl+'/一个Node服务端测试/public/dist/index.html');
     // res.sendFile(_mainUrl+'/手动Vue项目实践/'+req.query.name+'/dist/index.html');
 });
 
+// 定义 多 页面的路由
+router.get('/manyhtml', function (req, res) {
+    //sendFile只可以传绝对路径
+    res.sendFile(_mainUrl+'/一个Node服务端测试/public/dist/'+req.query.name+'.html');
+    // res.sendFile(_mainUrl+'/手动Vue项目实践/'+req.query.name+'/dist/index.html');
+});
 
 // 定义 about 页面的路由
 router.get('/ppt', function (req, res) {

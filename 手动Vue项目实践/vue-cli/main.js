@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import router from './router'
 import App from './App.vue';
 import {common} from './install';
+import '../assets/anima.css'
 // import { sync } from 'vuex-router-sync';
 Vue.use(Vuex)
 Vue.use(common,'通过args传入的参数')
