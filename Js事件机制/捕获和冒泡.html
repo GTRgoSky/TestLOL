@@ -16,16 +16,15 @@
     </div>
     <script>
     s1.addEventListener("click",function(e){
-        console.log("s1 冒泡事件");         
+        console.log("s1 冒泡事件");     
     },false);
     s2.addEventListener("click",function(e){
         console.log("s2 冒泡事件");
-        
     },false);
             
     s1.addEventListener("click",function(e){
         console.log("s1 捕获事件");
-        //e.stopPropagation()可以阻止接下来的s1,s2冒泡事件导致s2捕获事件也不会被触发
+        //e.stopPropagation()可以阻止接下来的s1,s2冒泡事件导致s2捕获事件也不会被触发。即阻止事件流继续执行  
     },true);
             
     s2.addEventListener("click",function(e){

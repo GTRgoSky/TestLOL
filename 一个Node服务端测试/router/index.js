@@ -66,6 +66,13 @@ router.get('/manyhtml', function (req, res) {
     // res.sendFile(_mainUrl+'/手动Vue项目实践/'+req.query.name+'/dist/index.html');
 });
 
+// 定义 canvas的路由
+router.get('/canvas', function (req, res) {
+    //sendFile只可以传绝对路径
+    res.sendFile(_mainUrl+'/canvas/'+req.query.name+'.html');
+    // res.sendFile(_mainUrl+'/手动Vue项目实践/'+req.query.name+'/dist/index.html');
+});
+
 // 定义 about 页面的路由
 router.get('/ppt', function (req, res) {
     //sendFile只可以传绝对路径

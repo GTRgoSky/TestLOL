@@ -3,11 +3,12 @@
         foo
         <slot></slot>
         {{count}}
+        <div @click="add">{{userID}}</div>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
     mounted(){
         console.log('foo');
@@ -15,6 +16,7 @@ export default {
         // setTimeout(() => {
         //     console.log('time')
         // }, 1000);
+        //console.log(this.userID) this.$store.state.person.userID;
     },
     name:"foo",
     activated(){
@@ -26,10 +28,17 @@ export default {
         // console.log('de');
     },
     computed: {
-        ...mapState(['count'])
+        ...mapState(['count']),
+        ...mapState('user',['userID']),
         // count () {
         //     return this.$store.state.count
         // }
+    },
+    methods: {
+        ...mapMutations('user',['changeuserID']),
+        add() {
+            this.changeuserID('change');
+        }
     }
 }
 </script>

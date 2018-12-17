@@ -29,7 +29,7 @@ let output = {  //配置输出选项
     // filename:'build.js',//输出后的文件名称
     filename: 'js/[name].js',
     chunkFilename: 'js/[name].[chunkhash:8].js',
-    publicPath: '/dist/'//老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
+    publicPath: process.env.NODE_ENV === 'product' ? '/dist/' : ''//老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
 };
 let moduleConfig = {
     rules: [
@@ -110,7 +110,7 @@ const singlePage = {
         //     return assetFilename.endsWith('.js');
         // }
     },
-    // devtool: 'inline-source-map',
+    devtool: process.env.NODE_ENV === 'product' ? 'none' : 'inline-source-map',
     // devtool: 'source-map',
     // devtool: 'none',
     devServer: devServer,
