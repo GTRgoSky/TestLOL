@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于grid布局</title>
+    <style>
+        html,body {
+            margin: 0;
+            height: 100%;
+        }
+        .parent {
+            height: 100%;
+            width: 100%;
+        }
+        .class1 {
+            display: grid;
+            grid-template-columns: auto;
+            grid-template-rows: [测试线路] 25% [测试线路1 测试线路2] auto;
+            background-color: blueviolet;
+            height: 100%;
+        }
+        .class2 {
+            background-color: yellowgreen;
+        }
+        .class3 {
+            background-color: rosybrown;
+            overflow-y: scroll;
+        }
+        .class4 {
+            height: 120%;
+        }
+        .class5 {
+            display: grid;
+            grid-template-columns: 10px repeat(24, 40px [col-start]) auto ;
+            height: 300px;
+        }
+        .class6 {
+            /* grid-area:testend; */
+            display: grid;
+            grid-template-columns: 100px 200px auto;
+            grid-template-areas: "test testmiddle testend";
+            height: 300px;
+        }
+        .class7 {
+            grid-area:testend;
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent">
+        <div class="class1">
+            <div class="class2">
+                1
+            </div>
+            <div class="class3">
+               <div class="class4">13</div>
+            </div>
+        </div>
+        <!-- <div class="class5">
+            <div class="class6">  32131</div>
+        </div>
+        <div class="class6">
+            <div class="class7">  32131</div>
+        </div> -->
+    </div>
+</body>
+</html>
