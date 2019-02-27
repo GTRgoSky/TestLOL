@@ -23,7 +23,6 @@ const timeFormat = function(str){
     return ans;
 }
 
-
 //格式化导入时间。第一参数传入new Date()可以解析的时间 第二参数传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
 const timeSetFormat = function(dateT, str){
     let type = null;
@@ -65,17 +64,43 @@ const timeCompare = (v1,v2) =>{
     const date1 = new Date(v1).valueOf();
     const date2 = new Date(v2).valueOf();
     if(isNaN(date1) || isNaN(date2)) {
-        throw Error('new Date(arguments).valueOf() is not a number , Please use the arguments like'+
-        +'YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss')
+        throw Error('new Date(arguments).valueOf() is not a number , Please use the arguments like YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss')
     }
     return date1 - date2 > 0 ? 1 : date1 - date2 == 0 ? 0 : -1;
 }
 
-//eg: type('测试对象')
+//根据日期判断当前日期是否是[工作日 0 \ 休息日 1 \ 节假日 2]
+//使用接口 http://api.goseek.cn/Tools/holiday?date= 
+//接收参数 str 字符串类型  YYYY-MM-DD格式 也可以是 YYYYMMDD
+const holidayDate = (str) =>{
+    if(whichType(str) !== 'String') {
+        throw Error('The arguments must be a String Like YYYY-MM-DD');
+    };
+    let _str = str.replace(/-/g,'');
+    let _iframe = document.createElement('iframe');
+    _iframe.src = 'http://api.goseek.cn/Tools/holiday?date='+_str;
+    _iframe.style = 'display:none';
+    document.body.appendChild(_iframe);
+    console.log(_iframe.innerHTML)
+//     //步骤一:创建异步对象
+//     const ajax = new XMLHttpRequest();
+//     //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
+//     ajax.open('get','http://api.goseek.cn/Tools/holiday?date='+_str);
+//     // ajax.setRequestHeader("wings","use UTF-8");
+//     //步骤三:发送请求
+//     ajax.send();
+//     //步骤四:注册事件 onreadystatechange 状态改变就会调用
+//     ajax.onreadystatechange = function (res) {
+//        //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
+// 　　　　console.log(ajax,res);//输入相应的内容
+//     }
+}
+
 module.exports = {
     timeFormat,
     whichType,
     timeCompare,
-    timeSetFormat
+    timeSetFormat,
+    holidayDate
 }
 

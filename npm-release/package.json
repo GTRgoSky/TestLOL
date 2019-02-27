@@ -9,15 +9,27 @@
   "author": "Wings",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "gulp": "^3.9.0",
     "gulp-babel": "^8.0.0",
     "gulp-minify": "^3.1.0",
-    "gulp-uglify": "^3.0.1"
+    "gulp-uglify": "^3.0.1",
+    "gulp-webserver": "^0.9.1"
   },
   "dependencies": {
-    "gulp-rename": "^1.4.0"
+    "@babel/core": "^7.2.2",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "globby": "^9.0.0",
+    "gulp-connect": "^5.7.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-util": "^3.0.8",
+    "reactify": "^1.1.1",
+    "through2": "^3.0.0",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   },
   "keywords": "time format"
 }

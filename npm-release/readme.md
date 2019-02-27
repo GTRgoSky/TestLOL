@@ -15,3 +15,7 @@ whichType(v)
 timeCompare
 比较2个时间大小(v1 > v2 返回 1 ； v1 == v2 返回 0 ； v1 < v2 返回 -1)
 参数格式最好为入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss 否则可能引起未知错误
+
+
+使用了browserify进行commonJs的转换
+使用了gulp-webserver进行gulp服务启动
