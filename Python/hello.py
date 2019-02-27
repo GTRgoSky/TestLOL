@@ -249,7 +249,6 @@ for i, value in enumerate(['A', 'B', 'C']):
     print('Index is:',i,', Values:', value)
 for x, y in [(1, 1), (2, 4), (3, 9)]:
     print(x, y)
-"""
 #####使用迭代查找一个list中最小和最大值，并返回一个tuple：
 def findMinAndMax(_list):
     if len(_list) == 0:
@@ -263,3 +262,99 @@ def findMinAndMax(_list):
                 Min = v
     return (Min, Max)
 print(findMinAndMax([0,1,3,7]), findMinAndMax([]))
+"""
+
+#列表生成式
+"""
+print([x * x for x in range(1,11)], '\n', [x * x for x in range(1,11) if x % 2 == 0], 
+'\n', [m + n for m in 'ABC' for n in 'XYZ'])
+"""
+"""
+###
+import os # 导入os模块，模块的概念后面讲到
+print([d for d in os.listdir('.')]) # os.listdir可以列出文件和目录
+###列表生成式也可以使用两个变量来生成list
+_d = {'a' : 'A', 'b': 'B', 'c' : 'C'}
+print([k + '=' + v for k, v in _d.items()])
+_l = ['Hello', 'World', 'IBM', 'Apple']
+print([s.lower() for s in _l])
+#####
+_L = ['Hello', 'World', 18, 'Apple', None]
+print([s.lower() for s in _L if isinstance(s, str)])
+"""
+
+#生成器
+"""
+_G = (x * x for x in range(10))
+print(_G, next(_G), next(_G))
+for _x in _G:#因为上面用过2次_G，所以循环从2开始(值为4)
+    print(_x)
+"""
+"""
+###斐波拉契数列
+def fbllsl(max):
+    print('start')
+    a, b, n = 0, 1, 0
+    while n < max:
+        #print(b)
+        yield b
+        a, b = b, a + b
+        n = n + 1
+    print('end')
+    return 'done'
+_f = fbllsl(5)
+print(_f)
+while True:
+    try:
+        x = next(_f)
+        print('f:', x)
+    except StopIteration as e:
+        print('Generator return value:', e.value)
+        break
+"""
+"""
+#####杨辉三角 (自己写的)
+def triangles(max):
+    n, _list = 0, [1]
+    while n < max:
+        yield _list
+        if _list == [1]:
+            _list = [1, 1]
+        else:
+            _arr = [1]
+            for k,v in enumerate(_list):
+                if k < len(_list) - 1:
+                    _arr.append(_list[k] + _list[k+1])
+                else:
+                    _arr.append(1)
+                    break
+            _list = _arr
+        n = n + 1
+    return 'done'
+_t = triangles(10)
+while True:
+    try:
+        x = next(_t)
+        print('list:', x)
+    except StopIteration as e:
+        print('Generator return value:', e.value)
+        break
+print(_t)
+"""
+"""
+#####杨辉三角(网上查询方法)
+def triangles():
+    List = [1]
+    while True:
+        yield List
+        List.append(0)
+        List = [List[x-1] + List[x] for x in range(len(List))] #range从0开始
+n = 0
+for t in triangles():
+    print(t)
+    n = n + 1
+    if n == 10:
+        break
+"""
+#迭代器 可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator
+###把list、dict、str等Iterable变成Iterator可以使用iter()函数：

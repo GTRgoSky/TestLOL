@@ -14,6 +14,9 @@
             height: 100%;
             width: 100%;
         }
+        body::-webkit-scrollbar {
+            display: none;
+        }
         .class1 {
             display: grid;
             grid-template-columns: auto;
@@ -28,6 +31,9 @@
             background-color: rosybrown;
             overflow-y: scroll;
         }
+        .class3::-webkit-scrollbar {
+            display: none;
+        }
         .class4 {
             height: 120%;
         }
@@ -39,9 +45,11 @@
         .class6 {
             /* grid-area:testend; */
             display: grid;
-            grid-template-columns: 100px 200px auto;
+            /* grid-template-columns: 100px 200px auto; */
+            grid-template: 100px 100px 100px /200px 200px auto;
             grid-template-areas: "test testmiddle testend";
             height: 300px;
+            grid-gap: 10px 30px;
         }
         .class7 {
             grid-area:testend;
@@ -59,12 +67,12 @@
                <div class="class4">13</div>
             </div>
         </div>
-        <!-- <div class="class5">
+        <div class="class5">
             <div class="class6">  32131</div>
         </div>
         <div class="class6">
             <div class="class7">  32131</div>
-        </div> -->
+        </div>
     </div>
 </body>
 </html>
