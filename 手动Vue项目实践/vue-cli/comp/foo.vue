@@ -10,7 +10,14 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 export default {
+    beforeCreate() {
+        
+    },
+    created() {
+        
+    },
     mounted(){
+        
         console.log('foo');
         console.log(this.$router.currentRoute);
         // setTimeout(() => {
@@ -26,6 +33,8 @@ export default {
     deactivated(){
         //失去激活
         // console.log('de');
+    },
+    components: {
     },
     computed: {
         ...mapState(['count']),

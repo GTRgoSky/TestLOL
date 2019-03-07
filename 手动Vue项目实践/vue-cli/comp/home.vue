@@ -20,6 +20,10 @@
                 </a>
             </template>
         </p>
+        <h1 slot="header">
+            About Me
+        </h1>
+        <slotsdemo><div slot="test">现在我改变了你</div><div slot="created">createdDom</div></slotsdemo>
         <button @click="changeTodo">点我试试</button>
     </div>
 </template>
@@ -46,7 +50,8 @@ export default {
         // ues {"plugins": ["syntax-dynamic-import"]}
         bar : () => import('./bar.vue'),
         foo : () => import('./foo.vue'),
-        dom : () => import('./dom.vue')
+        dom : () => import('./dom.vue'),
+        slotsdemo : () => import('./slotsdemo.vue'),
     },
     methods:{
         changeTodo(){
@@ -55,12 +60,15 @@ export default {
             console.log(this.$refs.refD)
         }
     },
+    created() {
+    },
     mounted(){
         console.log(timeFormat('YYYY-MM-DD hh:mm:ss'),66666);
         bus.$on('isAlsoGetUserTansInfo', function(status) {
             console.log(1)
         })
-        console.log(this.$router.currentRoute);
+        console.log(this.$router.currentRoute,66);
+       
     }
 }
 </script>

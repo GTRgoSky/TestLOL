@@ -5,6 +5,8 @@ const Foo = resolve => require(['./comp/foo.vue'], resolve);
 const Bar = resolve => require(['./comp/bar.vue'], resolve);
 const Ket = resolve => require(['./comp/ket.vue'], resolve);
 const Form = resolve => require(['./comp/form.vue'], resolve);
+const slotsDemo = resolve => require(['./comp/slotsdemo.vue'], resolve);
+const vuenew = resolve => require(['./comp/newVueTest/index.vue'], resolve);
 
 Vue.use(VueRouter);
 
@@ -54,6 +56,16 @@ const router = new VueRouter({
             path: '/form',
             component: Form,
             name: 'form'
+        },
+        {
+            path: '/slotsdemo',
+            component: slotsDemo,
+            name: 'slotsdemo'
+        },
+        {
+            path: '/vuenew',
+            component: vuenew,
+            name: 'vuenew'
         }
     ]
 })
