@@ -10,6 +10,8 @@ import '../assets/anima.css'
 
 Vue.use(common,'通过args传入的参数')
 
+import _hostname from './envset'
+console.log(test, _hostname)
 // const unsync = sync(store, router) // done. Returns an unsync callback fn
 Vue.config.errorHandler = function (err, vm, info) {
     // handle error

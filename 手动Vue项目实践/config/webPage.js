@@ -13,8 +13,13 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 // let lessExtract = new MiniCssExtractPlugin('less.css');
 // const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
 // const glob = require('glob');
-console.log('argv:'+ argv.fx)
-let _url = argv.fx;
+let _arr = argv.fx.split('/');
+console.log('argv:'+ _arr)
+let _url = _arr[0];
+if(_arr.length > 1) {
+    process.env.HOST_ENV = _arr[1]
+}
+require('../envconfig')
 // let _url = '测试打包体积'
 console.log('配置全局变量：'+process.env.NODE_ENV);
 console.log('__dirname:'+ __dirname);
@@ -152,7 +157,7 @@ const singlePage = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[chunkhash:8].css', //配置入口
             // chunkFilename: `[id].[chunkhash:8].css`
-        })
+        }),
         // new HTMLWebpackPlugin({
         //     title: 'Code Splitting'
         // })
@@ -162,6 +167,11 @@ const singlePage = {
         // new PurifyCssWebpack({
         //     paths:glob.sync(__dirname+'/dist/')
         // })
+        //引入 process.env
+        new webpack.DefinePlugin({
+            'process.env.HOST_NAME': '\"' + process.env.HOST_NAME + '\"',
+            'test': '\"' + '测试输入变量' + '\"'
+        })
     ],
     optimization: {
         splitChunks: {
