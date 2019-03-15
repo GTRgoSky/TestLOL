@@ -24,6 +24,23 @@ const request = require('request');
 //     }
 // })
 
+//跨域设置 https://blog.csdn.net/u012149969/article/details/81145144
+app.all("*",function(req,res,next){
+    //设置允许跨域的域名，*代表允许任意域名跨域
+    res.header("Access-Control-Allow-Origin","http://192.168.8.120:8080");
+    //允许的header类型
+    res.header("Access-Control-Allow-Headers","content-type,jwt-token,authorization");
+    //跨域允许的请求方式 
+    res.header("Access-Control-Allow-Methods","DELETE,PUT,POST,GET,OPTIONS");
+    //
+    res.header('Access-Control-Allow-Credentials',true)
+    if (req.method.toLowerCase() == 'options') {
+        res.sendStatus(200);  //让options尝试请求快速结束
+    }
+    else
+        next();
+})
+
 
 //使用Node作为代理请求其他资源(一个弱智思路)
 app.use('/xr/js/jq.js',function(req, res, next){
