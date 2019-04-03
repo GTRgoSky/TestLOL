@@ -72,16 +72,16 @@ const timeCompare = (v1,v2) =>{
 //根据日期判断当前日期是否是[工作日 0 \ 休息日 1 \ 节假日 2]
 //使用接口 http://api.goseek.cn/Tools/holiday?date= 
 //接收参数 str 字符串类型  YYYY-MM-DD格式 也可以是 YYYYMMDD
-const holidayDate = (str) =>{
-    if(whichType(str) !== 'String') {
-        throw Error('The arguments must be a String Like YYYY-MM-DD');
-    };
-    let _str = str.replace(/-/g,'');
-    let _iframe = document.createElement('iframe');
-    _iframe.src = 'http://api.goseek.cn/Tools/holiday?date='+_str;
-    _iframe.style = 'display:none';
-    document.body.appendChild(_iframe);
-    console.log(_iframe.innerHTML)
+// const holidayDate = (str) =>{
+//     if(whichType(str) !== 'String') {
+//         throw Error('The arguments must be a String Like YYYY-MM-DD');
+//     };
+//     let _str = str.replace(/-/g,'');
+//     let _iframe = document.createElement('iframe');
+//     _iframe.src = 'http://api.goseek.cn/Tools/holiday?date='+_str;
+//     _iframe.style = 'display:none';
+//     document.body.appendChild(_iframe);
+//     console.log(_iframe.innerHTML)
 //     //步骤一:创建异步对象
 //     const ajax = new XMLHttpRequest();
 //     //步骤二:设置请求的url参数,参数一是请求的类型,参数二是请求的url,可以带参数,动态的传递参数starName到服务端
@@ -94,13 +94,12 @@ const holidayDate = (str) =>{
 //        //步骤五 如果能够进到这个判断 说明 数据 完美的回来了,并且请求的页面是存在的
 // 　　　　console.log(ajax,res);//输入相应的内容
 //     }
-}
+// }
 
 module.exports = {
     timeFormat,
     whichType,
     timeCompare,
     timeSetFormat,
-    holidayDate
 }
 
