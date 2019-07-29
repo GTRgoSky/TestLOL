@@ -7,6 +7,7 @@ const Ket = resolve => require(['./comp/ket.vue'], resolve);
 const Form = resolve => require(['./comp/form.vue'], resolve);
 const slotsDemo = resolve => require(['./comp/slotsdemo.vue'], resolve);
 const vuenew = resolve => require(['./comp/newVueTest/index.vue'], resolve);
+const jsontest = resolve => require(['./comp/json-test.vue'], resolve);
 
 Vue.use(VueRouter);
 
@@ -66,7 +67,12 @@ const router = new VueRouter({
             path: '/vuenew',
             component: vuenew,
             name: 'vuenew'
-        }
+        },
+        {//json在线编辑测试
+            path: '/json-test',
+            component: jsontest,
+            name: 'json-test'
+        },
     ]
 })
 
