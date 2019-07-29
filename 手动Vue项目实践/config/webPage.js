@@ -73,7 +73,7 @@ let moduleConfig = {
     }
 };
 let devServer = { //配置webpack加载地址的host，port，地址路径
-    host:'192.168.8.120', 
+    host:'192.168.8.194', 
     contentBase: _url + '/',
     historyApiFallback: true,
     port: 8088,
@@ -89,7 +89,8 @@ const singlePage = {
     //context 配置根目录地址。默认为执行启动 Webpack 时所在的当前工作目录
     mode:'production',//production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
     entry: {
-        main: `./${_url}/main.js`,//配置入口 
+        main: ['babel-polyfill',`./${_url}/main.js`],//配置入口 
+        // main: `./${_url}/main.js`,//配置入口 
     },
     output:output,
     module:moduleConfig,

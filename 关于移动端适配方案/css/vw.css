@@ -1,0 +1,21 @@
+html {
+  color: darkblue;
+  width: 100vmin;
+  font-size: 12px;
+  padding-top: 1px;
+  padding-bottom: 0.26667vmin;
+  background-color: aqua;
+  margin: 0;
+}
+html body {
+  margin: 0;
+}
+html div {
+  width: 50vmin;
+  background-color: brown;
+  display: inline-block;
+  font-size: 14px;
+}
+html:first-child {
+  background-color: darkcyan;
+}
