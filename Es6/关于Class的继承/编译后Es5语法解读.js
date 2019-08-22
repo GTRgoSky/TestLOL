@@ -18,7 +18,7 @@ var _createClass = function () {
     };
 }();
 
-function _possibleConstructorReturn(self, call) {
+function _possibleConstructorReturn(self, call) {//self 实例this；call调用父级方法，this指向实例本身
     if (!self) {
         throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     }
@@ -41,7 +41,7 @@ function _inherits(subClass, superClass) {
 }
 
 function _classCallCheck(instance, Constructor) {
-    if (!(instance instanceof Constructor)) {
+    if (!(instance instanceof Constructor)) {//instance是实例的this;Constructor是构造函数本身
         throw new TypeError("Cannot call a class as a function");
     }
 }
@@ -76,6 +76,8 @@ var Child = function (_Parent) {
     function Child(name, age) {
         _classCallCheck(this, Child);
 
+        //getPrototypeOf要返回其原型的对象。 只有调用了super才会传入this，否则
+        // var _this; return _possibleConstructorReturn(_this); 编译后生成了一个空变量传入了。
         return _possibleConstructorReturn(this, (Child.__proto__ || Object.getPrototypeOf(Child)).call(this, name, age));
     }
 

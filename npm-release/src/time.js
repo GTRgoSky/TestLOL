@@ -46,6 +46,31 @@ const timeSetFormat = function(dateT, str){
     return ans;
 }
 
+/*
+    ES6正则扩展： http://es6.ruanyifeng.com/#docs/regex#RegExp-prototype-sticky-属性
+    获取传入时间格式的字符串
+    传入格式 YYYY-MM-DD (可不带)hh:mm:ss 或者 时间戳
+    eg: ('1999-12-12 12:12:12/时间戳', 'MM')获取月份
+*/
+const getTimeFormat = function (str, format) {
+    if(!str || !format) {
+        throw Error('arguments should be String But get undefined');
+    }
+    try {
+        const getDate = timeSetFormat(str, 'YYYY-MM-DD hh:mm:ss');
+        // const RE_DATE_Format = /(?<YYYY>YYYY)-(?<MM>MM)-(?<DD>DD) (?<hh>hh):(?<mm>mm):(?<ss>ss)/;
+        const RE_DATE = /(?<YYYY>\d{4})-(?<MM>\d{2})-(?<DD>\d{2}) (?<hh>\d{2}):(?<mm>\d{2}):(?<ss>\d{2})/;
+        const {groups: groups} = RE_DATE.exec(getDate);
+        return format.replace(/YYYY|MM|DD|hh|mm|ss/g, (
+            matched,// 整个匹配结果 
+        ) =>{
+            return groups[matched];
+        })
+    }catch(err){
+        throw Error('请检查参数是否正确')
+    }
+}
+
 //判断对象类型的js（Vue的判断方法）
 const whichType = v => Object.prototype.toString.call(v).replace(/\[object /,'').replace(']','');
 
@@ -55,12 +80,6 @@ const timeCompare = (v1,v2) =>{
     if(whichType(v1) !== 'String' || whichType(v2) !== 'String') {
         throw Error('The arguments must be a String')
     }
-    // if(v1.length < 11) {
-    //     v1 += ' 00:00:00'
-    // }
-    // if(v2.length < 11) {
-    //     v2 += ' 00:00:00'
-    // }
     const date1 = new Date(v1).valueOf();
     const date2 = new Date(v2).valueOf();
     if(isNaN(date1) || isNaN(date2)) {
@@ -101,5 +120,6 @@ module.exports = {
     whichType,
     timeCompare,
     timeSetFormat,
+    getTimeFormat
 }
 

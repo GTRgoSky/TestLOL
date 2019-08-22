@@ -6,7 +6,8 @@ Class Parnet            Class Child             Function
 ③ [Parent的实例]pvm.__proto__ == P.prototype
 ④ C.__proto__  ==  Parnet
 ⑤ C.portotype  ==  C.portotype
-⑥ C.__proto__portotype  == P.portotype
+⑥ C.__proto__.portotype  == P.portotype
+⑦ C.portotype.__proto__ ==  P.portotype
 
 构造函数的__proto__ 指向 父级 本身  eg:④
 构造函数实例的__proto__指向构造函数的prototype   eg:③

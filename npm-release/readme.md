@@ -9,6 +9,11 @@ timeFormat (str)
 timeSetFormat (date, str)
 格式化导入时间。第一参数传入new Date()可以解析的时间 第二参数传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
 
+getTimeFormat (str, format)
+获取时间对应值
+str: YYYY-MM-DD hh:mm:ss 格式 或者时间戳格式
+format: YYYY或者MM或者 YYYY-MM格式 得到对应格式
+
 whichType(v)
 判断对象类型
 
@@ -19,3 +24,5 @@ timeCompare
 
 使用了browserify进行commonJs的转换
 使用了gulp-webserver进行gulp服务启动
+关于babel参考
+https://segmentfault.com/a/1190000019846400

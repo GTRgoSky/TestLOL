@@ -27,7 +27,7 @@ const request = require('request');
 //跨域设置 https://blog.csdn.net/u012149969/article/details/81145144
 app.all("*",function(req,res,next){
     //设置允许跨域的域名，*代表允许任意域名跨域
-    res.header("Access-Control-Allow-Origin","http://192.168.8.120:8080");
+    res.header("Access-Control-Allow-Origin","*");
     //允许的header类型
     res.header("Access-Control-Allow-Headers","content-type,jwt-token,authorization");
     //跨域允许的请求方式 

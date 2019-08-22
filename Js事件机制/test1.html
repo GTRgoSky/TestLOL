@@ -5,9 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>事件机制</title>
+    <!-- https://www.cnblogs.com/zhuzhenwei918/p/6142228.html -->
 </head>
 <body>
+    <p>
+        <label for="wheelDelta"> 滚动值:</label>(IE/Opera)
+        <input type="text" id="wheelDelta" />
+    </p>
+    <p>
+        <label for="detail"> 滚动值:(Firefox)</label>
+        <input type="text" id="detail" />
+    </p>
+    <script type="text/javascript">
+        var scrollFunc = function(e) {
+            // e是FF的事件。window.event是chrome/ie/opera的事件
+            var ee = e || window.event;
+            // console.log(ee); //可以看看ee.wheelDelta和e.detail在浏览器中的值；
+            var t1 = document.getElementById("wheelDelta");
+            var t2 = document.getElementById("detail");
+            if(ee.wheelDelta) { //IE/Opera/Chrome   
+                t1.value = ee.wheelDelta;
+            } else if(ee.detail) { //Firefox    
+                t2.value = ee.detail;
+            }
+        }
+        /*注册事件*/
+        if(document.addEventListener) {
+            //W3C FF
+            document.addEventListener('DOMMouseScroll', scrollFunc, false);
+        } 
+        //IE/Opera/Chrome/Safari
+        window.onmousewheel = document.onmousewheel = scrollFunc; 
+    </script>
     <button id="btn1" onclick="fun1();">btn</button>
+    <button id="button"> 点击我</button>
+    <script>
+        var button=document.getElementById("button");
+        button.onclick=function(){
+            alert('客户区坐标位置:' + event.clientX+","+event.clientY);
+            var pageX=event.clientX+(document.body.scrollLeft||document.documentElement.scrollLeft);
+            var pageY=event.clientY+(document.body.scrollRight||document.documentElement.scrollRight || '');
+            alert("页面坐标位置：pageX为"+pageX+"pageY为"+pageY);
+            alert("屏幕坐标位置：X为："+event.screenX+"Y为："+event.screenY);
+        };
+    </script>
     <script type="text/javascript">
 		function fun1(){
 			console.log("111");

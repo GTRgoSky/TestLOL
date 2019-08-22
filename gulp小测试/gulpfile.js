@@ -43,3 +43,7 @@ gulp.task('auto',function(){
 })
 
 gulp.task('default',['less']);
+
+gulp.task('test', function() {
+    console.log('test')
+})

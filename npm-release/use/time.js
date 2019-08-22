@@ -1,73 +1,97 @@
 'use strict';
 
 //格式化当前时间。传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
-const timeFormat = function(str){
-    let type = null;
-    let ans = null;
-    if(str === 'YYYY-MM-DD') type = 1;
-    if(str === 'YYYY-MM-DD hh:mm:ss') type = 2;
-    if(!type) throw Error('Please use YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss');
-    const date = new Date();
-    let year = date.getFullYear().toString();
-    let mouth = (date.getMonth()+1).toString().padStart(2, '0');
-    let day = date.getDate().toString().padStart(2, '0');
-    let hour = date.getHours().toString().padStart(2, '0');
-    let mun = date.getMinutes().toString().padStart(2, '0');
-    let sec = date.getSeconds().toString().padStart(2, '0');
-    if(type == 1){
+
+var timeFormat = function timeFormat(str) {
+    var type = null;
+    var ans = null;
+    if (str === 'YYYY-MM-DD') type = 1;
+    if (str === 'YYYY-MM-DD hh:mm:ss') type = 2;
+    if (!type) throw Error('Please use YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss');
+    var date = new Date();
+    var year = date.getFullYear().toString();
+    var mouth = (date.getMonth() + 1).toString().padStart(2, '0');
+    var day = date.getDate().toString().padStart(2, '0');
+    var hour = date.getHours().toString().padStart(2, '0');
+    var mun = date.getMinutes().toString().padStart(2, '0');
+    var sec = date.getSeconds().toString().padStart(2, '0');
+    if (type == 1) {
         ans = year + '-' + mouth + '-' + day;
-    }else{
+    } else {
         ans = year + '-' + mouth + '-' + day + ' ' + hour + ':' + mun + ':' + sec;
     }
-    if(!ans) throw Error('Something err');
+    if (!ans) throw Error('Something err');
     return ans;
-}
+};
 
 //格式化导入时间。第一参数传入new Date()可以解析的时间 第二参数传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
-const timeSetFormat = function(dateT, str){
-    let type = null;
-    let ans = null;
-    if(str === 'YYYY-MM-DD') type = 1;
-    if(str === 'YYYY-MM-DD hh:mm:ss') type = 2;
-    if(!type) throw Error('Please use YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss');
-    const date = new Date(dateT);
-    let year = date.getFullYear().toString();
-    let mouth = (date.getMonth()+1).toString().padStart(2, '0');
-    let day = date.getDate().toString().padStart(2, '0');
-    let hour = date.getHours().toString().padStart(2, '0');
-    let mun = date.getMinutes().toString().padStart(2, '0');
-    let sec = date.getSeconds().toString().padStart(2, '0');
-    if(type == 1){
+var timeSetFormat = function timeSetFormat(dateT, str) {
+    var type = null;
+    var ans = null;
+    if (str === 'YYYY-MM-DD') type = 1;
+    if (str === 'YYYY-MM-DD hh:mm:ss') type = 2;
+    if (!type) throw Error('Please use YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss');
+    var date = new Date(dateT);
+    var year = date.getFullYear().toString();
+    var mouth = (date.getMonth() + 1).toString().padStart(2, '0');
+    var day = date.getDate().toString().padStart(2, '0');
+    var hour = date.getHours().toString().padStart(2, '0');
+    var mun = date.getMinutes().toString().padStart(2, '0');
+    var sec = date.getSeconds().toString().padStart(2, '0');
+    if (type == 1) {
         ans = year + '-' + mouth + '-' + day;
-    }else{
+    } else {
         ans = year + '-' + mouth + '-' + day + ' ' + hour + ':' + mun + ':' + sec;
     }
-    if(!ans) throw Error('Something err');
+    if (!ans) throw Error('Something err');
     return ans;
-}
+};
+
+/*
+    ES6正则扩展： http://es6.ruanyifeng.com/#docs/regex#RegExp-prototype-sticky-属性
+    获取传入时间格式的字符串
+    传入格式 YYYY-MM-DD (可不带)hh:mm:ss 或者 时间戳
+    eg: ('1999-12-12 12:12:12/时间戳', 'MM')获取月份
+*/
+var getTimeFormat = function getTimeFormat(str, format) {
+    if (!str || !format) {
+        throw Error('arguments should be String But get undefined');
+    }
+    try {
+        var getDate = timeSetFormat(str, 'YYYY-MM-DD hh:mm:ss');
+        // const RE_DATE_Format = /(?<YYYY>YYYY)-(?<MM>MM)-(?<DD>DD) (?<hh>hh):(?<mm>mm):(?<ss>ss)/;
+        var RE_DATE = /(?<YYYY>\d{4})-(?<MM>\d{2})-(?<DD>\d{2}) (?<hh>\d{2}):(?<mm>\d{2}):(?<ss>\d{2})/;
+
+        var _RE_DATE$exec = RE_DATE.exec(getDate),
+            groups = _RE_DATE$exec.groups;
+
+        return format.replace(/YYYY|MM|DD|hh|mm|ss/g, function (matched) // 整个匹配结果 
+        {
+            return groups[matched];
+        });
+    } catch (err) {
+        throw Error('请检查参数是否正确');
+    }
+};
 
 //判断对象类型的js（Vue的判断方法）
-const whichType = v => Object.prototype.toString.call(v).replace(/\[object /,'').replace(']','');
+var whichType = function whichType(v) {
+    return Object.prototype.toString.call(v).replace(/\[object /, '').replace(']', '');
+};
 
 //比较2个时间大小(v1 > v2 返回 1 ； v1 == v2 返回 0 ； v1 < v2 返回 -1)
-const timeCompare = (v1,v2) =>{
+var timeCompare = function timeCompare(v1, v2) {
     // console.log(whichType(v1))
-    if(whichType(v1) !== 'String' || whichType(v2) !== 'String') {
-        throw Error('The arguments must be a String')
+    if (whichType(v1) !== 'String' || whichType(v2) !== 'String') {
+        throw Error('The arguments must be a String');
     }
-    // if(v1.length < 11) {
-    //     v1 += ' 00:00:00'
-    // }
-    // if(v2.length < 11) {
-    //     v2 += ' 00:00:00'
-    // }
-    const date1 = new Date(v1).valueOf();
-    const date2 = new Date(v2).valueOf();
-    if(isNaN(date1) || isNaN(date2)) {
-        throw Error('new Date(arguments).valueOf() is not a number , Please use the arguments like YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss')
+    var date1 = new Date(v1).valueOf();
+    var date2 = new Date(v2).valueOf();
+    if (isNaN(date1) || isNaN(date2)) {
+        throw Error('new Date(arguments).valueOf() is not a number , Please use the arguments like YYYY-MM-DD Or YYYY-MM-DD hh:mm:ss');
     }
     return date1 - date2 > 0 ? 1 : date1 - date2 == 0 ? 0 : -1;
-}
+};
 
 //根据日期判断当前日期是否是[工作日 0 \ 休息日 1 \ 节假日 2]
 //使用接口 http://api.goseek.cn/Tools/holiday?date= 
@@ -97,9 +121,9 @@ const timeCompare = (v1,v2) =>{
 // }
 
 module.exports = {
-    timeFormat,
-    whichType,
-    timeCompare,
-    timeSetFormat,
-}
-
+    timeFormat: timeFormat,
+    whichType: whichType,
+    timeCompare: timeCompare,
+    timeSetFormat: timeSetFormat,
+    getTimeFormat: getTimeFormat
+};

@@ -132,14 +132,6 @@ router.get('/jsWap', function (req, res) {
     // res.sendFile(_mainUrl+'/一个Node服务端测试/mydist/index.html');
 });
 
-// 定义 payment 页面的路由
-router.get('/payment', function (req, res) {
-    //sendFile只可以传绝对路径
-    console.log('get payment')
-    // res.sendFile(_mainUrl+'/一个Node服务端测试/public/index.html');
-    res.sendFile(_mainUrl+'/一个Node服务端测试/mydist/payment/index.html');
-});
-
 // 定义 about 页面的路由
 router.get('/po', function (req, res) {
     res.send('About birds 对等的6789');
