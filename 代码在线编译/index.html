@@ -1,0 +1,39 @@
+<!-- https://www.cnblogs.com/FrankLongger/p/11223796.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            var textDom = null;
+            window.onload = function() {
+                var tel = `<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    </head>
+    <body>
+        
+    </body>
+</html>`;
+                textDom = document.getElementById('inputdata');
+                textDom.value += tel;
+            }
+            function runData(){
+                //获取输入框内的数据
+                var text = textDom.value;
+                //获取iframe的DOM
+                var _fDom = document.getElementById("iframe1").contentWindow.document;
+                // 先清空iframe
+                _fDom.body.innerText = "";
+                //将输入框内的数据传给iframe
+                document.getElementById('iframe1').contentDocument.write(text);
+                // document.getElementById('console').innerText = _fDom.body.innerText
+            }
+        </script>
+    </head>
+    <body>
+        <textarea rows="10" cols="35" id="inputdata"></textarea>
+        <button id="rundata" onclick="runData()">RUN</button>
+        <iframe id="iframe1"></iframe>
+    </body>
+</html>
