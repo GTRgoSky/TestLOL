@@ -129,4 +129,4 @@ promise.then((res) => {
 }).then(res=>{
     console.log(res);
 },rej=>{})
-// module.exports = Promise; //将Promise导出
+module.exports = Promise; //将Promise导出
