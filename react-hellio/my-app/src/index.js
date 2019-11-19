@@ -9,14 +9,31 @@ import WelcomeDialog from './slot';
 import { ThemeContext } from '../context/theme-context';
 
 class Index extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			background: 'stateDefault'
+		};
+		this.setContext = this.setContext.bind(this);
+	}
+	setContext(text) {
+		this.setState({
+			background: text
+		});
+		console.log(text);
+	}
 	render() {
 		return (
 			<div>
 				<QiPanGame></QiPanGame>
 				<BoilingVerdict></BoilingVerdict>
-				<ThemeContext.Provider value='dark'>
-					<WelcomeDialog></WelcomeDialog>
+				<ThemeContext.Provider
+					value={{ background: this.state.background }}>
+					<WelcomeDialog setContext={this.setContext}></WelcomeDialog>
 				</ThemeContext.Provider>
+				{/* <WelcomeDialog>
+				{'若用这个则使用了ThemeContext默认值'}
+				</WelcomeDialog> */}
 			</div>
 		);
 	}

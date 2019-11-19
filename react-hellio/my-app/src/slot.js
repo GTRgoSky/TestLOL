@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { ThemeContext } from '../context/theme-context';
 // 测试一
 // function WelcomeDialog() {
 // 	return (
@@ -15,7 +15,7 @@ import React from 'react';
 //测试二
 function Dialog(props) {
 	return (
-		<FancyBorder color='blue'>
+		<FancyBorder color='blue' setContext={props.setContext}>
 			<h1 className='Dialog-title'>{props.title}</h1>
 			<p className='Dialog-message'>{props.message}</p>
 			{props.children}
@@ -31,14 +31,20 @@ class SignUpDialog extends React.Component {
 		this.state = { login: '' };
 	}
 
+	static contextType = ThemeContext;
+
 	render() {
+		let theme = this.context;
 		return (
 			<Dialog
 				title='Mars Exploration Program'
-				message='How should we refer to you?'>
+				message='How should we refer to you?'
+				setContext={this.props.setContext}>
 				<input value={this.state.login} onChange={this.handleChange} />
-
 				<button onClick={this.handleSignUp}>Sign Me Up!</button>
+				<p onClick={() => this.props.setContext('hhml')}>
+					parent: {theme.background}
+				</p>
 			</Dialog>
 		);
 	}
@@ -53,9 +59,20 @@ class SignUpDialog extends React.Component {
 }
 
 function FancyBorder(props) {
+	let contextType = ThemeContext;
 	return (
 		<div className={'FancyBorder FancyBorder-' + props.color}>
 			{props.children}
+			<contextType.Consumer>
+				{value => (
+					<p
+						onClick={() => {
+							props.setContext('hhlh');
+						}}>
+						{value.background}
+					</p>
+				)}
+			</contextType.Consumer>
 		</div>
 	);
 }
