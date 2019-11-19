@@ -1,0 +1,17 @@
+{
+  "name": "promise",
+  "version": "1.0.0",
+  "description": "fight",
+  "main": "promiseA.js",
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  },
+  "devDependencies": {
+    "promises-aplus-tests": "*"
+  },
+  "scripts": {
+      "test": "promises-aplus-tests native"
+  },
+  "author": "",
+  "license": "ISC"
+}
