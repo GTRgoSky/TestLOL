@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <img alt="Vue logo" src="../assets/logo.png" @click="test">
+    <HelloWorld ref="child" msg="Welcome to Your Vue.js + TypeScript App" testmsg="wocao"/>
   </div>
 </template>
 
@@ -14,5 +14,15 @@ import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
     HelloWorld,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  public $refs!: {
+    child: HelloWorld,
+  };
+  private test(): number {
+    this.$refs.child.parentCol(1);
+    (this.$refs.child as HelloWorld).parentCol(2);
+    // (<HelloWorld> this.$refs.child).parentCol(3); 该用法被禁止
+    return 1;
+  }
+}
 </script>
