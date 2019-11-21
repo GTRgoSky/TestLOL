@@ -33,6 +33,10 @@ class SignUpDialog extends React.Component {
 
 	static contextType = ThemeContext;
 
+	shouldComponentUpdate() {
+		console.log('children update');
+	}
+
 	render() {
 		let theme = this.context;
 		return (
