@@ -5,9 +5,9 @@ import './index.css';
 import QiPanGame from './qipan';
 import BoilingVerdict from './boilingVerdict';
 import WelcomeDialog from './slot';
+import RefsTest from './refs';
 
 import { ThemeContext } from '../context/theme-context';
-
 class Index extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,6 +27,7 @@ class Index extends React.Component {
 			<div>
 				<QiPanGame></QiPanGame>
 				<BoilingVerdict></BoilingVerdict>
+				<RefsTest>btn</RefsTest>
 				<ThemeContext.Provider
 					value={{ background: this.state.background }}>
 					<WelcomeDialog setContext={this.setContext}></WelcomeDialog>
