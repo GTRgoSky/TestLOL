@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h1 @click="clit">{{ msg }}</h1>
+    <h2 @click="cli">{{testdata}}+++{{testmsg}}</h2>
     <p>
       For guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -36,7 +37,27 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 
 @Component
 export default class HelloWorld extends Vue {
-  @Prop() private msg!: string;
+  @Prop()
+  public msg!: string;
+  @Prop()
+  public testmsg!: string;
+  private testdata: string = '测试data声明';
+  public parentCol(num: number) {
+    console.log('parent contorl this methods' + num);
+  }
+  private cli(a: boolean = false) {
+    if (a) {
+      alert(`进入判断,当前的值为: ${this.testdata}`);
+      return;
+    }
+    alert(`当前的值为: ${this.testdata}`);
+  }
+  private mounted() {
+    console.log(`当前的值为: ${this.testdata}`);
+  }
+  private clit() {
+    this.cli(true);
+  }
 }
 </script>
 

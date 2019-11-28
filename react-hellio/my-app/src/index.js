@@ -6,6 +6,7 @@ import QiPanGame from './qipan';
 import BoilingVerdict from './boilingVerdict';
 import WelcomeDialog from './slot';
 import RefsTest from './refs';
+import LifeParent from './life';
 
 import { ThemeContext } from '../context/theme-context';
 class Index extends React.Component {
@@ -22,6 +23,11 @@ class Index extends React.Component {
 		});
 		console.log(text);
 	}
+
+	forceUpdateFun() {
+		this.forceUpdate();
+	}
+
 	render() {
 		return (
 			<div>
@@ -32,9 +38,11 @@ class Index extends React.Component {
 					value={{ background: this.state.background }}>
 					<WelcomeDialog setContext={this.setContext}></WelcomeDialog>
 				</ThemeContext.Provider>
+				<div onClick={this.forceUpdateFun.bind(this)}>点击强制更新</div>
 				{/* <WelcomeDialog>
 				{'若用这个则使用了ThemeContext默认值'}
 				</WelcomeDialog> */}
+				<LifeParent></LifeParent>
 			</div>
 		);
 	}
