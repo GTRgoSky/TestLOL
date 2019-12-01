@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="http://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="http://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="http://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="http://localhost:8111/reactTest.jsx?name=reactTest" type="text/babel"></script>
 </head>
+
 <body>
     <div id="test">click</div>
+    <div id="root"></div>
     <script>
-        setTimeout(()=>{
+        setTimeout(() => {
             var i = 0;
-            let a = setInterval(()=>{
+            let a = setInterval(() => {
                 i++
-                console.log(i,'go')
-                if(i>4){
+                console.log(i, 'go')
+                if (i > 4) {
                     clearInterval(a);
-                    console.log(i,'finish')
+                    console.log(i, 'finish')
                 }
-            },1000)
+            }, 1000)
             console.log(i)
-        },100)
-        test.addEventListener('click',()=>{
+        }, 100)
+        test.addEventListener('click', () => {
             console.log('click')
         })
         //事件轮询机制---每次只有计时器时间截止后才会把事件塞到计时器的watcher里
     </script>
+    <script type="text/babel">
+        ReactDOM.render(<Dialog title={'你好啊'} 
+        message="我是信息">
+        vpn挂了真让人讨厌啊
+        <input palceholder="很生气"/>
+        </Dialog>, 
+        document.getElementById('root'));
+    </script>
 </body>
+
 </html>
