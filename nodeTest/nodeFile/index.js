@@ -65,14 +65,16 @@ function processRequest(request, response) {
 		//response.end方法用来回应完成后关闭本次对话，也可以写入HTTP回应的具体内容。
 		response.end();
 	}
-	let keyName = url.parse(requestUrl, true).query.name;
-	if (!keyName) {
-		noPage();
-	}
 	//获取资源文件的绝对路径
 	/*  var filePath = path.resolve(__dirname + pathName);*/
 	//__dirname是访问项目静态资源的路径 我的项目静态文件都在public下所以我写public可根据自己项目路径来配置哦
-	var filePath = getFilePath[keyName];
+	let keyName = url.parse(requestUrl, true).query.name;
+	var filePath = '';
+	if (keyName) {
+		filePath = getFilePath[keyName];
+	} else {
+		filePath = path.resolve('public' + pathName);
+	}
 	console.log(filePath);
 	//获取对应文件的文档类型
 	//我们通过path.extname来获取文件的后缀名。由于extname返回值包含”.”，所以通过slice方法来剔除掉”.”，
