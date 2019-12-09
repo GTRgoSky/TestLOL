@@ -52,7 +52,7 @@ class LifeParent extends React.Component {
 			</>
 		);
 	}
-	componentDidUpdate() {
+	componentDidUpdate(prevProps) {
 		timeConsole('parent-componentDidUpdate');
 	}
 	componentDidMount() {
