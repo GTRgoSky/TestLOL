@@ -7,6 +7,7 @@ import BoilingVerdict from './boilingVerdict';
 import WelcomeDialog from './slot';
 import RefsTest from './refs';
 import LifeParent from './life';
+import RenderProps from './renderProps';
 
 import { ThemeContext } from '../context/theme-context';
 class Index extends React.Component {
@@ -43,6 +44,7 @@ class Index extends React.Component {
 				{'若用这个则使用了ThemeContext默认值'}
 				</WelcomeDialog> */}
 				<LifeParent></LifeParent>
+				<RenderProps></RenderProps>
 			</div>
 		);
 	}
