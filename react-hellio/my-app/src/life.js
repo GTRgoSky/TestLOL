@@ -1,4 +1,5 @@
 // 生命周期测试
+// http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/ 生命周期图谱
 import React from 'react';
 import { timeConsole } from 'utils';
 

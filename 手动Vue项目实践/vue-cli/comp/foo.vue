@@ -8,50 +8,49 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from "vuex";
 export default {
-    beforeCreate() {
-        
+    data() {
+        return {
+            testData: 1
+        };
     },
-    created() {
-        
-    },
-    mounted(){
-        
-        console.log('foo');
+    beforeCreate() {},
+    created() {},
+    mounted() {
+        console.log("foo");
         console.log(this.$router.currentRoute);
         // setTimeout(() => {
         //     console.log('time')
         // }, 1000);
         //console.log(this.userID) this.$store.state.person.userID;
     },
-    name:"foo",
-    activated(){
+    name: "foo",
+    activated() {
         //激活
-        // console.log('ac')
+        this.testData++;
+        console.log("ac", this.testData);
     },
-    deactivated(){
+    deactivated() {
         //失去激活
         // console.log('de');
     },
-    components: {
-    },
+    components: {},
     computed: {
-        ...mapState(['count']),
-        ...mapState('user',['userID']),
+        ...mapState(["count"]),
+        ...mapState("user", ["userID"])
         // count () {
         //     return this.$store.state.count
         // }
     },
     methods: {
-        ...mapMutations('user',['changeuserID']),
+        ...mapMutations("user", ["changeuserID"]),
         add() {
-            this.changeuserID('change');
+            this.changeuserID("change");
         }
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>

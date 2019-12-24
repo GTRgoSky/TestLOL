@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { ExampleComponent } from './getDerivedStateFromProps';
+import Parent from './paisheng';
 
 // React.Component
 class Greeting extends React.Component {
@@ -31,6 +33,8 @@ class Greeting extends React.Component {
 const MyComponent = React.memo(function MyComponent(props) {
 	/* 使用 props 渲染 */
 });
+
+// eslint-disable-next-line
 function MyComponents(props) {
 	/* 使用 props 渲染 */
 }
@@ -80,7 +84,7 @@ class ChildrenTest extends React.Component {
 		console.log(children); // 一个child是对象;两个是数组
 		let arr = React.Children.map(children, (c, i) => {
 			console.log(c, '|', i);
-			if (i == 1) {
+			if (i === 1) {
 				return React.cloneElement(c, { name: 'CloneElementName' + i });
 			} else {
 				return React.cloneElement(
@@ -145,4 +149,18 @@ class ChildrenTest extends React.Component {
     }
  */
 
-ReactDOM.render(<Greeting />, document.getElementById('root'));
+class CommonParent extends React.Component {
+	render() {
+		return (
+			<>
+				<Greeting></Greeting>
+				<h4>----分割线(getDerivedStateFromProps测试)----</h4>
+				<ExampleComponent></ExampleComponent>
+				<h4>----父子见的关系实践----</h4>
+				<Parent></Parent>
+			</>
+		);
+	}
+}
+
+ReactDOM.render(<CommonParent />, document.getElementById('root'));
