@@ -2,13 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ExampleComponent } from './getDerivedStateFromProps';
 import Parent from './paisheng';
+import './index.less';
 
+function createMarkup() {
+	return { __html: 'First &middot; Second' };
+}
+const pStyle = {
+	color: 'blue'
+};
 // React.Component
 class Greeting extends React.Component {
 	render() {
 		return (
 			<div>
-				<h1>Hello, {this.props.name}</h1>
+				<h1 className='test'>Hello, {this.props.name}</h1>
+				<p dangerouslySetInnerHTML={createMarkup()} style={pStyle}></p>
 				<ChildrenTest>
 					<p>hahahahahahaha{this.props.name}</p>
 					<span>hehehehehehe{this.props.name}</span>
