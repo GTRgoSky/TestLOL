@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ExampleComponent } from './getDerivedStateFromProps';
 import Parent from './paisheng';
+import EventComp from './event';
 import './index.less';
 
 function createMarkup() {
@@ -166,6 +167,7 @@ class CommonParent extends React.Component {
 				<ExampleComponent></ExampleComponent>
 				<h4>----父子见的关系实践----</h4>
 				<Parent></Parent>
+				<EventComp></EventComp>
 			</>
 		);
 	}

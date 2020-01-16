@@ -18,6 +18,7 @@ class Parent extends React.Component {
 					onChange={this.handleChange.bind(this)}
 					value={this.state.email}
 				/> */}
+				<h3>派生</h3>
 				<Child email={this.state.email}></Child>
 				<EmailInput
 					onChange={this.handleChange.bind(this)}
@@ -41,13 +42,32 @@ class Child extends React.Component {
 		}
 	}
 
+	changeEmail() {
+		this.setState({
+			email: 999
+		});
+	}
+
 	render() {
-		return <p>{this.state.email}</p>;
+		return (
+			<p onClick={this.changeEmail.bind(this)}>
+				Child： {this.state.email}
+			</p>
+		);
 	}
 }
 
 function EmailInput(props) {
-	return <input onChange={props.onChange} value={props.email} />;
+	let state = props.email;
+	return <input onChange={props.onChange} value={state} />;
+	// return (
+	// 	<input
+	// 		onChange={e => {
+	// 			state = e.target.value;
+	// 		}}
+	// 		defaultValue={state}
+	// 	/>
+	// );
 }
 
 export default Parent;
