@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怎么让一个 div 水平垂直居中</title>
+    <style>
+        html,
+        body,
+        div.parent {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+
+        div.child {
+            background-color: red;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* 1 */
+        /* div.parent {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        } */
+
+        /* 2 */
+        /* div.parent {
+            position: relative;
+        }
+
+        div.child {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        } */
+
+        /* 3 */
+        /* div.parent {
+            position: relative;
+        }
+
+        div.child {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+        } */
+
+        /* 4 */
+        /* div.parent {
+            position: relative;
+        }
+
+        div.child {
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+        } */
+
+        /* 5 */
+        /* div.parent {
+            display: grid;
+        }
+
+        div.child {
+            justify-self: center;
+            align-self: center;
+        } */
+
+        /* 6 */
+        div.parent {
+            font-size: 0;
+            text-align: center;
+
+        }
+
+        div.parent::before {
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        div.child {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent">
+        <div class="child"></div>
+    </div>
+</body>
+
+</html>

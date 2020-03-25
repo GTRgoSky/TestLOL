@@ -29,6 +29,7 @@ let DFSdeepClone = (obj, visitedArr = []) => {
 		let index = visitedArr.indexOf(obj);
 		_obj = isTypeOf(obj, 'array') ? [] : {};
 		if (~index) {
+			// ~暂时可以理解为取反 并且 -1
 			// 判断环状数据
 			_obj = visitedArr[index];
 		} else {
@@ -46,7 +47,9 @@ let DFSdeepClone = (obj, visitedArr = []) => {
 };
 
 //广度优先遍历
-
+/***
+ * 利用对象指针的思路，每层只对指针进行操作，同事影响了最外层对象的最终值
+ */
 let BFSdeepClone = obj => {
 	let origin = [obj],
 		copyObj = {},
@@ -95,6 +98,8 @@ let BFSdeepClone = obj => {
 	return copyObj;
 };
 
+BFSdeepClone({ a: { c: 3 }, b: 2 });
+return;
 //测试
 
 /**测试数据 */
