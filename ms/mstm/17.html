@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- https://www.softwhy.com/article-10123-1.html -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>下翻轮播</title>
+    <style>
+        body,
+        html {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        p {
+            margin: 0;
+            line-height: 100px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .parent {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .child {
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
+
+        .front {
+
+            background-color: blue;
+            /* height: 50%; */
+            z-index: -2;
+        }
+
+        .front p:last-child {
+            /* height: 0; */
+            visibility: hidden;
+        }
+
+        .line-middle {
+            z-index: 1;
+            background-color: blue;
+            transform: rotateX(90deg);
+            height: 50%;
+            top: 50%;
+        }
+
+        .line-middle p:first-child {
+            height: 0;
+            visibility: hidden;
+        }
+
+        .behind {
+            z-index: 0;
+            background-color: blue;
+        }
+
+        .turn-front {
+            z-index: 2;
+            transform: perspective(300px) rotateX(-90deg);
+        }
+
+        .turn-middle {
+            transform: perspective(300px) rotateX(0deg);
+            transition: all .5s ease-out .5s;
+            /*
+            transition: property duration timing-function delay; 
+            规定设置过渡效果的 CSS 属性的名称。
+            规定完成过渡效果需要多少秒或毫秒。
+            规定速度效果的速度曲线。
+            定义过渡效果何时开始。 */
+        }
+
+        .transition {
+            transition: all .5s ease-in;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="parent" id="parent">
+        <div class="front child transition" id="front">
+            <p></p>
+            <p></p>
+        </div>
+        <div class="behind child transition" id="behind">
+            <p>1</p>
+            <p>2</p>
+        </div>
+        <div class="line-middle child" id="lineMiddle">
+            <p></p>
+            <p></p>
+        </div>
+    </div>
+</body>
+<script>
+    let front = document.getElementById('front');
+    let behind = document.getElementById('behind');
+    let middle = document.getElementById('lineMiddle');
+    let parent = document.getElementById('parent');
+    parent.addEventListener('click', function () {
+
+        let save = front.getAttribute("class");
+        let classd = (front.getAttribute("class") + ' turn-front');
+        let saveMiddle = middle.getAttribute("class")
+        let middleclass = (middle.getAttribute("class") + ' turn-middle');
+
+
+
+        setInterval(() => {
+            // 上层板渲染 上层值的原始值
+            front.children[0].innerHTML = behind.children[0].innerHTML;
+            // 下层板渲染下层值的更新值
+            middle.children[1].innerHTML = value(behind.children[1].innerHTML);
+
+            front.setAttribute('class', classd);
+            middle.setAttribute('class', middleclass)
+            setTimeout(() => {
+                front.setAttribute('class', 'front child');
+            }, 500);
+            setTimeout(() => {
+                behind.children[0].innerHTML = value(behind.children[0].innerHTML);
+            }, 450);
+            setTimeout(() => {
+                behind.children[1].innerHTML = value(behind.children[1].innerHTML);
+                middle.setAttribute('class', 'line-middle child')
+                front.setAttribute('class', 'front child transition');
+            }, 950);
+        }, 1950);
+
+    })
+
+    function value(v) {
+        if (v == 1) return 5;
+        if (v == 5) return 1;
+        if (v == 6) return 2;
+        if (v == 2) return 6;
+    }
+</script>
+
+</html>
+<!-- https://www.jb51.net/article/131426.htm -->
+
+<!-- https://www.17sucai.com/pins/demo-show?id=18186 -->
