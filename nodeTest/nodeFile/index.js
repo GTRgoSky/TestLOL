@@ -13,10 +13,10 @@ var httpServer = http.createServer(processRequest);
 var port = 8111;
 
 //指定一个监听的接口
-httpServer.listen(port, function() {
+httpServer.listen(port, function () {
 	console.log(`app is running at port:${port}`);
 	console.log(`url: http://localhost:${port}`);
-	cp.exec(`explorer http://localhost:${port}`, function() {});
+	cp.exec(`explorer http://localhost:${port}`, function () {});
 });
 
 //响应请求的函数
@@ -41,7 +41,7 @@ function processRequest(request, response) {
 		wav: 'audio/x-wav',
 		wma: 'audio/x-ms-wma',
 		wmv: 'video/x-ms-wmv',
-		xml: 'text/xml'
+		xml: 'text/xml',
 	};
 
 	// 设置响应头
@@ -60,7 +60,7 @@ function processRequest(request, response) {
 		pathName += '/';
 		var redirect = 'http://' + request.headers.host + pathName;
 		response.writeHead(301, {
-			location: redirect
+			location: redirect,
 		});
 		//response.end方法用来回应完成后关闭本次对话，也可以写入HTTP回应的具体内容。
 		response.end();
@@ -75,11 +75,11 @@ function processRequest(request, response) {
 	} else {
 		filePath = path.resolve('public' + pathName);
 	}
-	console.log(filePath);
+	console.log(keyName, filePath);
 	//获取对应文件的文档类型
 	//我们通过path.extname来获取文件的后缀名。由于extname返回值包含”.”，所以通过slice方法来剔除掉”.”，
 	//对于没有后缀名的文件，我们一律认为是unknown。
-	var ext = path.extname(pathName);
+	var ext = path.extname(pathName); // 如localhost:8888/.html?xxxx=sss则ext = .html
 	ext = ext ? ext.slice(1) : 'unknown';
 
 	//未知的类型一律用"text/plain"类型
@@ -123,7 +123,7 @@ function processRequest(request, response) {
 					if (!flag) {
 						html += '</ul></body>';
 						response.writeHead(200, {
-							'content-type': 'text/html'
+							'content-type': 'text/html',
 						});
 						response.end(html);
 					}
@@ -137,7 +137,7 @@ function processRequest(request, response) {
 			//建立流对象，读文件
 			var stream = fs.createReadStream(filePath);
 			//错误处理
-			stream.on('error', function() {
+			stream.on('error', function () {
 				response.writeHead(500, { 'content-type': contentType });
 				response.end('<h1>500 Server Error</h1>');
 			});
