@@ -1,5 +1,6 @@
 <template>
     <div>
+        <async-component></async-component>
         <p ref="refD">home and params: {{ $route.params.userId }}</p>
         <button
             v-for="tab in tabs"
