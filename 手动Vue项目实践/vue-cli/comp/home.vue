@@ -1,5 +1,6 @@
 <template>
     <div>
+        <async-component></async-component>
         <p ref="refD">home and params: {{ $route.params.userId }}</p>
         <button
             v-for="tab in tabs"
@@ -23,6 +24,7 @@
             <div slot="created">createdDom</div>
         </slotsdemo>
         <button @click="changeTodo">点我试试</button>
+        <base-input v-on:click="onFocus"></base-input>
     </div>
 </template>
 
@@ -49,13 +51,17 @@ export default {
         bar: () => import("./bar.vue"),
         foo: () => import("./foo.vue"),
         dom: () => import("./dom.vue"),
-        slotsdemo: () => import("./slotsdemo.vue")
+        slotsdemo: () => import("./slotsdemo.vue"),
+        "base-input": () => import("./base-input.vue")
     },
     methods: {
         changeTodo() {
             this.todoT = [2, 1];
             this.$refs.refT.test();
             console.log(this.$refs.refD);
+        },
+        onFocus(e) {
+            console.log(e, "base-input-onFocus");
         }
     },
     created() {},
