@@ -1,12 +1,9 @@
 {
-  "presets": [
-
-    [
-
-      "stage-3"
-
-    ]
-
-  ],
-  "plugins": ["syntax-dynamic-import", "transform-runtime"]
+	"presets": [["stage-3"]],
+	"plugins": [
+		"syntax-dynamic-import",
+		"transform-runtime",
+		"jsx-v-model",
+		"transform-vue-jsx"
+	]
 }

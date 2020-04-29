@@ -77,6 +77,11 @@ const router = new VueRouter({
 			name: 'fictitiouslist',
 			component: () => import('./views/fictitiousList.vue'),
 		},
+		{
+			path: '/vnode', //虚拟列表
+			name: 'vnode',
+			component: () => import('./comp/vnode.vue'),
+		},
 	],
 });
 
