@@ -80,7 +80,7 @@ const router = new VueRouter({
 		{
 			path: '/vnode', //虚拟列表
 			name: 'vnode',
-			component: () => import('./comp/vnode.vue'),
+			component: () => import('./comp/vnodemain.vue'),
 		},
 	],
 });

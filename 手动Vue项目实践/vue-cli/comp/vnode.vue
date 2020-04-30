@@ -3,7 +3,11 @@ export default {
     data() {
         return {
             testhhh: 123,
-            iv: 555
+            iv: 555,
+            obj: {
+                ttt: 111,
+                tts: 222
+            }
         };
     },
     components: {
