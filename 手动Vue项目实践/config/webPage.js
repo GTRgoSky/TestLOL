@@ -1,18 +1,19 @@
-const autoWebPlugin = require('./plugin').autoWebPlugin;
+// const WebpackZipPlugin =require('webpack-zip-plugin')
+// const FileManagerPlugin = require('filemanager-webpack-plugin');
+// const {upload} = require('./upload.js');
+// const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
+// let lessExtract = new MiniCssExtractPlugin('less.css');
+// const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
+// const glob = require('glob');
+const { autoWebPlugin, FriendlyErrorsPluginVm } = require('./plugin');
 var vConsolePlugin = require('vconsole-webpack-plugin');
 var webpack = require('webpack'); //引入文件
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 var argv = require('yargs').argv;
-// const WebpackZipPlugin =require('webpack-zip-plugin')
-// const FileManagerPlugin = require('filemanager-webpack-plugin');
-// const {upload} = require('./upload.js');
-// const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// const ExtractTextPlugin = require('extract-text-webpack-plugin');//把编译好的代码放到单独的文件里面
-// let lessExtract = new MiniCssExtractPlugin('less.css');
-// const PurifyCssWebpack  = require('purifycss-webpack');//消除冗余代码
-// const glob = require('glob');
+
 let _arr = argv.fx.split('/');
 console.log('argv:' + _arr);
 let _url = _arr[0];
@@ -38,7 +39,7 @@ let output = {
 	// filename:'build.js',//输出后的文件名称
 	filename: 'js/[name].js',
 	chunkFilename: 'js/[name].[chunkhash:8].js',
-	publicPath: process.env.NODE_ENV === 'product' ? '/dist/' : '' //老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
+	publicPath: process.env.NODE_ENV === 'product' ? '/dist/' : '', //老版本的可以不用配置但是新版本需要配置(拼接html引入main.js路径=> /dist/main.js)
 };
 let moduleConfig = {
 	rules: [
@@ -52,39 +53,52 @@ let moduleConfig = {
 					options: {
 						// 这里的options选项参数可以定义多大的图片转换为base64
 						limit: 50000, // 表示小于50kb的图片转为base64,大于50kb的是路径
-						outputPath: 'images' //定义输出的图片文件夹
-					}
-				}
-			]
+						outputPath: 'images', //定义输出的图片文件夹
+					},
+				},
+			],
 		},
 		{
 			test: /\.less$/,
 			use: [
 				MiniCssExtractPlugin.loader,
 				'css-loader?minimize',
-				'less-loader'
-			]
+				'less-loader',
+			],
 		},
 		{
 			test: /\.css$/,
 			// use: [MiniCssExtractPlugin.loader,'css-loader?minimize']
 			// 提取出 Chunk 中的 CSS 代码到单独的文件中
-			use: [MiniCssExtractPlugin.loader, 'css-loader?minimize']
-		}
+			use: [MiniCssExtractPlugin.loader, 'css-loader?minimize'],
+		},
 	],
-	noParse: res => {
+	noParse: (res) => {
 		return '';
-	}
+	},
 };
 let devServer = {
+	// https://www.webpackjs.com/configuration/dev-server/#devserver-index
 	//配置webpack加载地址的host，port，地址路径
-	host: 'localhost',
+	host: '0.0.0.0',
 	contentBase: _url + '/',
 	historyApiFallback: true,
 	port: 8088,
 	headers: {
-		'X-foo': process.env.NODE_ENV == 'product' ? 'bar' : 'none'
-	}
+		'X-foo': process.env.NODE_ENV == 'product' ? 'bar' : 'none',
+	},
+	overlay: true, // 编译出现错误时，将错误直接显示在页面上
+	// string = 'info': 'silent' | 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'none' | 'warning'
+	// 隐藏客户端控制台的输出
+	clientLogLevel: 'none',
+	// 启用 quiet 后，除了初始启动信息之外的任何内容都不会被打印到控制台。这也意味着来自 webpack 的错误或警告在控制台不可见。
+	// quiet: true,
+	// 启用 noInfo 后，诸如「启动时和每次保存之后，那些显示的 webpack 包(bundle)信息」的消息将被隐藏。错误和警告仍然会显示。
+	noInfo: true,
+	// 当打开被启用时，开发服务器将打开浏览器。
+	open: true,
+	//允许浏览器使用您的本地IP打开
+	useLocalIp: true,
 	// proxy: { // 代理到后端服务接口
 	//     '/': 'http://192.168.8.120:3010/vuehtml'
 	// },
@@ -94,7 +108,7 @@ const singlePage = {
 	//context 配置根目录地址。默认为执行启动 Webpack 时所在的当前工作目录
 	mode: 'production', //production会自动压缩，还会在main.js设置全局变量process.env.NODE_ENV == '设置值'/production大小1.87mb/development大小2.09Mb
 	entry: {
-		main: ['babel-polyfill', `./${_url}/main.js`] //配置入口
+		main: ['babel-polyfill', `./${_url}/main.js`], //配置入口
 		// main: `./${_url}/main.js`,//配置入口
 	},
 	output: output,
@@ -103,21 +117,21 @@ const singlePage = {
 		//其他的配置选项(解析，当遇到import vue 时会精准找到后面配置的PATH)
 		// extensions: ['.js', '.vue', '.json'],
 		alias: {
-			vue$: 'vue/dist/vue.js' //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
-		}
+			vue$: 'vue/dist/vue.js', //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
+		},
 	},
 	externals: {
 		vue: 'Vue',
 		'vue-router': 'VueRouter',
-		vuex: 'Vuex'
+		vuex: 'Vuex',
 	},
 	// 输出文件性能检查配置
 	performance: {
 		// hints: 'warning', // 有性能问题时输出警告
 		// hints: 'error', // 有性能问题时输出错误
-		// hints: false, // 关闭性能检查
+		hints: false, // 关闭性能检查
 		maxAssetSize: 200000, // 最大文件大小 (单位 bytes)
-		maxEntrypointSize: 400000 // 最大入口文件大小 (单位 bytes)
+		maxEntrypointSize: 400000, // 最大入口文件大小 (单位 bytes)
 		// assetFilter: function(assetFilename) { // 过滤要检查的文件
 		//     return assetFilename.endsWith('.js');
 		// }
@@ -132,16 +146,16 @@ const singlePage = {
 			options: {
 				babel: {
 					presets: ['es2015'],
-					plugins: ['transform-runtime']
-				}
-			}
+					plugins: ['transform-runtime'],
+				},
+			},
 		}),
 		new vConsolePlugin({
-			enable: false // 发布代码前记得改回 false,
+			enable: false, // 发布代码前记得改回 false,
 		}),
 		new HTMLWebpackPlugin({
 			filename: 'index.html',
-			template: `./${_url}/index.html` //配置入口
+			template: `./${_url}/index.html`, //配置入口
 		}),
 		// new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"development"' })
 		//do zip
@@ -163,7 +177,7 @@ const singlePage = {
 		// 　　chunkFilename: "[id].css"
 		//}),
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[chunkhash:8].css' //配置入口
+			filename: 'css/[name].[chunkhash:8].css', //配置入口
 			// chunkFilename: `[id].[chunkhash:8].css`
 		}),
 		// new HTMLWebpackPlugin({
@@ -178,8 +192,9 @@ const singlePage = {
 		//引入 process.env
 		new webpack.DefinePlugin({
 			'process.env.HOST_NAME': '"' + process.env.HOST_NAME + '"',
-			test: '"' + '测试输入变量' + '"'
-		})
+			test: '"' + '测试输入变量' + '"',
+		}),
+		FriendlyErrorsPluginVm,
 	],
 	optimization: {
 		splitChunks: {
@@ -193,16 +208,16 @@ const singlePage = {
 			cacheGroups: {
 				vendors: {
 					test: /[\\/]node_modules[\\/]/,
-					priority: -10
+					priority: -10,
 				},
 				default: {
 					minChunks: 2,
 					priority: -20,
-					reuseExistingChunk: true
-				}
-			}
-		}
-	}
+					reuseExistingChunk: true,
+				},
+			},
+		},
+	},
 };
 
 const manyPage = {
@@ -214,17 +229,17 @@ const manyPage = {
 	module: moduleConfig,
 	resolve: {
 		alias: {
-			vue$: 'vue/dist/vue.js' //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
-		}
+			vue$: 'vue/dist/vue.js', //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
+		},
 	},
 	externals: {
 		vue: 'Vue',
 		'vue-router': 'VueRouter',
-		vuex: 'Vuex'
+		vuex: 'Vuex',
 	},
 	performance: {
 		maxAssetSize: 200000, // 最大文件大小 (单位 bytes)
-		maxEntrypointSize: 400000 // 最大入口文件大小 (单位 bytes)
+		maxEntrypointSize: 400000, // 最大入口文件大小 (单位 bytes)
 	},
 	devServer: devServer,
 	plugins: [
@@ -232,16 +247,16 @@ const manyPage = {
 			options: {
 				babel: {
 					presets: ['es2015'],
-					plugins: ['transform-runtime']
-				}
-			}
+					plugins: ['transform-runtime'],
+				},
+			},
 		}),
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[chunkhash:8].css' //配置入口
+			filename: 'css/[name].[chunkhash:8].css', //配置入口
 			// chunkFilename: `[id].[chunkhash:8].css`
 		}),
-		autoWebPlugin
-	]
+		autoWebPlugin,
+	],
 	// optimization: {
 	//     splitChunks: {
 	//        chunks: "all", // 必须三选一： "initial" | "all"(推荐) | "async" (默认就是async)'initial', // 只对入口文件处理
@@ -284,5 +299,5 @@ const manyPage = {
 
 module.exports = {
 	singlePage,
-	manyPage
+	manyPage,
 };

@@ -14,7 +14,7 @@
             @cliTs="cliTs"
         ></test>
         <!-- <test2 v-model="test2s"></test2> -->
-        <test3 v-on:focus.native="onFocus"></test3>
+        <test3 v-on:focus.native="onFocus" @test="()=>{}"></test3>
     </div>
 </template>
 

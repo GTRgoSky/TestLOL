@@ -12,6 +12,7 @@
         <section v-if="showTab == 'useself'">
             <useself :test="0"></useself>
         </section>
+        <vmodel v-model="vmodeldata"></vmodel>
     </section>
 </template>
 <script>
@@ -24,12 +25,14 @@ export default {
                 text: "sync start"
             },
             List: ["sync", "useself"],
-            showTab: ""
+            showTab: "",
+            vmodeldata: "vmodal test"
         };
     },
     components: {
         syncc: () => import("./sync.vue"),
-        useself: () => import("./useself.vue")
+        useself: () => import("./useself.vue"),
+        vmodel: () => import("./vmodel.vue")
     },
     computed: {
         observableTest() {

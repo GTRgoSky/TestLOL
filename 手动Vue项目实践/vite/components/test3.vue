@@ -9,10 +9,10 @@
 
 <script>
 export default {
-    inheritAttrs: false,
+    // inheritAttrs: false,
     props: ["label", "value"],
     mounted() {
-        console.log(this.$attrs, this.$listeners);
+        console.log(this.$attrs, this.$listeners, "test3");
     }
 };
 </script>

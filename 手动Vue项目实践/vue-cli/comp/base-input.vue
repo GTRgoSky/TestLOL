@@ -9,6 +9,7 @@
 
 <script>
 export default {
+    name: "base-input",
     inheritAttrs: false,
     props: ["label", "value"],
     computed: {

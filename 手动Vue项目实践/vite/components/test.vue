@@ -11,7 +11,7 @@ export default {
 
     props: ["num", "staticFont", "a", "b"],
     created() {
-        // console.log(this.$attrs);
+        console.log(this.$attrs, "test1");
     }
 };
 </script>

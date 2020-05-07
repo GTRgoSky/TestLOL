@@ -34,6 +34,7 @@
 import { timeFormat } from "wing-time";
 import { bus } from "../common/bus";
 export default {
+    name: "home",
     data() {
         return {
             currentTab: "foo",
@@ -61,7 +62,7 @@ export default {
             console.log(this.$refs.refD);
         },
         onFocus(e) {
-            console.log(e, "base-input-onFocus");
+            console.log(this, e, "base-input-onFocus");
         }
     },
     created() {},
