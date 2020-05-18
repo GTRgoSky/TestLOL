@@ -68,3 +68,8 @@ with open... 系列操作 io
 增加了一些没有统计上的功能
 更新了手动 Vue 项目实践中的 webpack 的打包。
 增加了 Vue 的一些 Demo 示例
+
+2020.05.18
+增加了 vue 的原理实现。
+增加了通过 postMessage/BroadcastChannel 实现的跨域数据通讯和不同 tab 窗体之间的通讯
+增加了 js 权威指南的 demo
