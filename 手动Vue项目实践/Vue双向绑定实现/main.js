@@ -3,29 +3,25 @@ var vm = new MVVM({
 	el: '#mvvm-app',
 	data: {
 		word: 'Hello World!',
-		testOBj: {
-			avc: 333,
+		obj: {
+			ts: {
+				a: 123,
+			},
 		},
-		// fx: {
-		//     a:1,
-		//     b:2,
-		//     c:{asd:3}
-		// },
-		// fff:{aa:4},
-		// f:5
 	},
 	methods: {
 		sayHi: function () {
 			this.word = 'Hi, everybody! i click ';
-			// this.fx = {
-			//     a:666,
-			//     b:2,
-			//     c:{asd:3}
-			// },
+
 			console.log(this);
 		},
-		test() {
-			this.testOBj.avc = 123;
+		changeObj() {
+			// this.obj.name = 'test' + new Date(); // 这种方法不会有双向绑定，因为无法进入劫持逻辑
+			if (this.obj.name) {
+				this.obj.name = 'test2' + new Date();
+				return;
+			}
+			this.obj = { name: 'test' + new Date().valueOf() };
 		},
 	},
 	mounted() {},

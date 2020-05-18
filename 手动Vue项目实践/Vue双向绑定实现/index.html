@@ -13,17 +13,9 @@
     <div id="mvvm-app">
         <input type="text" v-model="word">
         <p>{{word}}</p>
-        <div v-on:click="test">555</div>
-        <p v-html="testOBj.avc"></p>
-        <!-- <input type="text" v-model="fx.a">
-        <p>{{fx.a}}</p>
-        <input type="text" v-model="fx.b">
-        <p>{{fx.b}}</p>
-        <input type="text" v-model="fff.aa">
-        <p>{{fff.aa}}</p>
-        <p>{{f}}</p>
-        <button v-on:click="sayHi">change model</button>
-        <p>{{fx.c.asd}}</p> -->
+        <div v-html="obj.ts.a"></div>
+        <div v-on:click="changeObj">123</div>
+        <p id="ppp" ts="shj" d-ps="sda">{{obj.name}}</p>
     </div>
 
     <script src="../build.js" async></script>
