@@ -55,6 +55,25 @@ Set.prototype.foreach = function (f, context) {
 	}
 };
 
+//判断that是否和调用他的对象相等
+Set.prototype.equals = function (that) {
+	if (this === that) return true;
+
+	if (!(that instanceof Set)) return false;
+
+	if (that.size() != this.size()) return false;
+
+	try {
+		this.foreach(function (v) {
+			if (!that.contains(v)) throw false;
+		});
+		return true;
+	} catch (e) {
+		if (e == false) return false;
+		throw e;
+	}
+};
+
 // 这是一个内部函数，用来将任意的Javascript值和唯一的字符串对应起来
 Set._v2s = function (val) {
 	switch (val) {
@@ -123,6 +142,8 @@ var a = new Set(
  *      @105: [1,2,2,3]
  *  }
  * }
+ *
+ * b['|**objectid**|'] = 104
  */
 console.log(a);
 

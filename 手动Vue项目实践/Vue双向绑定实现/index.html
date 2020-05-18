@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue双向绑定实现</title>
 </head>
+
 <body>
 
     <div id="mvvm-app">
         <input type="text" v-model="word">
         <p>{{word}}</p>
+        <div v-on:click="test">555</div>
+        <p v-html="testOBj.avc"></p>
         <!-- <input type="text" v-model="fx.a">
         <p>{{fx.a}}</p>
         <input type="text" v-model="fx.b">
@@ -25,5 +29,6 @@
     <script src="../build.js" async></script>
 
 </body>
+
 </html>
 <!-- https://www.jianshu.com/p/07ba2b0c8fca -->

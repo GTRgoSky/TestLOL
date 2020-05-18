@@ -38,12 +38,13 @@ b.prototype = {
 function extend(Child, Parent) {
 	function content(obj) {
 		function F() {} // 声明一个构造函数
-		F.prototype = { constructor: F, ...obj }; //将构造函数的原型对象指向obj,且构造函数指向自己
+		F.prototype = obj; //将构造函数的原型对象指向obj,且构造函数指向自己
+		F.prototype.constructor = F;
 		return new F(); // 返回F的实例用于作为子类的原型对象
 	}
 
 	let p = content(Parent.prototype); // 将父类的原型对象传入，得到指向父类原型对象的实例
-
+	// let p = content(new Parent()); // 如果传入的是实例，则会多一层__prop__。因为实例的__prop__才是真正的指向原型对象
 	// 将子类指向实例p，注意这块如果用解构赋值，则其实是p.__proto__指向Parent的原型对象
 	// 引出 实例的__proto__指向原型对象
 	Child.prototype = p;

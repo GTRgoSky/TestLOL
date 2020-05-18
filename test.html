@@ -5,6 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        console.log(1122);
+    </script>
+    <script>
+        window.onload = function () {
+            console.log(666)
+        }
+    </script>
 </head>
 
 <body>
@@ -14,19 +22,23 @@
             <span>target的后代</span>
         </p>
     </div>
-
+    <a href="javascript:alert(new Date())">时间</a>
     <script>
         var target = document.getElementById('target');
         var i = 0
+        //观察DOM树结构发生变化时，做出相应处理的API
         var observe = new MutationObserver(function (mutations, observe) {
             console.log(mutations, observe)
             i++
         });
-        observe.observe(target, { childList: true });
+        observe.observe(target, {
+            childList: true
+        });
         target.appendChild(document.createTextNode('1'));
         target.appendChild(document.createTextNode('2'));
         target.appendChild(document.createTextNode('3'));
-        console.log(i)  
+        console.log(i)
+        target.style.color = 'red';
     </script>
 </body>
 

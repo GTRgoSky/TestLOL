@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="http://10.33.80.115:3010/xr/css/sp.css">
     <style>
-        .sanjiao{
+        .sanjiao {
             width: 0;
             height: 0;
             border: 50px solid transparent;
@@ -16,6 +17,7 @@
         }
     </style>
 </head>
+
 <body>
     <p id="Js"></p>
     <p>自带文案</p>
@@ -29,22 +31,23 @@
         <circle cx="10" cy="10" r="50" fill="red"/>
     </svg> -->
     <script>
-        requestAnimationFrame(function(){
+        requestAnimationFrame(function () {
             console.log(666)
             document.getElementById('rF').innerHTML = 556;
         })
-        function test(e){
+
+        function test(e) {
             e.innerHTML = 557;
             console.log(e.style.width)
         }
-        var fragment = document.createDocumentFragment();//节点碎片
-        for (var i=0; i<6; i++) {
-            var div =document.createElement('div');//创建一个dom节点
-            div.innerHTML = 'index:' + i;//给节点添加内容
-            fragment.appendChild(div);//把创建的节点插入到碎片中
+        var fragment = document.createDocumentFragment(); //节点碎片
+        for (var i = 0; i < 6; i++) {
+            var div = document.createElement('div'); //创建一个dom节点
+            div.innerHTML = 'index:' + i; //给节点添加内容
+            fragment.appendChild(div); //把创建的节点插入到碎片中
             // document.getElementById('sA').appendChild(div);      此种方法出发了5次重排
         }
-        document.getElementById('sA').appendChild(fragment);      
+        document.getElementById('sA').appendChild(fragment);
 
 
         //临时测试
@@ -57,7 +60,7 @@
         // ctx.lineTo(100,10);
         // ctx.stroke();
 
-       
+        //https://www.cnblogs.com/bibiafa/p/9364986.html
     </script>
     <!-- <script src="http://10.33.80.115:3010/xr/js/jq.js"></script> -->
     <!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script> -->
@@ -67,4 +70,5 @@
             console.log('jqgo')
         })</script> -->
 </body>
+
 </html>

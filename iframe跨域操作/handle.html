@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>handel</title>
+</head>
+
+<body>
+    <div>handle</div>
+    <!-- *************tab页间通讯************* -->
+    <script>
+        var funMap = new Map(); // 消息队列
+        var channel3 = new window.BroadcastChannel('channel');
+        channel3.addEventListener('message', (res) => {
+            if (!res.data || !funMap.get(res.data.code)) return;
+            for (let el of funMap.get(res.data.code)) {
+                el(res.data.msg);
+            }
+        });
+
+        function onMessage(code, cb) {
+            if (!funMap.has(code)) {
+                funMap.set(code, [cb]);
+            } else {
+                let arr = funMap.get(code);
+                arr.push(cb);
+                funMap.set(code, arr);
+
+            }
+        }
+
+        onMessage('testcode0', (res => {
+            console.log('testcode0:', res);
+        }));
+
+        onMessage('testcode0', (res => {
+            console.log('testcode000:', res);
+        }));
+
+        onMessage('testcode2', (res => {
+            console.log('testcode2:', res);
+        }))
+    </script>
+    <!-- *************跨域通信************* -->
+    <!-- <script>
+        var channel1 = new window.BroadcastChannel('channel');
+
+        // // 获取推送的数据
+        window.addEventListener("message", function (res) {
+            if (!res.data) return;
+            channel1.postMessage(res.data);
+        }, false);
+
+        function postmsg(data) {
+            const ifr = document.createElement('iframe');
+            // 对方域名的暴露地址
+            ifr.src = "http://192.168.1.105:8112/.index.html?name=iframeHandle";
+            ifr.style.display = 'none';
+            document.body.appendChild(ifr);
+            ifr.onload = function () {
+                ifr.contentWindow.postMessage(data, 'http://192.168.1.105:8112');
+                setTimeout(() => {
+                    document.body.removeChild(ifr);
+                }, 1000)
+            }
+
+        }
+    </script> -->
+</body>
+
+</html>
