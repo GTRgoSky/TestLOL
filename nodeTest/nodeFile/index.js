@@ -80,7 +80,7 @@ function processRequest(request, response) {
 	//我们通过path.extname来获取文件的后缀名。由于extname返回值包含”.”，所以通过slice方法来剔除掉”.”，
 	//对于没有后缀名的文件，我们一律认为是unknown。
 	var ext = path.extname(pathName); // 如localhost:8888/.html?xxxx=sss则ext = .html
-	ext = ext ? ext.slice(1) : 'unknown';
+	ext = ext ? ext.slice(1) : filePath.match(/(\.\S+)$/)[0].substr(1);
 
 	//未知的类型一律用"text/plain"类型
 	var contentType = mime[ext] || 'text/plain';
