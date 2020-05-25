@@ -82,6 +82,11 @@ const router = new VueRouter({
 			name: 'vnode',
 			component: () => import('./comp/vnodemain.vue'),
 		},
+		{
+			path: '/time',
+			name: '/time',
+			component: () => import('./views/fullTimeScreen.vue'),
+		},
 	],
 });
 

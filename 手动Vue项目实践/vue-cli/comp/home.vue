@@ -31,7 +31,7 @@
 <script>
 // import foo from "./foo.vue";
 // import bar from "./bar.vue"
-import { timeFormat } from "wing-time";
+
 import { bus } from "../common/bus";
 export default {
     name: "home",
@@ -67,7 +67,6 @@ export default {
     },
     created() {},
     mounted() {
-        console.log(timeFormat("YYYY-MM-DD hh:mm:ss"), 66666);
         bus.$on("isAlsoGetUserTansInfo", function(status) {
             console.log(1);
         });
