@@ -87,6 +87,12 @@ const router = new VueRouter({
 			name: '/time',
 			component: () => import('./views/fullTimeScreen.vue'),
 		},
+		{
+			// 测试wathcer和computed的执行顺序
+			path: '/watchAndcomputed',
+			name: '/watchAndcomputed',
+			component: () => import('./comp/newVueTest/watchAndcomputed.vue'),
+		},
 	],
 });
 
