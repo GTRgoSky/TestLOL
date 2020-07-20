@@ -17,7 +17,7 @@ const AsyncComponent = () => ({
 	// 加载失败时使用的组件
 	error: require('./views/async/load.vue'),
 	// 展示加载时组件的延时时间。默认值是 200 (毫秒)
-	delay: 200,
+	delay: 0,
 	// 如果提供了超时时间且组件加载也超时了，
 	// 则使用加载失败时使用的组件。默认值是：`Infinity`
 	timeout: 3000,
@@ -35,6 +35,8 @@ Vue.config.errorHandler = function (err, vm, info) {
 	// 只在 2.2.0+ 可用
 	console.error('%c err:' + err, 'background:#000;color:#fff');
 };
+//若不是用CDN引入,则需要给window挂在上Vue
+window.Vue = Vue;
 new Vue({
 	router,
 	store,

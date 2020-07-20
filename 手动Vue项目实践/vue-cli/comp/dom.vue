@@ -9,23 +9,18 @@
 
 <script>
 export default {
-    created(){
-        console.log('dom')
-    },
-    props:{
-        todo:{
-            default:[],
-            type:Array
+    created() {},
+    props: {
+        todo: {
+            default: [],
+            type: Array
         }
     },
-    methods:{
-        test(){
-            console.log('domTest')
-        }
+    methods: {
+        test() {}
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>

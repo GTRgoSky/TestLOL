@@ -59,10 +59,10 @@ export default {
         changeTodo() {
             this.todoT = [2, 1];
             this.$refs.refT.test();
-            console.log(this.$refs.refD);
+            // console.log(this.$refs.refD);
         },
         onFocus(e) {
-            console.log(this, e, "base-input-onFocus");
+            // console.log(this, e, "base-input-onFocus");
         }
     },
     created() {},
@@ -70,7 +70,7 @@ export default {
         bus.$on("isAlsoGetUserTansInfo", function(status) {
             console.log(1);
         });
-        console.log(this.$router.currentRoute, 66);
+        // console.log(this.$router.currentRoute, 66);
     }
 };
 </script>

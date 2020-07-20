@@ -84,16 +84,25 @@ const router = new VueRouter({
 		},
 		{
 			path: '/time',
-			name: '/time',
+			name: 'time',
 			component: () => import('./views/fullTimeScreen.vue'),
 		},
 		{
 			// 测试wathcer和computed的执行顺序
 			path: '/watchAndcomputed',
-			name: '/watchAndcomputed',
+			name: 'watchAndcomputed',
 			component: () => import('./comp/newVueTest/watchAndcomputed.vue'),
 		},
+		{
+			path: '/lifecycle',
+			name: 'lifecycle',
+			component: () => import('./views/lifecycle.vue'),
+		},
 	],
+});
+
+router.beforeEach((to, from, next) => {
+	next();
 });
 
 export default router;

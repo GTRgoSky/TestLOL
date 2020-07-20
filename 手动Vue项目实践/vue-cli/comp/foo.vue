@@ -18,8 +18,7 @@ export default {
     beforeCreate() {},
     created() {},
     mounted() {
-        console.log("foo");
-        console.log(this.$router.currentRoute);
+        // console.log(this.$router.currentRoute);
         // setTimeout(() => {
         //     console.log('time')
         // }, 1000);
@@ -29,7 +28,7 @@ export default {
     activated() {
         //激活
         this.testData++;
-        console.log("ac", this.testData);
+        // console.log("ac", this.testData);
     },
     deactivated() {
         //失去激活
