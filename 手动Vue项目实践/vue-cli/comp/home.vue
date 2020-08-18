@@ -13,9 +13,9 @@
         </keep-alive>
         <p ref="refT" is="dom" :todo="todoT">
             <template slot-scope="slotProps">
-                <a :href="'http://www.baidu.com?id='+slotProps.todo">
-                    <p>3123 and {{slotProps.todo}}</p>
-                </a>
+                <!-- <a :href="'http://www.baidu.com?id='+slotProps.todo"> -->
+                <p>3123 and {{slotProps.todo}}</p>
+                <!-- </a> -->
             </template>
         </p>
         <h1 slot="header">About Me</h1>

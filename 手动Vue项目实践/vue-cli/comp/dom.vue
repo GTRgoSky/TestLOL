@@ -1,8 +1,9 @@
 <template>
     <div>
         dom
-        <div v-for="item in todo">
+        <div v-for="(item, index, key) in todo">
             <slot v-bind:todo="item"></slot>
+            test: {{item}}-{{index}}-{{key}}
         </div>
     </div>
 </template>

@@ -14,7 +14,7 @@ export default {
     },
     beforeCreate() {
         // console.log(this.getData); // -> undefined 无法访问到data
-        // this.getData = '修改看是否有效'
+        // this.getData = '修改看是否有效' // 无效
         // console.log(Object.assign({}, this));
     },
     created() {
