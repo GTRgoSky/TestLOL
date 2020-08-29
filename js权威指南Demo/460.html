@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文档加载完毕调用</title>
+    <script>
+        var whenReady = (function () {
+            var funcs = []; // 获得事件时要运行的函数list
+            var ready = false; // 当触发事件处理程序时。变为true
+
+            //当文档准备就绪时，调用事件处理程序
+            function handler(e) {
+                console.log(e);
+                //已经运行过一次，只需要返回
+                if (ready) return;
+
+                //如果发生readystatechange事件
+                //但是其状态不是“complate”的话，那么文档尚未准备好。
+                if (e.type === "readystatechange" && document.readyState !== 'complete') return;
+
+                //运行所有注册函数
+                // 注意每次都要计算funcs的长度
+                //防止这些函数的调用可能会导致注册更多的函数。
+                for (let i = 0; i < funcs.length; i++) {
+                    funcs[i].call(document);
+                };
+
+                //现在设置ready为true，并移除所有函数
+                ready = true;
+                funcs = null;
+            }
+
+            //为接收到的任何事件注册处理程序
+            if (document.addEventListener) {
+                // 当初始的 HTML 文档被完全加载和解析完成之后，DOMContentLoaded 事件被触发，而无需等待样式表、图像和子框架的完全加载
+                // 会等待非async的js
+                document.addEventListener('DOMContentLoaded', handler, false);
+                // 下面这两个都会等待img,并在async情况下也等待
+                /**
+                 * document.readyState == 
+                 * document有readyState属性来描述document的loading状态，readyState的改变会触发readystatechange事件.
+                    loading 文档仍然在加载
+                    interactive 文档结束加载并且被解析，但是想图片，样式，frame之类的子资源仍在加载
+                    complete 文档和子资源已经结束加载，该状态表明将要触发load事件。
+                 **/
+                document.addEventListener('readystatechange', handler, false);
+                // 图片都要等待
+                window.addEventListener('load', handler, false)
+            }
+
+            // 返回whenReady函数
+            return function whenReady(f) {
+                if (ready) f.call(document); //准备完毕运行
+                else funcs.push(f);
+            }
+        })();
+
+        // whenReady(fun1)...whenReady(fun9) => funcs = [1...9]
+        // 等到执行完成 全部执行
+    </script>
+    <script>
+        // 监听其他页面的localStorage变化*同源
+        window.addEventListener("storage", function (e) {
+            console.log(e);
+            if (!e) {
+                e = window.event;
+            }
+            var str = "key: " + e.key +
+                "\nnewValue: " + e.newValue +
+                "\noldValue: " + e.oldValue +
+                "\nurl: " + e.url +
+                "\nstorageArea: " + e.storageArea;
+            console.log(str)
+        });
+    </script>
+</head>
+
+<body>
+    <img src="http://img4.imgtn.bdimg.com/it/u=2041233934,1626963612&fm=26&gp=0.jpg" alt="">
+    <script crossorigin="anonymous" integrity="sha384-+jvb+jCJ37FkNjPyYLI3KJzQeD8pPFXUra3B/QJFqQ3txYrUPIP1eOfxK4h3cKZP"
+        src="https://lib.baomitu.com/vue/2.6.11/vue.js" async></script>
+</body>
+
+</html>

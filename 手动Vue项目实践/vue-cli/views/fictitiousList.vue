@@ -1,5 +1,10 @@
 <template>
-	<div class="fictitious-list" @scroll="viewScroll" @click="viewClick">
+	<div
+		class="fictitious-list"
+		@scroll="viewScroll"
+		v-mousewheel="mousewheel"
+		@click="viewClick"
+	>
 		<div
 			class="viewpoint-parent"
 			:style="{ height: contentHeight }"
@@ -26,6 +31,7 @@
 </template>
 
 <script>
+import normalizeWheel from 'normalize-wheel';
 export default {
 	data() {
 		let data = [];
@@ -40,6 +46,28 @@ export default {
 			contentHeightT: 0,
 		};
 	},
+	directives: {
+		mousewheel: {
+			bind(el, binding) {
+				const isFirefox =
+					typeof navigator !== 'undefined' &&
+					navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+				function mousewheel(element, callback) {
+					if (element && element.addEventListener) {
+						element.addEventListener(
+							isFirefox ? 'DOMMouseScroll' : 'mousewheel',
+							function (event) {
+								const normalized = normalizeWheel(event);
+								callback &&
+									callback.apply(this, [event, normalized]);
+							}
+						);
+					}
+				}
+				mousewheel(el, binding.value);
+			},
+		},
+	},
 	mounted() {
 		// 计算可是区域
 		this.calculateVisibleData();
@@ -51,13 +79,16 @@ export default {
 		},
 	},
 	methods: {
+		mousewheel(event, data) {
+			console.log(event, data);
+		},
 		viewScroll() {
 			let scrollTop = this.$el.scrollTop;
-			console.log(scrollTop);
+			// console.log(scrollTop);
 			this.calculateVisibleData(scrollTop);
 		},
 		viewClick() {
-			console.log(this.$el.clientHeight);
+			// console.log(this.$el.clientHeight);
 		},
 		calculateVisibleData(scrollTop = 0) {
 			// 根据偏移量，计算可见数据

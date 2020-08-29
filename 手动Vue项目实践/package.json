@@ -67,6 +67,7 @@
 		"friendly-errors-webpack-plugin": "^1.7.0",
 		"fs": "0.0.1-security",
 		"mini-css-extract-plugin": "^0.4.4",
+		"normalize-wheel": "^1.0.1",
 		"request": "^2.87.0",
 		"vconsole": "^3.1.0",
 		"vue-json-viewer": "^2.2.1",

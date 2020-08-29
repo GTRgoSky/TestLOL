@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<link href="./test.css" rel="stylesheet" id="testscss" type="text/css" />
+	<style>
+		body,
+		html {
+			margin: 0;
+		}
+
+		.contet {
+			margin-top: 100px;
+			margin-left: 100px;
+			width: 500px;
+			height: 500px;
+			position: relative;
+			overflow-y: scroll;
+		}
+
+		#test {
+			height: 800px;
+			border: 10px solid;
+			margin: 10px;
+			padding: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="contet" id="test1">
+		<div contenteditable="" spellcheck="true" id="edit"></div>
+		<div id="test">
+			123
+		</div>
+		<div class="stylecss">9999</div>
+		<input type="text" name="lala" id="lala" onkeydown="test(event)" />
+		<iframe id="hahah"> </iframe>
+	</div>
+	<script>
+		/**
+			a.offsetHeigth = 800;
+		*/
+		var a = document.getElementById('test');
+		var b = document.getElementById('test1');
+		console.log(
+			a.offsetTop,
+			a.offsetHeight,
+			a.clientHeight,
+			a.scrollHeight,
+			a.scrollTop
+		);
+		// 10 840 820 820 0
+		// 因为test1是定位元素所以所有值针对test1：10 -> margin导致；840 -》40是padding和boder导致，不包括magin；820-》20是padding导致；同上滚动元素的scroll = client；0滚动元素没滚动条永远为0
+		console.log(
+			b.offsetTop,
+			b.offsetHeight,
+			b.clientHeight,
+			b.scrollHeight,
+			b.scrollTop
+		);
+		// 100 500 500 860 0
+		// 所有值针对文档坐标（body）：100 -> margin导致；500 -》高度；同上；内涵滚动元素所以高度计算包括所有子元素最极限的高度；因为没滚动，随滚动条变化
+		var c = document.getElementById('hahah');
+		a.addEventListener('mousewheel', function (e) {
+			console.log(e.wheelDelta);
+			// e.preventDefault() 阻止滚动效果
+		})
+	</script>
+
+	<script>
+		document
+			.getElementById('lala')
+			.addEventListener('keypress', function (e) {
+				// 阻止文字输入
+				e.returnValue = false;
+				return false;
+			});
+
+		document
+			.getElementById('edit')
+			.addEventListener('input', function (e) {
+				console.log(this.innerHTML);
+			});
+
+		function test(e) {
+			console.log(e);
+		}
+	</script>
+
+	<script>
+		// 判断是拼音输入不走input
+		// 拼音输入开始
+		// el.addEventListener('compositionstart', function() {
+		// });
+		// 拼音输入结束
+		// el.addEventListener('compositionend', function() {
+		// });
+	</script>
+
+	<script type="ceshi" id="ceshiscript">
+		alert(123)
+		</script>
+</body>
+
+</html>
