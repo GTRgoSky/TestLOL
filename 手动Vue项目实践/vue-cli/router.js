@@ -82,7 +82,34 @@ const router = new VueRouter({
 			name: 'vnode',
 			component: () => import('./comp/vnodemain.vue'),
 		},
+		{
+			path: '/time',
+			name: 'time',
+			component: () => import('./views/fullTimeScreen.vue'),
+		},
+		{
+			// 测试wathcer和computed的执行顺序
+			path: '/watchAndcomputed',
+			name: 'watchAndcomputed',
+			component: () => import('./comp/newVueTest/watchAndcomputed.vue'),
+		},
+		{
+			// 测试生命周期
+			path: '/lifecycle',
+			name: 'lifecycle',
+			component: () => import('./views/lifecycle.vue'),
+		},
+		{
+			// 事件处理
+			path: '/event',
+			name: 'event',
+			component: () => import('./views/event.vue'),
+		},
 	],
+});
+
+router.beforeEach((to, from, next) => {
+	next();
 });
 
 export default router;

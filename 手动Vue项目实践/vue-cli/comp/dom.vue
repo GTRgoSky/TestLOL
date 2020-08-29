@@ -1,31 +1,27 @@
 <template>
     <div>
         dom
-        <div v-for="item in todo">
+        <div v-for="(item, index, key) in todo">
             <slot v-bind:todo="item"></slot>
+            test: {{item}}-{{index}}-{{key}}
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    created(){
-        console.log('dom')
-    },
-    props:{
-        todo:{
-            default:[],
-            type:Array
+    created() {},
+    props: {
+        todo: {
+            default: [],
+            type: Array
         }
     },
-    methods:{
-        test(){
-            console.log('domTest')
-        }
+    methods: {
+        test() {}
     }
-}
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>

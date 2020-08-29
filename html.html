@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            position: relative;
+        }
+
+        table {
+            position: absolute;
+        }
+
+        .t1 tbody {
+            visibility: hidden;
+        }
+
+        .t2 thead {
+            visibility: hidden;
+        }
+
+        .t2 .t11 {
+            visibility: hidden;
+        }
+
+        .t3 thead {
+            visibility: hidden;
+        }
+
+        .t3 .td {
+            visibility: hidden;
+        }
+
+        .t3 .t11 {
+            visibility: initial;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="t1">
+        <thead>
+            <th></th>
+            <th>行列1</th>
+            <th>行列2</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="t11">行列1-0</td>
+                <td>行列1-1</td>
+                <td>行列1-2</td>
+            </tr>
+            <tr>
+                <td class="t11">-0</td>
+                <td>行列2-1</td>
+                <td>行列2-2</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="t2">
+        <thead>
+            <th></th>
+            <th>行列1</th>
+            <th>行列2</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="t11">行列1-0</td>
+                <td>行列1-1</td>
+                <td>行列1-2</td>
+            </tr>
+            <tr>
+                <td class="t11">行列2-0</td>
+                <td>行列2-1</td>
+                <td>行列2-2</td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="t3">
+        <thead>
+            <th></th>
+            <th>行列1</th>
+            <th>行列2</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="t11">行列1-0</td>
+                <td>行列1-1</td>
+                <td>行列1-2</td>
+            </tr>
+            <tr>
+                <td class="t11">行列2-0</td>
+                <td>行列2-1</td>
+                <td>行列2-2</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>

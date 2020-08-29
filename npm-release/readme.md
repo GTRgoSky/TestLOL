@@ -1,28 +1,31 @@
 自用时间管理
-https://segmentfault.com/a/1190000007665813
-https://juejin.im/post/5bdfa46951882516c94e5b26
-npm 
+npm
 
 timeFormat (str)
-传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss 获取当前时间
+传入 YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss 获取当前时间
 
 timeSetFormat (date, str)
-格式化导入时间。第一参数传入new Date()可以解析的时间 第二参数传入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
+格式化导入时间。第一参数传入 new Date()可以解析的时间 第二参数传入 YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss
 
 getTimeFormat (str, format)
 获取时间对应值
 str: YYYY-MM-DD hh:mm:ss 格式 或者时间戳格式
-format: YYYY或者MM或者 YYYY-MM格式 得到对应格式
+format: YYYY 或者 MM 或者 YYYY-MM 格式 得到对应格式
 
 whichType(v)
 判断对象类型
 
 timeCompare
-比较2个时间大小(v1 > v2 返回 1 ； v1 == v2 返回 0 ； v1 < v2 返回 -1)
-参数格式最好为入YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss 否则可能引起未知错误
+比较 2 个时间大小(v1 > v2 返回 1 ； v1 == v2 返回 0 ； v1 < v2 返回 -1)
+参数格式最好为入 YYYY-MM-DD 或者 YYYY-MM-DD hh:mm:ss 否则可能引起未知错误
 
+htmlStr
+处理 html 特殊字符串
 
-使用了browserify进行commonJs的转换
-使用了gulp-webserver进行gulp服务启动
-关于babel参考
-https://segmentfault.com/a/1190000019846400
+```javascript
+// 使用举例：
+// 直接引入对应方法
+import { timeFormat } from 'wing-time';
+timeFormat('YYYY-MM-DD hh:mm:ss');
+// => 当前 年月日 时分秒
+```

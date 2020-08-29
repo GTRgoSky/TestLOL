@@ -32,7 +32,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.$listeners, "base-input");
+        // console.log(this.$listeners, "base-input");
     }
 };
 </script>

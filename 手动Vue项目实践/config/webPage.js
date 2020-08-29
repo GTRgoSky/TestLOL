@@ -120,11 +120,12 @@ const singlePage = {
 			vue$: 'vue/dist/vue.js', //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
 		},
 	},
-	externals: {
-		vue: 'Vue',
-		'vue-router': 'VueRouter',
-		vuex: 'Vuex',
-	},
+	// 排除引入
+	// externals: {
+	// 	vue: 'Vue',
+	// 	'vue-router': 'VueRouter',
+	// 	vuex: 'Vuex',
+	// },
 	// 输出文件性能检查配置
 	performance: {
 		// hints: 'warning', // 有性能问题时输出警告
@@ -232,11 +233,11 @@ const manyPage = {
 			vue$: 'vue/dist/vue.js', //vue文件地址配置(将 import vue 替换成 import vue/dist/vue.js)
 		},
 	},
-	externals: {
-		vue: 'Vue',
-		'vue-router': 'VueRouter',
-		vuex: 'Vuex',
-	},
+	// externals: {
+	// 	vue: 'Vue',
+	// 	'vue-router': 'VueRouter',
+	// 	vuex: 'Vuex',
+	// },
 	performance: {
 		maxAssetSize: 200000, // 最大文件大小 (单位 bytes)
 		maxEntrypointSize: 400000, // 最大入口文件大小 (单位 bytes)

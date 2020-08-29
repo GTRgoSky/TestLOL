@@ -13,9 +13,9 @@
         </keep-alive>
         <p ref="refT" is="dom" :todo="todoT">
             <template slot-scope="slotProps">
-                <a :href="'http://www.baidu.com?id='+slotProps.todo">
-                    <p>3123 and {{slotProps.todo}}</p>
-                </a>
+                <!-- <a :href="'http://www.baidu.com?id='+slotProps.todo"> -->
+                <p>3123 and {{slotProps.todo}}</p>
+                <!-- </a> -->
             </template>
         </p>
         <h1 slot="header">About Me</h1>
@@ -31,7 +31,7 @@
 <script>
 // import foo from "./foo.vue";
 // import bar from "./bar.vue"
-import { timeFormat } from "wing-time";
+
 import { bus } from "../common/bus";
 export default {
     name: "home",
@@ -59,19 +59,18 @@ export default {
         changeTodo() {
             this.todoT = [2, 1];
             this.$refs.refT.test();
-            console.log(this.$refs.refD);
+            // console.log(this.$refs.refD);
         },
         onFocus(e) {
-            console.log(this, e, "base-input-onFocus");
+            // console.log(this, e, "base-input-onFocus");
         }
     },
     created() {},
     mounted() {
-        console.log(timeFormat("YYYY-MM-DD hh:mm:ss"), 66666);
         bus.$on("isAlsoGetUserTansInfo", function(status) {
             console.log(1);
         });
-        console.log(this.$router.currentRoute, 66);
+        // console.log(this.$router.currentRoute, 66);
     }
 };
 </script>
