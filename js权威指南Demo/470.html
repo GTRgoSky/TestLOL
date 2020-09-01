@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖放</title>
+    <style>
+        #clock {
+            background-color: #ddf;
+            border: solid black 2px;
+            border-radius: 10px;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .inhere {
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>从时钟中拖出时间戳</h1>
+    <div id="clock"></div>
+    <!-- 时间放在这里 -->
+    <textarea name="" id="" cols="60" rows="20"></textarea>
+    <div class="inhere" id='inhere' draggable="true"></div>
+    <div class="inhere" id="target">target</div>
+
+    <script>
+        var clock = document.getElementById("clock");
+        var icon = new Image();
+        icon.src = 'http://img4.imgtn.bdimg.com/it/u=2041233934,1626963612&fm=26&gp=0.jpg';
+
+        // 每分钟显示一次时间
+        function displayTime() {
+            var now = new Date();
+            var hrs = now.getHours(),
+                mins = now.getMinutes();
+            if (mins < 10) mins = "0" + mins;
+            clock.innerHTML = hrs + ":" + mins;
+            setTimeout(displayTime, 60 * 1000);
+        }
+        displayTime();
+
+        //使时钟可以拖动
+        clock.draggable = true;
+
+        // 设置拖动事件
+        clock.ondragstart = function (event) {
+            var event = event;
+
+            //拖放API
+            var dt = event.dataTransfer;
+            console.log(dt);
+
+            // 告诉浏览器在拖动什么
+            /**
+                text/plain
+                text/html
+                text/xml
+                text/uri-list
+            */
+            dt.setData("Text", Date() + '\n');
+
+
+            // 用图标来表示时间戳
+            // 没有这个代码则用文本图像来作为拖动值
+            if (dt.setDragImage) dt.setDragImage(icon, 0, 0);
+        }
+
+
+        // 拖拽文件上传(增加下面2个后拖拽时间失效)
+        // document.addEventListener("drop", function (e) { //放置
+        //     e.preventDefault();
+        // })
+        // document.addEventListener("dragover", function (e) { //拖来拖去
+        //     e.preventDefault();
+        // });
+        // document.addEventListener("dragleave", function (e) { //拖后放
+        //     e.preventDefault();
+        // })
+        // document.addEventListener("dragenter", function (e) { //拖进
+        //     e.preventDefault();
+        // });
+
+        // 放置区域时触发
+        document.getElementById('inhere').ondrop = (e) => {
+            e.preventDefault();
+            console.log(e.dataTransfer)
+
+            var files = e.dataTransfer.files;
+            console.log(files)
+            document.getElementById('inhere').innerText = 'finish'
+        }
+
+        document.getElementById('inhere').addEventListener('dragstart', (event) => {
+            var event = event;
+            var dt = event.dataTransfer;
+            dt.setData("text/plain", Date() + '\n');
+            if (dt.setDragImage) dt.setDragImage(icon, 0, 0);
+        })
+
+        var target = document.getElementById('target');
+        target.addEventListener('drop', function (e) {
+            console.log(e, e.dataTransfer);
+            console.log(e.dataTransfer.getData("text/plain"))
+            Array.prototype.slice.call(e.dataTransfer.items).map(el => {
+                // 获取数据详情
+                console.log(el, el.type)
+            })
+            e.preventDefault();
+        })
+        target.addEventListener("dragover", function (e) { //拖来拖去
+            e.preventDefault();
+        });
+        target.addEventListener("dragenter", function (e) { //拖进
+            e.preventDefault();
+            console.log(e);
+        });
+    </script>
+</body>
+
+</html>

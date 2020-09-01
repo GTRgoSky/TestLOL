@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .mouse {
+            height: 200px;
+            width: 200px;
+            background: red;
+        }
+
+        .mouse2 {
+            height: 200px;
+            width: 200px;
+            background: green;
+        }
+
+        .mouse3 {
+            height: 200px;
+            width: 200px;
+            background: blue;
+        }
+
+        .draggable {
+            height: 200px;
+            width: 200px;
+            background: burlywood;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <input type="text" onblur="test('‘onblur’')" onchange="test2(event,3)">
+        <input type="text" onfocus="test('‘onfocus’')" onchange="test2(event,4)">
+        <input type="text" id="textinput">
+        <input type="text" id="keyAndchar">
+        <input type="text" id="invalid" oninput="validateComments(this)" required>
+        <input id="locationa">
+        <input type="submit" value="提交">
+    </form>
+    <div class="mouse" id="mouse"></div>
+    <div class="mouse2" id="mouse2"></div>
+    <div class="mouse3" id="mouse3"></div>
+    <div class="draggable" draggable="true" id="draggable"></div>
+    <div onclick="test2()" id="clickd">点击顺序</div>
+    <script>
+        // 会取消掉html注册
+        document.getElementById('clickd').onclick = function (e) {
+            console.log('clickd')
+        }
+        // 这种事件处理函数的注册方式可以直接获取到form中对应id的dom
+        function test(t) {
+            console.log('test', locationa, t)
+            localStorage.setItem('test', 666)
+        }
+
+        // onchange只有在失去焦点时触发
+        function test2(e, t) {
+            console.log('test2', e, t)
+        }
+
+        document.getElementById('textinput').addEventListener('textInput', (e) => {
+            console.log('textinput', e)
+        })
+
+        document.getElementById('keyAndchar').addEventListener('char', (e) => {
+            console.log('keyAndchar', e)
+        })
+
+        // 验证
+        document.getElementById('invalid').addEventListener('invalid', (e) => {
+            console.log(e);
+        })
+
+        function validateComments(vm) {
+            vm.setCustomValidity('laji')
+        }
+
+
+        let mouse = document.getElementById('mouse');
+        mouse.addEventListener('mousedown', (e) => {
+            console.log('mousedown', e)
+        })
+        let mouse2 = document.getElementById('mouse2');
+        mouse2.addEventListener('mouseover', (e) => {
+            console.log('mouseover', e)
+        })
+        let mouse3 = document.getElementById('mouse3');
+        mouse3.addEventListener('mouseout', (e) => {
+            console.log('mouseout', e)
+        })
+
+        // 拖拽
+        document.getElementById('draggable').addEventListener('drag', (e) => {
+            console.log(e)
+        })
+
+        // 禁用上下文
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        })
+        // 阻止滚轮
+        document.addEventListener('mousewheel', (e) => {
+            // e.preventDefault();
+            console.log(e.wheelDelta, e)
+        });
+        // 监听其他页面的localStorage变化*同源
+        window.addEventListener("storage", function (e) {
+            console.log(e);
+            if (!e) {
+                e = window.event;
+            }
+            var str = "key: " + e.key +
+                "\nnewValue: " + e.newValue +
+                "\noldValue: " + e.oldValue +
+                "\nurl: " + e.url +
+                "\nstorageArea: " + e.storageArea;
+            console.log(str)
+        });
+        // 离开前
+        // window.addEventListener('beforeunload', (e) => {
+        //     console.log(e);
+        //     alert(123);
+        // })
+    </script>
+</body>
+
+</html>

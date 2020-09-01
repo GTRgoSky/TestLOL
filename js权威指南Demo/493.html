@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <input type="file" name="" id="file">
+    <script>
+        var a = new XMLHttpRequest();
+        // a.open('GET', 'http://localhost:3010/qwzn?name=472');
+        // a.setRequestHeader('Content-Type', 'text/html; charset=UTF-8')
+        // a.onreadystatechange = function () {
+        //     if (a.readyState == 4) {
+        //         console.log(a.responseText);
+        //         document.getElementById('app').innerHTML = a.responseText
+        //     }
+        // };
+        a.open('POST', 'http://localhost:3010/qwzn?name=472')
+
+        document.getElementById('file').addEventListener('change', function () {
+            var file = this.files[0];
+            a.send(file);
+        })
+    </script>
+</body>
+
+</html>

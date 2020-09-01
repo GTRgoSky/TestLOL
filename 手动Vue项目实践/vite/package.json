@@ -1,15 +1,15 @@
 {
-	"name": "vites",
-	"version": "1.0.0",
-	"description": "",
-	"main": "main.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"vite": "^0.3.2"
-	}
+  "name": "vite",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.0.0-rc.1"
+  },
+  "devDependencies": {
+    "vite": "^1.0.0-rc.1",
+    "@vue/compiler-sfc": "^3.0.0-rc.1"
+  }
 }
