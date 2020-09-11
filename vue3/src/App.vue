@@ -7,6 +7,7 @@
         <router-link to="/">Home</router-link>
         <router-link to="/composition">Contact</router-link>
         <router-link to="/provideAndInject">provideAndInject</router-link>
+        <router-link to="/ref">ref</router-link>
     </div>
     <router-view />
 </template>

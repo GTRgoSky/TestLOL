@@ -1,16 +1,18 @@
 <!-- MyBook.vue -->
 <template>
-    <div @click="add">1234</div>
+    <div @click="add">globalTest:{{globalTest}}</div>
 </template>
 
 <script>
 // import { reactive } from "vue";
 export default {
-    mounted() {},
+    mounted() {
+        console.log(this.globalTest);
+    },
     setup() {
         // expose to template
         function add() {
-            console.log(this, this.globalTest);
+            console.log(this.globalTest);
         }
         return {
             add,

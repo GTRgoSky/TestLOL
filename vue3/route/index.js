@@ -20,6 +20,10 @@ const router = createRouter({
 			path: '/provideAndInject',
 			component: provideAndInject,
 		},
+		{
+			path: '/ref',
+			component: () => import('../src/components/ref.vue'),
+		},
 	],
 });
 

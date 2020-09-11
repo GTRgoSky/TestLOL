@@ -1,0 +1,6 @@
+{
+    "presets": ["env"],
+    "parserOpts": { // 这些 plugin 允许 Babel 解析特定类型的语法(不转译)。
+        "plugins": ["jsx", "flow"]
+    }
+}

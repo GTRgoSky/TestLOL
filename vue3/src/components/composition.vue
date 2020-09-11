@@ -31,6 +31,8 @@ import {
     defineAsyncComponent,
 } from "vue";
 // import HelloWorld from "./HelloWorld.vue";
+// onRenderTracked // 渲染跟踪
+// onRenderTriggered - // 检查哪个依赖性导致组件重新渲染
 export default {
     components: {
         HelloWorld: defineAsyncComponent({
@@ -97,6 +99,13 @@ export default {
         // watchEffect 应该接收一个应用预期副作用 (这里即设置 innerHTML) 的函数
         // 副作用：在 DOM 当中渲染内容会被视为一种“副作用
         // state.count 会在首次执行后作为依赖被追踪。当 state.count 未来发生变更时，里面这个函数又会被重新执行。
+        // watchEffect 在组件更新后执行副作用。
+        /*第二个参数：
+            flush： post-更新后执行，sync同步执行，pre-更新前执行
+            // 下面的 仅在开发模式下生效
+            onTrack () => void - 当一个 reactive 对象属性或一个 ref 作为依赖被追踪时
+            onTrigger () => void 依赖项变更导致副作用被触发时
+        */
         watchEffect(() => {
             let str = `count is ${state.count}`;
             if (document.getElementById("test"))
