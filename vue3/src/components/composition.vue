@@ -116,12 +116,11 @@ export default {
             state.count++;
             useFolder.createFolder(8);
             useFolder.clickBtnAndHandle();
-            //如果这样操作会改变_obj的值 影响 _obj2
+            // 这样操作会改变_obj的值 影响 _obj2
             state._obj.b.c = { c: 111 };
-            // 如果如下操作不影响_obj  不影响 _obj2
+            // 如下操作不影响_obj  不影响 _obj2
             // state._obj = { c: 111 };
-            // push, [0] = xxx, [1].a = xxx, splice, pop等array方法都无效
-            state._array = [1, 2, 4];
+            state._array.push(666);
             // _array2.value.push(123);
             _array2.value = [1, 2, 3];
             userParam.add();
