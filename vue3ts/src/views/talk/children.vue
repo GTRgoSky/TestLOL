@@ -1,13 +1,18 @@
 <!-- children.vue -->
 <template>
-    <h1>{{children}}</h1>
-    <p>{{childProp}}</p>
+    <h1>{{ children }}</h1>
+    <p>{{ childProp }}</p>
     <button @click="changeParent">点我修改父级数据</button>
     <grandson :grandsonProp="attrProp"></grandson>
 </template>
 
 
 <script lang="ts">
+/* eslint-disable */
+interface ChildProp {
+    a: number;
+    [propName: string]: any;
+}
 import { ref, defineComponent, toRef } from "vue";
 import grandson from "./grandson.vue";
 export default defineComponent({
@@ -22,7 +27,7 @@ export default defineComponent({
     setup(prop, context) {
         const children = ref("children");
         // 为了修改prop需要先将对应字段转为ref
-        const getP = toRef(prop.childProp, "a");
+        const getP = toRef(prop.childProp as ChildProp, "a");
         // 修改父级数据
         function changeParent(): void {
             context.emit("setprop", ++getP.value, "a");

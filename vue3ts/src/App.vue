@@ -1,12 +1,5 @@
 <template>
-    <div id="app">
-        <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-        <div>
-            <router-link to="/communication">communication</router-link>
-        </div>
-        <router-view></router-view>
-        <!-- <Home msg="Welcome to Your Vue.js + TypeScript App" /> -->
-    </div>
+    <router-view></router-view>
 </template>
 
 <script lang="ts">
@@ -21,12 +14,19 @@ export default defineComponent({
 </script>
 
 <style>
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
+    width: 100%;
+    height: 100%;
 }
 </style>

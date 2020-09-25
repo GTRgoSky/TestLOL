@@ -1,18 +1,19 @@
 <template>
     <div id="test">666</div>
     <teleport to="#teleportTemplate">我是一个插入的底部</teleport>
-    <div>复用API：ref: {{newFolderName}}</div>
-    <div>newFolderObj: {{newFolderObj}}</div>
-    <div>newFolderArray: {{newFolderArray}}</div>
-    <div>newFolderObj2: {{newFolderObj2}}</div>
-    <div>newFolderObj3: {{newFolderObj3}}</div>
-    <div>reactive_obj: {{state._obj}}</div>
-    <div>reactive_obj2: {{state._obj2}}</div>
-    <div>reactive_array {{state._array}}</div>
-    <div>_array2: {{_array2}}</div>
-    <button
-        @click="increment"
-    >Count is: {{ state.count }}, double is: {{ state.double }}, function is {{ket}}</button>
+    <div>复用API：ref: {{ newFolderName }}</div>
+    <div>newFolderObj: {{ newFolderObj }}</div>
+    <div>newFolderArray: {{ newFolderArray }}</div>
+    <div>newFolderObj2: {{ newFolderObj2 }}</div>
+    <div>newFolderObj3: {{ newFolderObj3 }}</div>
+    <div>reactive_obj: {{ state._obj }}</div>
+    <div>reactive_obj2: {{ state._obj2 }}</div>
+    <div>reactive_array {{ state._array }}</div>
+    <div>_array2: {{ _array2 }}</div>
+    <button @click="increment">
+        Count is: {{ state.count }}, double is: {{ state.double }}, function is
+        {{ ket }}
+    </button>
     <Suspense>
         <template #default>
             <HelloWorld />
@@ -73,22 +74,6 @@ export default {
 
         const _array2 = ref([1, { a: 2 }]);
 
-        // watch(
-        //     [() => state._array, _array2],
-        //     [
-        //         (n, o) => {
-        //             console.log("_array", n, o);
-        //         },
-        //         (n, o) => {
-        //             console.log("_array2", n, o);
-        //         },
-        //     ]
-        // );
-
-        // watch(_array2, (n, o) => {
-        //     console.log("_array2", n, o);
-        // });
-
         const useFolder = useCreateFolder();
         const userParam = userParams(state);
 
@@ -138,6 +123,18 @@ export default {
             ...useFolder,
             ...userParam,
         };
+
+        // watch(
+        //     [() => state._array, _array2],
+        //     [
+        //         (n, o) => {
+        //             console.log("_array", n, o);
+        //         },
+        //         (n, o) => {
+        //             console.log("_array2", n, o);
+        //         },
+        //     ]
+        // );
     },
 };
 
