@@ -1,6 +1,12 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHashHistory, RouteRecordRaw, Router } from 'vue-router'
+import { App } from 'vue';
 import apiRoute from './apiRoute';
 import Home from '../views/Home.vue';
+declare module "vue" {
+  interface ComponentCustomProperties { // 配置接口
+    $router: Router;
+  }
+}
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
@@ -35,9 +41,12 @@ const routes: Array<RouteRecordRaw> = [
   }
 ]
 
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes
-})
 
-export default router
+export default function (app: App): void {
+  const router = createRouter({
+    history: createWebHashHistory(),
+    routes
+  });
+  app.use(router)
+  app.config.globalProperties.$router = router
+}

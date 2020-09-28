@@ -17,6 +17,11 @@ const apiRoute = function (Main: Component): Array<RouteRecordRaw> {
                     path: 'computed',
                     name: 'computed',
                     component: () => import('../views/api/computed.vue')
+                },
+                {
+                    path: 'Ref',
+                    name: 'Ref',
+                    component: () => import('../views/api/ref.vue')
                 }
             ]
 

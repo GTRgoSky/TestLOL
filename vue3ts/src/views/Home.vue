@@ -6,6 +6,7 @@
             <router-link to="/communication">父子三代传值</router-link>
             <router-link to="/api/watch">watch</router-link>
             <router-link to="/api/computed">computed</router-link>
+            <router-link to="/api/Ref">Ref</router-link>
         </div>
         <div class="content">
             <router-view></router-view>
