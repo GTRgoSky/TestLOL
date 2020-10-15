@@ -1,10 +1,10 @@
-#输入与输出
-'''
+# 输入与输出
+"""
 print('The quick brown fox', 'jumps over', 'the lazy dog')
 print('加法：', 100 + 300, '乘法：', 1024*768)
 name = input('请输入一个姓名：')
 print('hello,',name)
-'''
+"""
 
 # \一般用于转义，如果长字符串不进行转义可以写在r'内部（示例如下）
 """
@@ -15,7 +15,7 @@ line2
 line3''')  
 """
 
-#布尔值(请注意大小写)
+# 布尔值(请注意大小写)
 """
 print(3 > 2, True and True, True and False, 5 > 3 and 3 > 1, 
 3 < 2 and 1 > 0, 1 > 2 or 2 > 1, 1 < 0 or 2 < 1, '\n')
@@ -29,7 +29,7 @@ else:
     print('you are an adult man')
 """
 
-#数组
+# 数组
 """
 classmates = ['Monday', 'Tuesday', 'wednesday']
 ###增加到数组最后一位append
@@ -66,7 +66,7 @@ while sum > 0:
 print(_n)
 """
 
-#dict 字典
+# dict 字典
 """
 _dict = {'a':1, 'b':2}
 print(_dict['b'], 'a' in _dict, 'c' in _dict)
@@ -75,7 +75,7 @@ print(_dict.get('a'), _dict.get('c',166))
 ### pop(key)删除指定key
 """
 
-#set 去重、交集List
+# set 去重、交集List
 """
 _set1 = set([1,2,3,4,4])
 print(_set1)
@@ -90,7 +90,7 @@ for _i in _set1:
     print(_i)
 """
 
-#声明函数 def
+# 声明函数 def
 """
 ###声明一个简单函数
 def judgeX(x):
@@ -109,7 +109,7 @@ def judgeX(x):
 _inX = int(input('请输入参数：'))
 judgeX(_inX)
 """
-####math模块 https://blog.csdn.net/ben_ben_niao/article/details/40955439 
+####math模块 https://blog.csdn.net/ben_ben_niao/article/details/40955439
 # import math
 """
 ###返回多个值（涉及到引用包） 返回的值是一个tuple
@@ -235,7 +235,7 @@ def trim(_str):
 print(trim(' hello! '), trim(" "), trim(""), trim(" hello!"), trim("hello! "))
 """
 
-#迭代
+# 迭代
 """
 _d = {'a': 1, 'b': 2, 'c': 3}
 for k,v in _d.items():
@@ -264,7 +264,7 @@ def findMinAndMax(_list):
 print(findMinAndMax([0,1,3,7]), findMinAndMax([]))
 """
 
-#列表生成式
+# 列表生成式
 """
 print([x * x for x in range(1,11)], '\n', [x * x for x in range(1,11) if x % 2 == 0], 
 '\n', [m + n for m in 'ABC' for n in 'XYZ'])
@@ -283,7 +283,7 @@ _L = ['Hello', 'World', 18, 'Apple', None]
 print([s.lower() for s in _L if isinstance(s, str)])
 """
 
-#生成器
+# 生成器
 """
 _G = (x * x for x in range(10))
 print(_G, next(_G), next(_G))
@@ -356,5 +356,5 @@ for t in triangles():
     if n == 10:
         break
 """
-#迭代器 可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator
+# 迭代器 可以被next()函数调用并不断返回下一个值的对象称为迭代器：Iterator
 ###把list、dict、str等Iterable变成Iterator可以使用iter()函数：

@@ -7,6 +7,7 @@
             <router-link to="/api/watch">watch</router-link>
             <router-link to="/api/computed">computed</router-link>
             <router-link to="/api/Ref">Ref</router-link>
+            <router-link to="/api/reactive">reactive</router-link>
         </div>
         <div class="content">
             <router-view></router-view>

@@ -6,20 +6,20 @@ class Promise {
 		this.reason = undefined; //默认赋值为undefined
 		this.successStore = []; //定义一个存放成功函数的数组
 		this.failStore = []; //定义一个存放失败函数的数组
-		let resolve = value => {
+		let resolve = (value) => {
 			if (this.status === 'pending') {
 				//只有状态为pending才能转换状态
 				this.value = value; //将传递进来的的值赋给value保存
 				this.status = 'resolved'; //将状态设置成resolved
-				this.successStore.forEach(fnc => fnc()); //一次执行数组中的成功函数
+				this.successStore.forEach((fnc) => fnc()); //一次执行数组中的成功函数
 			}
 		};
-		let reject = reason => {
+		let reject = (reason) => {
 			if (this.status === 'pending') {
 				//只有状态为pending才能转换状态
 				this.reason = reason; //将传递进来的失败原因赋给reason保存
 				this.status = 'rejected'; //将状态设置成rejected
-				this.failStore.forEach(fnc => fnc()); //依次执行数组中的失败函数
+				this.failStore.forEach((fnc) => fnc()); //依次执行数组中的失败函数
 			}
 		};
 		try {
@@ -30,43 +30,31 @@ class Promise {
 	}
 	then(onFulfilled, onRejected) {
 		// 处理值穿透 promise.then().then().then((res)=>{ });
-		onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : y => y; //判断是否是一个函数
+		// onFulfilled 和 onRejected 必须是一个函数
+		onFulfilled =
+			typeof onFulfilled === 'function' ? onFulfilled : (y) => y;
 		onRejected =
 			typeof onRejected === 'function'
 				? onRejected
-				: errr => {
-						//判断是否是一个函数
-						throw err; //注意，这里不是返回值，而是抛出错误
+				: (errr) => {
+						throw err;
 				  };
 
 		let promise2; // 返回的新的promise
-		//等同于es5的Promise.prototype.then 当调用then的时候,根据状态，来执行不同的函数
 		if (this.status === 'resolved') {
-			//如果状态是resolved
-			// onFulfilled(this.value); //执行成功的resolve，并将成功后的值传递过去
 			promise2 = new Promise((resolve, reject) => {
 				setTimeout(() => {
-					//异步处理
+					// then 在实际情况中时在微任务中，模拟用宏任务代表他是异步的
 					try {
-						console.log('非异步处理');
 						let x = onFulfilled(this.value);
 						handlePromise(promise2, x, resolve, reject);
 					} catch (e) {
 						reject(e);
 					}
 				}, 0);
-				// try {
-				// 	console.log('非异步处理');
-				// 	let x = onFulfilled(this.value);
-				// 	handlePromise(promise2, x, resolve, reject);
-				// } catch (e) {
-				// 	reject(e);
-				// }
 			});
 		}
 		if (this.status === 'rejected') {
-			//如果状态是rejected
-			// onRejected(this.reason); //执行失败的reject,并将失败原因传递过去
 			promise2 = new Promise((resolve, reject) => {
 				setTimeout(() => {
 					try {
@@ -79,16 +67,6 @@ class Promise {
 			});
 		}
 		if (this.status === 'pending') {
-			// //此处增加一种状态判断
-			// this.successStore.push(() => {
-			// 	//当状态为pending时将成功的函数存放到数组里
-			// 	onFulfilled(this.value);
-			// });
-			// this.failStore.push(() => {
-			// 	//当状态为pending时将失败的函数存放到数组中
-			// 	onRejected(this.reason);
-			// });
-
 			promise2 = new Promise((resolve, reject) => {
 				this.successStore.push(() => {
 					setTimeout(() => {
@@ -136,7 +114,7 @@ class Promise {
 			}
 			for (let i = 0; i < promiseArrs.length; i++) {
 				//循环遍历数组
-				promiseArrs[i].then(data => {
+				promiseArrs[i].then((data) => {
 					handleData(i, data); //将结果和索引传入handleData函数
 				}, reject);
 			}
@@ -149,14 +127,40 @@ class Promise {
 			}
 		});
 	}
+
+	static resolve(fun) {
+		if (fun instanceof Promise) {
+			return fun;
+		}
+		return new Promise((r, j) => {
+			typeof fun === 'function' ? r(fun()) : r(fun);
+		});
+	}
+
+	static all(promiseList) {
+		return new Promise((reslove, reject) => {
+			let len = promiseList.length;
+			let res = [];
+			if (len === 0) return reslove(res);
+			promiseList.map((el, index) => {
+				Promise.resolve(el).then(
+					(r) => {
+						res[index] = r;
+						if (index + 1 === len) reslove(res);
+					},
+					(j) => {
+						reject(j);
+					}
+				);
+			});
+		});
+	}
 }
 
 function handlePromise(promise2, x, resolve, reject) {
 	if (promise2 === x) {
-		//promise2是否等于x,也就是判断是否将自己本身返回
-		return reject(new TypeError('circular reference')); //如果是抛出错误
+		return reject(new TypeError('circular reference'));
 	}
-	//判断x不是bull且x是对象或者函数
 	if (x !== null && (typeof x === 'object' || typeof x === 'function')) {
 		let called; //called控制resolve或reject 只执行一次，多次调用没有任何作用。
 		try {
@@ -165,13 +169,13 @@ function handlePromise(promise2, x, resolve, reject) {
 				//如果是函数，就认为它是返回新的promise
 				then.call(
 					x,
-					y => {
+					(y) => {
 						//如果y是promise继续递归解析
 						if (called) return;
 						called = true;
 						handlePromise(promise2, y, resolve, reject); //递归解析promise
 					},
-					r => {
+					(r) => {
 						if (called) return;
 						called = true;
 						reject(r);
@@ -197,28 +201,27 @@ var a = new Promise((r, j) => {
 	r(222);
 })
 	.then(
-		res => {
+		(res) => {
 			console.log(res, 02);
 			return 333;
 		},
-		err => {}
+		(err) => {}
 	)
 	.then(
-		res => {
+		(res) => {
 			console.log(res, 03);
-			// return new Promise((resolve, reject) => {
-			// 	//返回一个新的Promise
-			// 	resolve('hello world');
-			// 	return 'end';
-			// });
+			return new Promise((resolve, reject) => {
+				//返回一个新的Promise
+				resolve('hello world');
+			});
 			return 444;
 		},
-		err => {}
+		(err) => {}
 	)
 	.then(
-		res => {
+		(res) => {
 			console.log(res, 04);
 			return 555;
 		},
-		err => {}
+		(err) => {}
 	);

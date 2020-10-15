@@ -22,6 +22,11 @@ const apiRoute = function (Main: Component): Array<RouteRecordRaw> {
                     path: 'Ref',
                     name: 'Ref',
                     component: () => import('../views/api/ref.vue')
+                },
+                {
+                    path: 'reactive',
+                    name: 'reactive',
+                    component: () => import('../views/api/reactive.vue')
                 }
             ]
 
