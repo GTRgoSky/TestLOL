@@ -6,7 +6,7 @@
  * weakMap可以防止内存泄漏，是个弱引用
  */
 function deepClone(obj, hash = new WeakMap()) {
-	if (hash.has(obj)) return obj; // 判断hash是否已经存在这个指
+	if (hash.has(obj)) return obj; // 判断hash是否已经存在这个值（自身）
 	var cobj;
 	// if null
 	if (obj === null) {

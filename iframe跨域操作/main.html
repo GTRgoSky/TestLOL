@@ -14,7 +14,7 @@
     <!-- <iframe id="handle" src="http://192.168.1.105:8111/.index.html?name=iframeHandle" frameborder="0"></iframe> -->
     <!-- <iframe id="child" src="http://192.168.1.105:8111/.index.html?name=iframeChild" frameborder="0"></iframe> -->
     <!-- *************tab页间通讯************* -->
-    <script>
+    <!-- <script>
         var channel3 = new window.BroadcastChannel('channel');
         channel3.addEventListener('message', (res) => {
             if (!res.data) return;
@@ -34,9 +34,9 @@
             postMessage('testcode' + i, 'hahah');
             i++;
         }
-    </script>
+    </script> -->
     <!-- *************跨域通信************* -->
-    <!-- <script>
+    <script>
         function postmsg() {
             const ifr = document.createElement('iframe');
             // 对方域名的暴露地址
@@ -58,7 +58,7 @@
             if (!res.data) return;
             console.log(res.data, 444);
         })
-    </script> -->
+    </script>
     <!-- *************iframe通讯************* -->
     <!-- <script>
         window.name = 'main';

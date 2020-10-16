@@ -10,7 +10,7 @@
 <body>
     <div>handle</div>
     <!-- *************tab页间通讯************* -->
-    <script>
+    <!-- <script>
         var funMap = new Map(); // 消息队列
         var channel3 = new window.BroadcastChannel('channel');
         channel3.addEventListener('message', (res) => {
@@ -42,15 +42,15 @@
         onMessage('testcode2', (res => {
             console.log('testcode2:', res);
         }))
-    </script>
+    </script> -->
     <!-- *************跨域通信************* -->
-    <!-- <script>
-        var channel1 = new window.BroadcastChannel('channel');
+    <script>
+        var channel = new window.BroadcastChannel('channel');
 
         // // 获取推送的数据
         window.addEventListener("message", function (res) {
             if (!res.data) return;
-            channel1.postMessage(res.data);
+            channel.postMessage(res.data);
         }, false);
 
         function postmsg(data) {
@@ -67,7 +67,7 @@
             }
 
         }
-    </script> -->
+    </script>
 </body>
 
 </html>

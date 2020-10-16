@@ -24,6 +24,10 @@ const router = createRouter({
 			path: '/ref',
 			component: () => import('../src/components/ref.vue'),
 		},
+		{
+			path: '/globalProperties',
+			component: () => import('../src/components/globalProperties.vue'),
+		},
 	],
 });
 
