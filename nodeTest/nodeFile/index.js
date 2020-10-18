@@ -10,7 +10,7 @@ var getFilePath = require('./file/index');
 //创建服务
 var httpServer = http.createServer(processRequest);
 // 这是端口号
-var port = 8112;
+var port = 8111;
 
 //指定一个监听的接口
 httpServer.listen(port, function () {

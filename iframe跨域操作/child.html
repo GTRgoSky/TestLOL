@@ -13,7 +13,6 @@
     </div>
     <script>
         window.name = 'child';
-        console.log(window.name);
         var channel = new window.BroadcastChannel('channel');
         channel.addEventListener('message', (res) => {
             if (!res.data) return;

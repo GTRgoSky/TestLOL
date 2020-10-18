@@ -51,6 +51,7 @@
         window.addEventListener("message", function (res) {
             if (!res.data) return;
             channel.postMessage(res.data);
+            console.log(res.data)
         }, false);
 
         function postmsg(data) {
