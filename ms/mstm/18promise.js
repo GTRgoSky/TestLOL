@@ -133,7 +133,7 @@ class Promise {
 			return fun;
 		}
 		return new Promise((r, j) => {
-			typeof fun === 'function' ? r(fun()) : r(fun);
+			r(fun);
 		});
 	}
 

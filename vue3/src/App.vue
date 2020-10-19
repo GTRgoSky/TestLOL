@@ -1,15 +1,16 @@
 <template>
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-    <!-- <composition></composition> -->
-    <!-- <globalProperties></globalProperties> -->
-    <div id="router">
-        <router-link to="/">Home</router-link>
-        <router-link to="/composition">Contact</router-link>
-        <router-link to="/provideAndInject">provideAndInject</router-link>
-        <router-link to="/ref">ref</router-link>
-    </div>
-    <router-view />
+	<!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+	<!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
+	<!-- <composition></composition> -->
+	<!-- <globalProperties></globalProperties> -->
+	<div id="router">
+		<router-link to="/">Home</router-link>
+		<router-link to="/composition">Contact</router-link>
+		<router-link to="/provideAndInject">provideAndInject</router-link>
+		<router-link to="/ref">ref</router-link>
+		<router-link to="/globalProperties">globalProperties</router-link>
+	</div>
+	<router-view />
 </template>
 
 <script>
@@ -19,26 +20,26 @@
 // import { defineComponent } from "vue";
 
 export default {
-    name: "App",
-    components: {
-        // HelloWorld,
-        // composition,
-        // globalProperties,
-    },
+	name: 'App',
+	components: {
+		// HelloWorld,
+		// composition,
+		// globalProperties,
+	},
 };
 </script>
 
 <style lang="scss">
 #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
 }
 #router {
-    margin: 0 0 20px;
-    a {
-        margin: 10px;
-    }
+	margin: 0 0 20px;
+	a {
+		margin: 10px;
+	}
 }
 </style>
