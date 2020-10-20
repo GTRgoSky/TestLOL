@@ -13,9 +13,9 @@ let map = {
 	null: 'Null',
 	undefined: 'Undefined',
 	boolean: 'Boolean',
-	number: 'Number'
+	number: 'Number',
 };
-let getType = item => {
+let getType = (item) => {
 	return _toString.call(item).slice(8, -1);
 };
 let isTypeOf = (item, type) => {
@@ -50,32 +50,27 @@ let DFSdeepClone = (obj, visitedArr = []) => {
 /***
  * 利用对象指针的思路，每层只对指针进行操作，同事影响了最外层对象的最终值
  */
-let BFSdeepClone = obj => {
+let BFSdeepClone = (obj, hashMap = new WeakMap()) => {
 	let origin = [obj],
 		copyObj = {},
 		copy = [copyObj];
-	// 去除环状数据
-	let visitedQueue = [],
-		visitedCopyQueue = [];
 	while (origin.length > 0) {
 		let items = origin.shift(),
 			_obj = copy.shift();
-		visitedQueue.push(items);
 		if (isTypeOf(items, 'object') || isTypeOf(items, 'array')) {
 			for (let item in items) {
 				let val = items[item];
 				if (isTypeOf(val, 'object')) {
-					let index = visitedQueue.indexOf(val);
-					if (!~index) {
+					if (!hashMap.has(val)) {
 						_obj[item] = {};
 						//下次while循环使用给空对象提供数据
 						origin.push(val);
 						// 推入引用对象
 						copy.push(_obj[item]);
 					} else {
-						_obj[item] = visitedCopyQueue[index];
-						visitedQueue.push(_obj);
+						_obj[item] = hashMap.get(val);
 					}
+					hashMap.set(val, val);
 				} else if (isTypeOf(val, 'array')) {
 					// 数组类型在这里创建了一个空数组
 					_obj[item] = [];
@@ -87,8 +82,6 @@ let BFSdeepClone = obj => {
 					_obj[item] = val;
 				}
 			}
-			// 将已经处理过的对象数据推入数组 给环状数据使用
-			visitedCopyQueue.push(_obj);
 		} else if (isTypeOf(items, 'function')) {
 			copyObj = eval('(' + items.toString() + ')');
 		} else {
@@ -98,7 +91,10 @@ let BFSdeepClone = obj => {
 	return copyObj;
 };
 
-BFSdeepClone({ a: { c: 3 }, b: 2 });
+let b = { a: { c: 3 }, b: 2 };
+let c = b;
+let a = BFSdeepClone({ a: { c: 3 }, b: 2 });
+console.log(a == b, b == c, a == c);
 return;
 //测试
 
@@ -140,11 +136,11 @@ let obj = {
 	b: () => console.log(1),
 	c: {
 		d: 3,
-		e: 4
+		e: 4,
 	},
 	f: [1, 2],
 	und: undefined,
-	nul: null
+	nul: null,
 };
 var objCopy = DFSdeepClone(obj);
 var objCopy1 = BFSdeepClone(obj);
@@ -161,17 +157,17 @@ console.log(obj.nul, obj.und); // 输出null，undefined 测试通过
 // 预期不爆栈且深度复制
 let circleObj = {
 	foo: {
-		name: function() {
+		name: function () {
 			console.log(1);
 		},
 		bar: {
 			name: 'bar',
 			baz: {
 				name: 'baz',
-				aChild: null //待会让它指向obj.foo
-			}
-		}
-	}
+				aChild: null, //待会让它指向obj.foo
+			},
+		},
+	},
 };
 circleObj.foo.bar.baz.aChild = circleObj.foo;
 var circleObjCopy = DFSdeepClone(circleObj);
