@@ -8,7 +8,7 @@ class LifeParent extends React.Component {
 		super(props);
 		this.state = {
 			context: 'LifeParent',
-			propschild: 'parent-give-props'
+			propschild: 'parent-give-props',
 		};
 		timeConsole('parent-constructor');
 	}
@@ -56,6 +56,7 @@ class LifeParent extends React.Component {
 	componentDidUpdate(prevProps) {
 		timeConsole('parent-componentDidUpdate');
 	}
+	// 组件已经被渲染到 DOM 中后运行
 	componentDidMount() {
 		timeConsole('parent-componentDidMount');
 	}
@@ -66,13 +67,13 @@ class LifeParent extends React.Component {
 
 	setStateFun() {
 		this.setState({
-			context: 'LifeParent-' + new Date().valueOf()
+			context: 'LifeParent-' + new Date().valueOf(),
 		});
 	}
 
 	setPropsFun() {
 		this.setState({
-			propschild: 'parent-give-props-' + new Date().valueOf()
+			propschild: 'parent-give-props-' + new Date().valueOf(),
 		});
 	}
 }
@@ -81,7 +82,7 @@ class LifePChild extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			context: 'LifePChild'
+			context: 'LifePChild',
 		};
 		timeConsole('child-constructor');
 	}
@@ -136,7 +137,7 @@ class LifePChild extends React.Component {
 
 	setStateFun() {
 		this.setState({
-			context: 'LifePChild' + new Date().valueOf()
+			context: 'LifePChild' + new Date().valueOf(),
 		});
 	}
 }

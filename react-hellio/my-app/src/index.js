@@ -14,15 +14,14 @@ import FileInput from './formNoControl';
 import { ThemeContext } from '../context/theme-context';
 class Index extends React.Component {
 	constructor(props) {
-		super(props);
 		this.state = {
-			background: 'stateDefault'
+			background: 'stateDefault',
 		};
 		this.setContext = this.setContext.bind(this);
 	}
 	setContext(text) {
 		this.setState({
-			background: text
+			background: text,
 		});
 		console.log(text);
 	}
