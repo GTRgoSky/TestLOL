@@ -114,3 +114,23 @@ Vue-Ts 写组件尝试
 #### 2020.09.25
 
 (vue3ts)：增加 watch DEMO 了解 watch 处理逻辑
+
+#### 2020.10.20
+
+    提交规范
+    feat | 新增功能
+    fix | 修复
+    docs | 文档
+    style | 样式
+    refactor | 重构（即不是新增功能，也不是修改 bug 的代码变动）
+    perf | 性能, 体验优化
+    test | 测试
+    workflow| 工作流程
+    build | 构建
+    chore | 构建过程或辅助工具的变动
+    revert | 回滚
+
+#### 2020.111.10
+
+    阻止不让复制的功能
+    https://zhuanlan.zhihu.com/p/268388056

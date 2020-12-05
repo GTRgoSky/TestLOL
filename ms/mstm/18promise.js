@@ -1,3 +1,5 @@
+// https://malcolmyu.github.io/2015/06/12/Promises-A-Plus/#%E6%9C%AF%E8%AF%AD
+
 class Promise {
 	//创建一个Promise类
 	constructor(executor) {
@@ -36,7 +38,7 @@ class Promise {
 		onRejected =
 			typeof onRejected === 'function'
 				? onRejected
-				: (errr) => {
+				: (err) => {
 						throw err;
 				  };
 
