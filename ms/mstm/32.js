@@ -1,78 +1,35 @@
-function ajax1() {
-	console.log('1 start');
-	return new Promise((r, j) => {
-		setTimeout(() => {
-			r(1);
-		}, 2000);
-	});
+function getTimeString(date = new Date()) {
+	var start = new Date(date);
+	//new Date(1,0,1)这三个参数是年月天
+	var end = new Date(start.getFullYear() + 1, 0, 1);
+
+	var elapse = Math.floor((end - start) / 1000); // 取共有秒
+
+	var seconds = elapse % 60;
+	var minutes = Math.floor(elapse / 60) % 60;
+	var hours = Math.floor(elapse / (60 * 60)) % 24;
+	var days = Math.floor(elapse / (60 * 60 * 24)) % 30;
+	var months = Math.floor(elapse / (60 * 60 * 24 * 30)) % 12;
+	var years = Math.floor(elapse / (60 * 60 * 24 * 30 * 12));
+
+	return (
+		start.getFullYear() +
+		'年还剩' +
+		years +
+		'年' +
+		months +
+		'月' +
+		days +
+		'日' +
+		hours +
+		'小时' +
+		minutes +
+		'分' +
+		seconds +
+		'秒'
+	);
 }
 
-function ajax2() {
-	console.log('2 start');
-	return new Promise((r, j) => {
-		setTimeout(() => {
-			r(2);
-		}, 200);
-	});
-}
+getTimeString();
 
-function ajax3() {
-	console.log('3 start');
-	return new Promise((r, j) => {
-		setTimeout(() => {
-			r(3);
-		}, 800);
-	});
-}
-
-// 因为只有 reslove 才会继续执行 ，这里面 调用then后会把执行方法腿推到 successList 执行队列，等待 reslove 执行后在执行
-// [ajax1(), ajax2(), ajax3()].reduce((total, currentValue) => {
-// 	return total.then(() => {
-// 		return currentValue.then((r) => {
-// 			// 执行渲染
-// 			console.log(r);
-// 		});
-// 	});
-// }, Promise.resolve());
-
-/**
- * 形成：
- * let e1 = ajax1();e2 = ajax2(); e3 = ajax3();
- * el.then((res1) => {
- *      render(res1)
- *      return el2
- * }).then(() => {
- *      return el2
- * }).then((res2) => {
- *      render(res2)
- * }).then(() => {
- *      return el3
- * }).then((res3) => {
- *      render(res3)
- * })
- */
-
-[ajax1(), ajax2(), ajax3()]
-	.reduce((total, currentValue) => {
-		return total.then((r) => {
-			console.log(r);
-			return currentValue;
-		});
-	})
-	.then((r) => {
-		console.log(r);
-	});
-
-/**
- * 形成：
- * let e1 = ajax1();e2 = ajax2(); e3 = ajax3();
- * el.then((res1) => {
- *      render(res1)
- *      return el2
- * }).then((res2) => {
- *      render(res2).
- *      return el3
- * }).then((res3) => {
- *      render(res3)
- * })
- */
+console.log(getTimeString());
