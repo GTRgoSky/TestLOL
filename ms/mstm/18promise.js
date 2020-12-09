@@ -216,14 +216,18 @@ var a = new Promise((r, j) => {
 				//返回一个新的Promise
 				resolve('hello world');
 			});
-			return 444;
 		},
 		(err) => {}
 	)
 	.then(
 		(res) => {
 			console.log(res, 04);
-			return 555;
+		},
+		(err) => {}
+	)
+	.then(
+		(res) => {
+			console.log(res, 05);
 		},
 		(err) => {}
 	);

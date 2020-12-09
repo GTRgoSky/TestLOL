@@ -42,12 +42,14 @@ function extend(Child, Parent) {
 		F.prototype.constructor = F;
 		return new F(); // 返回F的实例用于作为子类的原型对象
 	}
+	
 
 	let p = content(Parent.prototype); // 将父类的原型对象传入，得到指向父类原型对象的实例
 	// let p = content(new Parent()); // 如果传入的是实例，则会多一层__prop__。因为实例的__prop__才是真正的指向原型对象
 	// 将子类指向实例p，注意这块如果用解构赋值，则其实是p.__proto__指向Parent的原型对象
 	// 引出 实例的__proto__指向原型对象
 	Child.prototype = p;
+	// Child.prototype = Object.create(Parent.prototype) 上面的全都不要了
 	Child.prototype.constructor = Child;
 
 	return Child;

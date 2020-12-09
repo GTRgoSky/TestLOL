@@ -1,4 +1,7 @@
 {
     "editor.formatOnSave": true,
-    "debug.javascript.warnOnLongPrediction": false
+    "debug.javascript.warnOnLongPrediction": false,
+    "prettier.enable": false,
+    "prettier.endOfLine": "auto",
+    "prettier.jsxBracketSameLine": true
 }
