@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnError</title>
+    <!-- https://github.com/happylindz/blog/issues/5 -->
+</head>
+
+<body>
+    <script>
+
+        // 全局代码块：
+        // window.onerror = function (msg, url, row, col, error) {
+        //     console.log('我知道错误了主要');
+        //     console.log({
+        //         msg, url, row, col, error
+        //     })
+        //     return true;
+        // };
+
+        // 正常事件代码块：
+        // window.addEventListener(
+        //     "error",
+        //     function (event) {
+        //         console.log('我知道错误了');
+        //         // console.log({
+        //         //     msg, url, row, col, error
+        //         // })
+        //         console.log(event);
+        //         return true;
+        //     }
+        // );
+
+
+        // 异步代码块：
+        // window.addEventListener(
+        //     "error",
+        //     function (event) {
+        //         var dom = event.target;
+        //         console.log('我知道错误了');
+        //         console.log(event)
+        //         if (/img/i.test(dom.nodeName)) {
+        //             // dom.src = "xxxx.png";
+        //             // dom.src = "";
+        //             console.log(event)
+        //             dom.onerror = null;
+        //         }
+        //         return true;
+        //     },
+        //     true
+        // );
+
+        // Promise异常代码块：
+        window.addEventListener("unhandledrejection", function (e) {
+            e.preventDefault()
+            console.log('我知道 promise 的错误了');
+            console.log(e.reason);
+            return true;
+        });
+
+        Promise.reject('promise error');
+
+        // 此时不会被监听了
+        new Promise((resolve, reject) => {
+            reject('promise error2');
+        }).catch(e => {
+            console.log(e)
+        });
+
+        // var a = function () {
+        //     console.log(666);
+        //     b();
+        // }
+        // a();
+        // console.log(999)
+    </script>
+    <!-- <img src="dsads" alt=""> -->
+</body>
+
+</html>

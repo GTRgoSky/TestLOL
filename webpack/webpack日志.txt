@@ -1,0 +1,4 @@
+export default {
+    newTest: 1,
+    n: 2
+}
