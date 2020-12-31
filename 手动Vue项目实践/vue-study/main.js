@@ -1,5 +1,8 @@
 import Vue from 'vue'; //引入主角vue.js，这里是因为在webpack.config中进行配置地址了
 import testA from './test.vue';
+import VueCompositionAPI from '@vue/composition-api'
+
+Vue.use(VueCompositionAPI)
 
 // Vue.config.performance =
 Vue.config.optionMergeStrategies.celue = function (parentVal, childVal) {
