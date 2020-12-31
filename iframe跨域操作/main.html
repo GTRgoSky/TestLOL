@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="renderer" content="webkit">
     <title>main</title>
 </head>
 
@@ -11,14 +12,24 @@
     <div onclick="postmsg()">
         main
     </div>
+
+    <div onclick="openWindow('openCwindow')">
+        openWindow
+    </div>
+
+    <div onclick="switchWindow('openCwindow')">
+        switchWindow
+    </div>
     <!-- <iframe id="handle" src="http://192.168.1.105:8111/.index.html?name=iframeHandle" frameborder="0"></iframe> -->
     <!-- <iframe id="child" src="http://192.168.1.105:8111/.index.html?name=iframeChild" frameborder="0"></iframe> -->
     <!-- *************tab页间通讯************* -->
-    <!-- <script>
+    <script>
+
         var channel3 = new window.BroadcastChannel('channel');
         channel3.addEventListener('message', (res) => {
             if (!res.data) return;
-            console.log(res.data, 444);
+            console.log(res.data, 'tab页间通讯');
+            
         })
 
         function postMessage(code, msg) {
@@ -31,33 +42,37 @@
         var i = 0;
 
         function postmsg() {
-            postMessage('testcode' + i, 'hahah');
+            console.log('点击')
+            postMessage('t2', 'tab页间通讯--发送');
             i++;
+            switchWindow('openCwindow');
         }
-    </script> -->
+
+
+    </script>
     <!-- *************跨域通信************* -->
     <script>
-        function postmsg() {
-            const ifr = document.createElement('iframe');
-            // 对方域名的暴露地址
-            ifr.src = "http://192.168.1.105:8111/.index.html?name=iframeHandle";
-            ifr.style.display = 'none';
-            document.body.appendChild(ifr);
-            ifr.onload = function () {
-                ifr.contentWindow.postMessage('ceshi', 'http://192.168.1.105:8111');
-                setTimeout(() => {
-                    document.body.removeChild(ifr);
-                }, 1000)
-            }
+        // function postmsg() {
+        //     const ifr = document.createElement('iframe');
+        //     // 对方域名的暴露地址
+        //     ifr.src = "http://192.168.1.105:8111/.index.html?name=iframeHandle";
+        //     ifr.style.display = 'none';
+        //     document.body.appendChild(ifr);
+        //     ifr.onload = function () {
+        //         ifr.contentWindow.postMessage('ceshi', 'http://192.168.1.105:8111');
+        //         setTimeout(() => {
+        //             document.body.removeChild(ifr);
+        //         }, 1000)
+        //     }
 
-        }
+        // }
 
-        // 获取推送的数据
-        var channel3 = new window.BroadcastChannel('channel');
-        channel3.addEventListener('message', (res) => {
-            if (!res.data) return;
-            console.log(res.data, 444);
-        })
+        // // 获取推送的数据
+        // var channel3 = new window.BroadcastChannel('channel');
+        // channel3.addEventListener('message', (res) => {
+        //     if (!res.data) return;
+        //     console.log(res.data, 444);
+        // })
     </script>
     <!-- *************iframe通讯************* -->
     <!-- <script>

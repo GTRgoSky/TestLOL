@@ -8,43 +8,22 @@
 </head>
 
 <body>
-    <div>handle</div>
+    <div onclick="openWindow()">handle</div>
+    <div onclick="goP()">goP</div>
+    <div onclick="goC()">goC</div>
     <!-- *************tab页间通讯************* -->
-    <!-- <script>
-        var funMap = new Map(); // 消息队列
+    <script>
         var channel3 = new window.BroadcastChannel('channel');
         channel3.addEventListener('message', (res) => {
-            if (!res.data || !funMap.get(res.data.code)) return;
-            for (let el of funMap.get(res.data.code)) {
-                el(res.data.msg);
-            }
+            console.log(res.data)
+            if (!res.data) return;
+            // console.log(window['openCwindow']);
+            // goP();
         });
 
-        function onMessage(code, cb) {
-            if (!funMap.has(code)) {
-                funMap.set(code, [cb]);
-            } else {
-                let arr = funMap.get(code);
-                arr.push(cb);
-                funMap.set(code, arr);
-
-            }
-        }
-
-        onMessage('testcode0', (res => {
-            console.log('testcode0:', res);
-        }));
-
-        onMessage('testcode0', (res => {
-            console.log('testcode000:', res);
-        }));
-
-        onMessage('testcode2', (res => {
-            console.log('testcode2:', res);
-        }))
-    </script> -->
+    </script>
     <!-- *************跨域通信************* -->
-    <script>
+    <!-- <script>
         var channel = new window.BroadcastChannel('channel');
 
         // // 获取推送的数据
@@ -68,7 +47,7 @@
             }
 
         }
-    </script>
+    </script> -->
 </body>
 
 </html>

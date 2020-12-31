@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
     <title>child</title>
 </head>
 
@@ -11,7 +12,75 @@
     <div id="child" onclick="sendParent()">
         child
     </div>
+
+    <div onclick="onMessage1(1)">
+        onMessage1
+    </div>
+
+    <div onclick="removeMessage1()">
+        removeMessage1
+    </div>
+
+    <div onclick="onMessage2(2)">
+        onMessage2
+    </div>
+
+    <!-- *************tab页间通讯************* -->
     <script>
+        var channel = new window.BroadcastChannel('channel');
+        let channelMap = new Map();
+        channel.addEventListener('message', (res) => {
+            if (!res.data) return;
+            let code = res.data.code
+            if(channelMap.has(code)) {
+                let funMap = channelMap.get(code);
+                for(let cb of funMap.values()) {
+                    cb(res.data.msg)
+                }
+            }
+            // console.log(res.data, 'tab页间通讯子接受');
+        })
+
+
+        var onMessageFun = function(msg) {
+            console.log(msg + 1)
+        }
+
+        var onMessageFun2 = function(msg) {
+            console.log(msg + 2)
+        }
+
+        function onMessage1(i) {
+            onMessage('t1', onMessageFun)
+        }
+
+        function onMessage2(i) {
+            onMessage('t2', onMessageFun2)
+        }
+
+        function onMessage(code, cb) {
+            if(channelMap.has(code)) {
+                channelMap.get(code).set(cb, cb);
+            }else {
+                channelMap.set(code, new Map([
+                    [cb, cb]
+                ]));
+            }
+        }
+
+        function removeMessage1() {
+            removeMessage('t1', onMessageFun);
+        }
+
+        function removeMessage(code, cb) {
+            if(channelMap.has(code)) {
+                channelMap.get(code).delete(onMessageFun);
+            }
+        }
+
+    </script>
+
+    <!-- <script>
         window.name = 'child';
         var channel = new window.BroadcastChannel('channel');
         channel.addEventListener('message', (res) => {
@@ -37,7 +106,7 @@
             }
 
         }
-    </script>
+    </script> -->
 </body>
 
 </html>
