@@ -139,3 +139,7 @@ Vue-Ts 写组件尝试
 
     错误捕获/上报机制
     看了一下webpack的loader用法
+
+#### 2020.12.31
+
+    尝试vue2中用composition-api
