@@ -144,5 +144,3 @@ Vue-Ts 写组件尝试
 
     尝试vue2中用composition-api
     测试rebease1
-    测试rebease2
-    测试rebease3
