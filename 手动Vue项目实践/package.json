@@ -60,7 +60,7 @@
 		"@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
 		"@vue/babel-preset-jsx": "^1.1.2",
 		"@vue/composition-api": "^1.0.0-beta.22",
-		"axios": "^0.18.1",
+		"axios": "^0.21.1",
 		"babel-polyfill": "^6.26.0",
 		"babel-preset-stage-3": "^6.24.1",
 		"es6-promise": "^4.2.8",
