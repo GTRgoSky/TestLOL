@@ -1,6 +1,6 @@
 <template>
     <div @click="test">Ref</div>
-    <div>{{ slowRef.a }}</div>
+    <div>{{ slowRef }}</div>
     <div>{{ rfReact.a }}</div>
 </template>
 
@@ -21,18 +21,20 @@ export default {
         // 使用 triggerRef 强制更新 或者 改变其他 副作用 该值会被更新
         // 只对 对象 有效 因为 基础类型 不做 reactive 处理
         const slowRef = shallowRef({
-            a: 0,
+            a: 123,
         });
         const rfReact = ref({
             a: 1,
         });
         function test() {
-            const r = ref(2);
+            // const r = ref(2);
             // r.value = 6;
             // 这里触发的就是 reactive 的更新 而不是 ref 的 set
             rfReact.value.a = 9;
-            // 不会触发更新
+            // 不会触发更新  ({a: 1})
             // slowRef.value.a = 999;
+            // 会更新 (1)
+            // slowRef.value = 99;
             // 强制更新所有
             // triggerRef(slowRef);
         }
