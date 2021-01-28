@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 // import router from './router'
 // import store from './store'
 import Test from './views/provideInject/parent.vue'
-import './views/ts/函数';
+import './views/ts/index';
 
 
 // const app = createApp(App)
