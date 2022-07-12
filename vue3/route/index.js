@@ -28,6 +28,10 @@ const router = createRouter({
 			path: '/globalProperties',
 			component: () => import('../src/components/globalProperties.vue'),
 		},
+		{
+			path: '/excel',
+			component: () => import('../src/components/excel.vue')
+		}
 	],
 });
 

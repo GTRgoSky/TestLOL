@@ -3,13 +3,13 @@
 	<!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
 	<!-- <composition></composition> -->
 	<!-- <globalProperties></globalProperties> -->
-	<div id="router">
+	<!-- <div id="router">
 		<router-link to="/">Home</router-link>
 		<router-link to="/composition">Contact</router-link>
 		<router-link to="/provideAndInject">provideAndInject</router-link>
 		<router-link to="/ref">ref</router-link>
 		<router-link to="/globalProperties">globalProperties</router-link>
-	</div>
+	</div> -->
 	<router-view />
 </template>
 

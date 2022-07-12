@@ -38,8 +38,8 @@ b.prototype = {
 function extend(Child, Parent) {
 	function content(obj) {
 		function F() {} // 声明一个构造函数
-		F.prototype = obj; //将构造函数的原型对象指向obj,且构造函数指向自己
-		F.prototype.constructor = F;
+		F.prototype = obj; // Parent.prototype //将构造函数的原型对象指向obj=parent的实例
+		F.prototype.constructor = F; // 且构造函数指向自己
 		return new F(); // 返回F的实例用于作为子类的原型对象
 	}
 	
@@ -101,3 +101,17 @@ extend(f, b);
 var fvm2 = new f(3, 4);
 console.log(fvm2);
 fvm2.con();
+
+
+
+// 随便写写 Object.create
+
+function Parent() {}
+
+function Child() {
+	Parent.call(this);
+}
+
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.constructor = Child;
+

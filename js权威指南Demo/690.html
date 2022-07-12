@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件预览</title>
+</head>
+<body>
+    <script>
+        function readfile(fs) {
+            let f = fs[0]
+            console.log('0:', f, fs);
+            var reader = new FileReader();
+            reader.onload = function() {
+                var text = reader.result;
+                var out = document.getElementById('output');
+                out.innerHTML = '';
+                out.appendChild(document.createTextNode(text))
+            }
+            reader.readAsText(f);
+        }
+    </script>
+
+    file:
+    <input type="file" onchange="readfile(this.files)">
+    <pre id="output"></pre>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猜数字</title>
+
+    <style>
+        #prompt {
+            font-size: 16pt;
+        }
+
+        table {
+            width: 90%;
+            margin: 10px 5%;
+        }
+        #low, #high {
+            background-color: lightgray;
+            height: 1em;
+        }
+        #mid {
+            background-color: green;
+        }
+    </style>
+    <script>
+        window.onload = newgame;
+        window.onpopstate = popState;
+        var state, ui;
+
+        function newgame(playagain) {
+            ui = {
+                heading: null, //文档h1
+                prompt: null, // 输入猜测字标题
+                input: null, // 输入框
+                low: null, // 可视化表格单元格 && 数字范围
+                mid: null,
+                high: null
+            }
+
+            for(let id in ui) ui[id] = document.getElementById(id);
+
+            ui.input.onchange = handleGuess;
+
+            state = {
+                n: Math.floor(99 * Math.random()) + 1, // 取整数 0 --- 100-- 答案
+                low: 0, // 可猜测下限
+                high: 100, // 可猜测上线
+                guessnum: 0, // 猜测的次数
+                guess: undefined // 最后一次猜测
+            };
+
+            display(state);
+
+            /**
+                此函数回座位onload事件处理程序调用
+                当点击显示在游戏最后的“再玩一次”按钮，也会调用。并且此时 playagain === true
+                如果作为onload调用 则不保存状态。
+                因为，当通过浏览器历史记录从其他文档状态回退到当前游戏状态时也会出发onload。会造成覆盖真正历史记录。
+                在支持pushState()方法的浏览器中，load事件之后宗祜有一个popstate事件。
+                因此这里的处理方式是，等待popstate事件，而不是直接进行状态保存。
+                如果该事件提供一个状态对象，则直接使用该对象。
+                如果没有状态对象，则表示这是一个新的游戏。
+                则使用replaceState来保存最新的游戏状态。
+            */
+
+            if(playagain) save(state);
+        }
+
+        // 如果支持，就用pushState方法将游戏状态保存到浏览器历史记录中
+        function save(state) {
+            if(!history.pushState) return; //如果 pushState 方法没有定义，则返回
+
+            /**
+                这里会将一个保存的状态和URL关联起来。
+                该URL显示猜测的数字，但是不对游戏状态进行编码
+                因此，这对于书签是没有用的。
+                不能简单的将游戏状态写到URL中，这会将游戏一些几米数字暴露在地址栏中
+            */
+
+            var url = '#guess' + state.guessnum;
+            // 保存状态对象和URL
+            history.pushState(state, '', url);
+        }
+
+
+        // 这是onpopstate的事件处理程序，用于恢复历史状态
+        function popState(event) {
+            if(event.state) { // 如果事件有一个状态对象，则恢复该状态
+                // event.state 是对已保存状态对象的深拷贝
+                // 因此无需改变保存的值 就可以修改对象
+                state = event.state; // 恢复历史状态
+                display(state); // 显示恢复的状态
+            }else {
+                /**
+                 * 当第一次载入页面时，会触发一个没有状态的popstate事件
+                 * 用真实的状态将null状态替换掉
+                 * 不需要display方法
+                */
+                history.replaceState(state, '', '#guess' + state.guessnum);
+            }
+        }
+
+        // 每次用户猜测一个数字的时候，调用此事件处理程序
+        // 用于更新游戏状态，保存游戏状态并显示游戏状态
+        function handleGuess() {
+            // 从input字段中获取提包复古用猜测的数字
+            var g = parseInt(this.value);
+            // 如果该值是限定范围中的一个数字
+            if(g > state.low && g < state.high) {
+                // 对应更新状态
+                if(g < state.n)state.low = g;
+                else if(g > state.n) state.high = g;
+                state.guess = g;
+                state.guessnum++;
+                // 在浏览器保存新的状态
+                save(state);
+                // 根据用户猜测情况来修改文档
+                display(state);
+            }else {
+                // 无效猜测，不保存
+                alert('Please enter a number greater than' + state.low + 'and less than' + state.high);
+            };
+        }
+
+        // 修改文档来显示当前游戏状态
+        function display() {
+            // 显示文档的导航和标题
+            ui.heading.innerHTML = 'I`m thinking of a number between' + state.low + " and " + state.high + '.';
+
+            // 使用一个表格来显示数字的取值范围
+
+            ui.low.style.width = state.low + '%';
+            ui.mid.style.width = (state.high - state.low) + '%';
+            ui.high.style.width = (100 - state.high) + '%';
+
+            // 确保 input 字段是可见的、空的并且是聚焦的
+            ui.input.style.visibility = 'visible';
+            ui.input.value = '';
+            ui.input.focus();
+
+            //根据用户最近的猜测设置提示
+            if(state.guess === undefined) {
+                ui.prompt.innerHTML = 'Type your guess and hit Enter: ';
+            }else if(state.guess < state.n) {
+                ui.prompt.innerHTML = state.guess + ' is too low. Guess again: ';
+            }else if(state.guess > state.n) {
+                ui.prompt.innerHTML = state.guess + ' is too high. Guess again: ';
+            }else {
+                ui.input.style.visibility = 'hidden'; // 隐藏，不需要再猜测
+                ui.heading.innerHTML = state.guess + ' is correct!';
+                ui.prompt.innerHTML = 'You Win! <button onclick="newgame(true)">Play Again</button>'
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- 游戏UI -->
+    <!-- 游戏标题 -->
+    <h1 id="heading">I`m thinking of a number...</h1>
+    <!-- 有效范围 -->
+    <table>
+        <tr>
+            <td id="low"></td>
+            <td id="mid"></td>
+            <td id="high"></td>
+        </tr>
+    </table>
+    <!-- 输入框 -->
+    <label for="" id="prompt"></label>
+    <input type="text" id="input" type="text">
+</body>
+</html>
